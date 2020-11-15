@@ -2,37 +2,35 @@
 
 get_header(); ?>
 
-<?php if (get_field('page_include_banner')) {
+<!-- Hero Banner -->
+<?php
+$hero_args = array('section_classes' => 'mb-0');
+
+if (get_field('page_include_banner')) {
     if (get_field('page_banner_style') === 'Split') {
-        get_template_part('template-parts/global/content', 'hero-split');
+        get_template_part('template-parts/global/content', 'hero-split', $hero_args);
     } else {
-        get_template_part('template-parts/global/content', 'hero');
+        get_template_part('template-parts/global/content', 'hero', $hero_args);
     }
-} ?>
+}
+?>
 
-<?php //get_template_part('template-parts/global/content', 'hero-split'); ?>
+<!-- Brands List -->
+<?php
+$image_list_args = array(
+    'section_heading' => false,
+    'section_classes' => 'bg-blue-light mt-0'
+);
+get_template_part('template-parts/global/content', 'image-list', $image_list_args); ?>
 
-<div class="container-fluid content-section">
-    <div class="wrapper">
-        <div class="row">
-            <div class="col">
-                <ul class="list-group list-group-horizontal">
-                    <?php
-                    if( have_rows('page_home_logos') ):
-                        $logos = '';
-                        while ( have_rows('page_home_logos') ) : the_row();
-                            $logos .= '<li class="list-group-item flex-fill no-border">';
-                            $logos .= '<img src="' . get_sub_field('page_home_logos_logo') . '" />';
-                            $logos .= '</li>';
-                        endwhile;
-                        echo $logos;
-                    endif;
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Servers -->
+<?php
+$server_args = array(
+  'section_heading' => true,
+  'heading_copy' => 'New & Factory Refurbished Servers',
+  'subheading_copy' => 'Whether you need multiple racks, or a single tower, we have the largest selection of top brands at unbeatable prices.',
+);
+get_template_part('template-parts/servers/content', 'manufacturers'); ?>
 
 <!-- What We do -->
 <div class="container-fluid content-section bg-color bg-light-blue" id="what-we-do">
