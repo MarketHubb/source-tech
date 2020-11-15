@@ -12,16 +12,24 @@ set_query_var('testimonial', $testimonial);
 ?>
 
 <!-- Hero Banner -->
-<?php if (get_field('page_include_banner')) {
+<?php
+$hero_args = array('section_classes' => 'mb-0');
+if (get_field('page_include_banner')) {
     if (get_field('page_banner_style') === 'Split') {
-        get_template_part('template-parts/global/content', 'hero-split');
+        get_template_part('template-parts/global/content', 'hero-split', $hero_args);
     } else {
-        get_template_part('template-parts/global/content', 'hero');
+        get_template_part('template-parts/global/content', 'hero', $hero_args);
     }
 } ?>
 
 <!-- Brands List -->
-<?php get_template_part('template-parts/global/content', 'image-list'); ?>
+<?php
+$image_list_args = array(
+    'section_heading' => false,
+    'section_classes' => 'bg-blue-light mt-0'
+);
+get_template_part('template-parts/global/content', 'image-list', $image_list_args); ?>
+
 
 <!-- Services -->
     <div class="content">
