@@ -1,0 +1,12 @@
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+ethumbs.db
+Thumbs.db
+*.log
+node_modules
+style.css
+woocommerce.css
+style.css.map
+woocommerce.css.map

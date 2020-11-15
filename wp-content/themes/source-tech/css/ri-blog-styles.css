@@ -1,0 +1,310 @@
+.post-content-container h3:first-of-type {
+    font-size: 3rem;
+    color: #333;
+}
+.post-content-container .img-container {
+    margin: 2rem 0;
+}
+.post-content-container .img-container img {
+    border-radius: 4px;
+}
+.post-content-container .img-container .caption {
+    font-size: .85rem;
+    font-style: italic;
+}
+.post-content-container .callout {
+    background-color: #f5f8fa;
+    margin: 2rem 0;
+    border-radius: 4px;
+    border-left: 6px solid #0087c7;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.15rem;
+    letter-spacing: .25px;
+}
+
+/****************************************
+*** Global ***
+*****************************************/
+.bg-white {
+    background-color: #fff;
+}
+.bg-blue-grey {
+    background-color: #f5f8fa;
+}
+.post-content-container a, .post-content-container a:visited {
+    color: #007bff;
+}
+/****************************************
+*** Breadcrumbs ***
+*****************************************/
+.breadcrumbs {
+    text-align: right;
+}
+.breadcrumbs span[typeof="ListItem"] {
+    margin: 0 5px;
+    font-weight: bold;
+    letter-spacing: -.04rem;
+    font-size: .75rem;
+}
+/****************************************
+*** Banner ***
+*****************************************/
+.masthead {
+    height: 60vh;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.banner-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.banner-container .content-section {
+    padding: 5rem 0;
+}
+.banner-overlay {
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+}
+.banner-overlay.dark {
+    background-color: rgba(0,0,0,.7);
+}
+.banner-headline {
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: -.04rem;
+}
+.banner-subheadline {
+    color: #fff;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: -.03rem;
+}
+/****************************************
+*** Title ***
+*****************************************/
+ul.post-categories {
+    margin-left: 0;
+    margin-bottom: 0;
+    padding-inline-start: 0;
+}
+ul.post-categories li {
+    display: inline-block;
+    border-radius: 1000px;
+    padding: .2rem 1.25rem;
+    font-weight: bold;
+    background: rgba(255,255,255, .9);
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+    color: #0087c7;
+}
+.blog-title {
+    font-size: 3rem;
+    letter-spacing: -.04rem;
+    line-height: 130%;
+    font-weight: bold;
+}
+.publish-container {
+    display: inline-block;
+}
+.publish-container p {
+    color: #fff;
+    display: inline-block;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-bottom: 0;
+    letter-spacing: .01rem;
+    font-size: .85rem;
+    font-style: italic;
+}
+.publish-container i {
+    color: #f5f8fa;
+    margin-right: .25rem;
+}
+.publish-container p:nth-of-type(2) {
+    border-left: 1px solid;
+    padding-left: 1rem;
+    border-color: #ddd;
+}
+.post-read-time {
+    color: #fff;
+}
+.post-read-time i {
+    margin-right: 1rem;
+}
+/****************************************
+*** Post Overview ***
+*****************************************/
+.post-overview {
+    background-color: #f5f8fa;
+    margin-top: 1rem;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    box-shadow: 0 10px 20px -5px rgba(51,71,91,0.1);
+    border-radius: 3px;
+    border-left: 4px solid #0087c7;
+    margin-left: .25rem !important;
+    margin-right: .25rem !important;
+}
+.post-overview ul {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+.post-overview ul li {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    letter-spacing: -.02rem;
+    color: #222;
+    font-weight: 600;
+    line-height: 125%;
+}
+/****************************************
+*** Tables ***
+*****************************************/
+#tablepress-30 > thead tr th:not(:first-of-type) {
+    text-align: center;
+}
+.td-icon {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.td-icon.yes {
+    color: darkgreen;
+}
+.td-icon.no {
+    color: darkred;
+}
+.tablepress .blog-table-sub {
+    display: block;
+    font-size: .8rem;
+    font-style: italic;
+}
+#tablepress-32 .row-11, #tablepress-33 .row-12 {
+    border: 3px solid red;
+}
+.table-sub {
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    position: relative;
+    bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+#tablepress-32_wrapper + p > .table-sub {
+    bottom: .5rem;
+}
+/****************************************
+*** Content ***
+*****************************************/
+.post-content-section ul {
+    margin: 1.5rem 0 1.5em 1.5em;
+}
+.post-content-section ul li {
+    padding: .5rem 0;
+}
+.post-conclusion {
+    background-color: #f5f8fa;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 20px -5px rgba(51,71,91,0.1);
+    line-height: 1.4;
+    border-left: 4px solid #0087c7;
+    padding: 1.25rem 1rem 1.25rem 3rem;
+}
+.post-callout {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 20px -5px rgba(51,71,91,0.1);
+    line-height: 1.4;
+}
+.post-callout p {
+    font-size: 1.5rem;
+    letter-spacing: -.025rem;
+    border-left: 4px solid #0087c7;
+    padding: 1.25rem 1rem 1.25rem 3rem;
+}
+.post-content-container {
+    border-radius: 4px;
+    box-shadow: 0 10px 50px -5px rgba(51,71,91,0.12);
+    position: relative;
+    bottom: 2rem;
+}
+.post-content-container > .row:first-of-type {
+    padding: 1rem 2.5rem 1.5rem;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.post-content-container .row:not(.nested) {
+    padding: 2.5rem 1rem;
+}
+.post-content-container .row:last-of-type {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.post-overview p {
+    margin-bottom: .5rem;
+}
+.post-overview strong {
+    display: block;
+}
+.post-overview a.product-links {
+    color: #2ea3f2;
+    font-weight: bold;
+}
+.post-overview a.product-links:not(:first-of-type) {
+    margin-left: .5rem;
+    padding-left: .5rem;
+    border-left: 2px solid;
+}
+.content.panel {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 10px 50px -5px rgba(51,71,91,0.12);
+    padding: 2.5rem;
+    position: relative;
+    bottom: 2rem;
+}
+.post-content-section h3 {
+    font-size: 1.5rem;
+    letter-spacing: -.035rem;
+    font-weight: bold;
+    line-height: 130%;
+    margin: 1rem 0;
+}
+.post-images p, .post-images li {
+    font-size: .85rem;
+    font-style: italic;
+    letter-spacing: -.02rem;
+}
+
+/****************************************
+*** Media Queries ***
+*****************************************/
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .banner-headline {
+        font-size: 3.25rem;
+    }
+    .banner-subheadline {
+        font-size: 1.1rem;
+    }
+}

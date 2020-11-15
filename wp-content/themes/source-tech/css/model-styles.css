@@ -1,0 +1,301 @@
+/*region CTA */
+.server-cta-list {
+	margin-left: 0;
+}
+.server-cta-list li {
+	text-align: center;
+	border: none;
+}
+.server-cta-list li:not(:last-of-type) {
+	border-right: 1px solid rgba(0,0,0,.125);
+}
+.server-cta-btn {
+	background-color: #ea662b;
+	color: #fff;
+}
+.server-cta-btn-label {
+	font-weight: 900;
+	text-transform: uppercase;
+}
+
+/*endregion*/
+/* CTA Module */
+.cta-card {
+	position: relative;
+	bottom: 1rem;
+}
+/* Breadcrumbs */
+.breadcrumbs {
+	display: none;
+}
+/* CTA: Header */
+.model-page-header-cta .col {
+	padding-left: 0;
+	padding-right: 0;
+}
+.model-page-header-cta .alert {
+	border-radius: 0;
+	letter-spacing: -.025rem;
+	font-weight: 600;
+	color: #222;
+}
+.header-cta-callout {
+	color: #EA672B;
+	font-weight: bold;
+}
+.page-cta-alert {
+	text-align: center;
+	font-size: .9rem;
+	font-weight: 600;
+	font-size: .8rem;
+}
+.model-page-header-cta i {
+	color: #ea662b;
+    font-size: 1rem;
+    padding: 0 5px;
+    vertical-align: text-bottom;
+}
+/* CTA: Page */
+
+.cta-container p {
+	margin-bottom: 0;
+}
+.model-page-cta-phone-container {
+	border-right: 1px solid;
+	text-align: right;
+}
+.model-page-cta-tag {
+	font-size: .9rem;
+	margin-bottom: 1em;
+	background-color: #ea662b !important;
+	padding: .5em 1em;
+	
+}
+.model-page-cta-title {
+	font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.model-page-cta-phone-copy {
+	font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	color: #33475b;
+}
+.model-page-cta-phone-copy i {
+	color: #0087c7;
+	padding-right: 5px;
+}
+.model-page-cta-phone {
+	font-size: 1rem;
+	color: #33475b;
+}
+.model-page-cta {
+	position: relative;
+	top: 2rem;
+	margin-bottom: -3rem;
+}
+.page-cta-lead, .page-cta {
+	margin-bottom: 0;
+	color: #33475b;
+	font-weight: bold;
+	text-align: right;
+	font-size: .9rem;
+}
+/* Tabs */
+#accordion .card-header {
+	background-color: transparent;
+	border: none;
+}
+#accordion .card-header button {
+	font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	color: #777;
+}
+#accordion .card-header button[aria-expanded="true"] {
+	color: #333;
+}
+#model-page-tabs ul {
+	margin-left: 0;
+}
+.model-tab-heading {
+	position: relative;
+	bottom: 1rem;
+	color: #33475b !important;
+}
+/* Tab Content */
+.model-page-tab-content-heading {
+	position: relative;
+	bottom: 1rem;
+}
+.model-page-tab-content-subheading {
+	font-size: .85rem;
+	line-height: 135%;
+	position: relative;
+	bottom: 1rem;
+	background: #cce5ff;
+	padding: .3rem .5rem;
+	color: #222;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 600;
+	letter-spacing: -.025em;
+}
+.model-page-tab-content-subheading:first-letter {
+	text-transform: uppercase;
+}
+#server-tab-content {
+	margin-bottom: 3rem;
+}
+#server-tab-content .tab-pane {
+	padding-left: 1.1rem;
+}
+#accordion button:hover {
+	outline: 0;
+	border: none;
+}
+#accordion button {
+	color: #222;
+	text-decoration: none;
+}
+/* Specs Table */
+#model-specs-table td, #model-specs-table th {
+	padding: .5rem;
+	font-size: .85rem;
+	border: none;
+	line-height: 155%;
+	letter-spacing: -.025em;
+}
+#model-specs-table tbody tr:not(:first-of-type) td, #model-specs-table tbody tr:not(:first-of-type) th {
+	border-top: 1px solid #f7f7f7;
+}
+#model-specs-table th {
+	vertical-align: middle;
+}
+.table .thead-dark th {
+	background-color: #0087c7;
+	border-color: #0087c7;
+}
+/* Title & Description */
+.server-title-abstract {
+	color: #555;
+	font-size: 1rem;
+	font-style: italic;
+}
+.model-page-tags {
+	background-color: #0087c7;
+	margin-right: .5em;
+	padding-right: 1em;
+	padding-left: 1em;
+	border-radius: .25rem;
+}
+.model-page-description-label {
+	font-weight: bold;
+	color: #222;
+}
+.discount-container {
+	position: relative;
+	top: 1rem;
+	padding: 0 0 0 1rem;
+	border-left: 4px solid #0087c7;
+}
+.model-page-discount {
+	font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	color: #33475b !important;
+	font-size: 1.6em !important;
+	line-height: 115% !important;
+	text-transform: uppercase;
+	letter-spacing: -.05rem;
+	font-weight: bold;
+}
+.model-page-discount-sub {
+	color: #333;
+	font-size: .85rem;
+	display: inline-block;
+	margin-bottom: 0;
+	font-style: italic;
+	letter-spacing: -.025em;
+}
+.model-page-description {
+	font-size: .85rem;
+	line-height: 155%;
+	letter-spacing: -.025em;
+	position: relative;
+	top: 1rem;
+}
+/* Images */
+.image-thumb-container {
+	margin-top: 1em;
+}
+.model-page-featured-image {
+	position: relative;
+	margin-bottom: -1em;
+}
+.image-thumb-container .thumb-images img {
+	padding: 10px;
+}
+.image-thumb-container .thumb-images img:hover {
+	cursor: pointer;
+	border: 1px solid #0087c7;
+}
+.image-thumb-container .thumb-images.active img {
+	border: 1px solid #0087c7;
+}
+/* How it Works */
+.model-page-how-title h2.section-heading {
+	background: #0087c7;
+    color: #fff;
+    padding: 15px;
+}
+.model-page-how .shadow {
+	box-shadow: 0 10px 35px -5px rgba(51,71,91,0.2) !important;
+}
+.model-page-how i {
+	color: #0087c7;
+	font-size: 2rem;
+	margin-bottom: 1em;
+}
+.how-copy {
+	font-size: .85rem;
+	line-height: 155%;
+	letter-spacing: -.025em;
+}
+/* Tabs */
+#model-page-tabs {
+	margin: 1rem 0 3rem;
+}
+#model-page-tabs .nav .nav-item .nav-link {
+	font-size: .9em;
+	font-weight: bold;
+	font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	color: #777;
+}
+#model-page-tabs .nav .nav-item .nav-link:visited {
+	color: #777;
+}
+#model-page-tabs .nav .nav-item .nav-link:hover {
+	color: #333;
+	border-color: #0087c7 #0087c7 #fff;
+}
+#model-page-tabs .nav .nav-item .nav-link.active {
+	color: #24292e;
+	border-color: #0087c7 #0087c7 #fff;
+	outline: 0;
+}
+.nav-tabs {
+	border-bottom: 1px solid #0087c7;
+}
+#model-page-tabs i {
+	padding-right: 10px;
+	color: #0087c7;
+}
+.morecontent span {
+	display: none;
+}
+/* Testimonial */
+.model-page-testimonial {
+	padding: 6rem 0;
+}
+
+/* MEDIA QUERIES */
+/* Responsive Styles Desktop Only */
+@media all and (min-width: 981px) {
+	.cta-title-container {
+		text-align: right;
+	}
+}

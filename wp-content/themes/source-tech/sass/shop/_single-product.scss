@@ -1,0 +1,143 @@
+/**
+ * Single Product
+ */
+.single-product {
+	div.product {
+		@include clearfix;
+		position: relative;
+
+		.woocommerce-product-gallery {
+			flex-basis: 60%;
+			position: relative;
+
+			.woocommerce-product-gallery__trigger {
+				position: absolute;
+				top: 1em;
+				right: 1em;
+				display: block;
+				z-index: 99;
+			}
+
+			.flex-viewport {
+				margin-bottom: 1em;
+			}
+
+			.flex-control-thumbs {
+				@include clearfix;
+				margin: 0;
+				padding: 0;
+
+				li {
+					list-style: none;
+					cursor: pointer;
+					float: left;
+
+					img {
+						opacity: .5;
+
+						&.flex-active {
+							opacity: 1;
+						}
+					}
+
+					&:hover {
+						img {
+							opacity: 1;
+						}
+					}
+				}
+			}
+
+			@for $i from 2 through 5 {
+				&.woocommerce-product-gallery--columns-#{$i} {
+					.flex-control-thumbs {
+						li {
+							@include column-width($i);
+
+							&:nth-child(#{$i}n) {
+								margin-right: 0;
+							}
+
+							&:nth-child(#{$i}n+1) {
+								clear: both;
+							}
+						}
+					}
+				}
+			}
+		}
+		.summary-block {
+			flex-basis: 40%;
+
+			.entry-summary {
+
+				margin: 0; 
+
+				.product_title {
+					font-family: $font__main;
+					@include font-size(2.5);
+					margin: 0 0 15px;
+				}
+				.request-quote {
+					display: block;
+					@include font-size(1.5);
+					background-color: $color__hilite;
+					line-height: 2.2rem;
+					padding: 14px 17px;
+					text-align: center;
+
+					&:hover {
+						text-decoration: none;
+					}
+
+					span {
+						font-weight: bold;
+						text-transform: uppercase;
+						color: #fff;
+					}
+				}
+			}
+			.wc-tabs-wrapper {
+				border-bottom: 1px #c1c1c1 solid;
+			}
+			.ship-warranty {
+				text-align: center;
+			}
+		}
+		.more-info-block {
+			@include font-size(0.8);
+			float: left;
+			width: 100%;
+			margin-top: 30px;
+
+			.more-info-tab {
+				background: #fff;
+				float: left;
+				padding: 0.75em 2em;
+				border: solid 1px #ccc;
+				max-width: 200px;
+				text-align: center;
+				border-bottom: none;
+			}
+			.more-info-field {
+				border: solid 1px #ccc;
+				padding: 2em;
+				margin-top: 38px;
+			}
+		}
+	}
+}
+
+.stock {
+	&:empty:before {
+		display: none;
+	}
+
+	&.in-stock {
+		color: $woocommerce__color-success;
+	}
+
+	&.out-of-stock {
+		color: $woocommerce__color-error;
+	}
+}
