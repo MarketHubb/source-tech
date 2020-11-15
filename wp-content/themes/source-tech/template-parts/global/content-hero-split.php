@@ -3,10 +3,10 @@ $hero = get_field('page_banner_details');
 
 if ($hero) : ?>
 
-    <div class="container-fluid hero-banner content-section" id="banner-split">
-        <div class="row justify-content-end align-items-center row-eq-height">
+    <div class="container-fluid hero-banner content-section  <?php echo $args['section_classes']; ?>" id="banner-split">
+        <div class="row justify-content-end align-items-center row-eq-height ">
             <!-- Content (left) -->
-            <div class="col-md-5 h-100">
+            <div class="col-md-5 ">
 
                 <h1 class=""><?php echo $hero['page_banner_heading']; ?><br>
                 <span class="font-weight-lighter"><?php echo $hero['page_banner_subheading']; ?></span></h1>
@@ -21,13 +21,13 @@ if ($hero) : ?>
                 ?>
 
                 <?php if ($hero['page_banner_button_type'] !== 'None') { ?>
-                    <a class="btn btn-primary btn-lg" href="<?php echo $button_url; ?>" role="button"><?php echo $hero['page_banner_button_text']; ?></a>
+                    <a class="btn btn-primary btn-lg mb-3" href="<?php echo $button_url; ?>" role="button"><?php echo $hero['page_banner_button_text']; ?></a>
                 <?php } ?>
 
             </div>
 
             <!-- Image (right) -->
-            <div class="col-md-5 h-100">
+            <div class="col-md-5 ">
                 <div class=""><img
                             src="<?php echo $hero['page_banner_image']; ?>"
                             alt="">

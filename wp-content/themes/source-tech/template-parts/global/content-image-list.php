@@ -1,4 +1,4 @@
-<div class="content image-list-container bg-blue-light">
+<div class="content image-list-container <?php echo $args['section_classes']; ?>">
     <div class="container-fluid">
         <div class="wrapper">
             <div class="row">
