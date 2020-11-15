@@ -161,7 +161,7 @@
 /*endregion*/
 /*region Colors & Backgrounds */
 .bg-blue-light {
-	background-image: -webkit-radial-gradient(50% 50%, ellipse cover, rgb(255, 255, 255), rgba(9, 137, 251, 0.0980392) 115%) !important;
+	background-image: -webkit-radial-gradient(50% 50%, ellipse cover, rgb(255, 255, 255), rgba(9, 137, 251, 0.1980392) 115%) !important;
 }
 /*endregion*/
 /*region Banner, Hero & Full-width Callouts */
