@@ -167,7 +167,7 @@ function source_tech_scripts() {
     wp_enqueue_style( 'ri_custom_styles', get_stylesheet_directory_uri() . '/css/ri-styles.css' );
     wp_enqueue_style( 'ri_blog_styles', get_stylesheet_directory_uri() . '/css/ri-blog-styles.css' );
     wp_register_script( 'ri-blog-scripts', get_template_directory_uri() . '/js/ri-blog-scripts.js', array(), '', true );
-    wp_enqueue_style( 'ri_web_fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:500,600,700&display=swap' );
+    wp_enqueue_style( 'ri_web_fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:300,500,600,700&display=swap' );
     wp_enqueue_style( 'ri_web_fonts_roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' );
     wp_enqueue_style( 'fontello', get_template_directory_uri() . '/css/fontello.css');
     wp_enqueue_script( 'source-tech-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
@@ -291,10 +291,24 @@ function ri_new_loop_shop_per_page( $cols ) {
   $cols = 50;
   return $cols;
 }
+//region Global Helper Functions
+function get_first_sentence($content)
+{
+    $pos = strpos($content, '.');
 
-//-----------------------------------------------------
-// RI - Global Helpers
-//-----------------------------------------------------
+    return substr($content, 0, $pos+1);
+}
+function get_repeater_field_row( $repeater_field, $row_index, $sub_field, $post_id ) {
+    $rows = get_field( $repeater_field, $post_id );
+    $row_index      = $row_index - 1;
+
+    if ( $rows ) {
+        $repeater_field_row = $rows[$row_index];
+        $repeater_field  = $repeater_field_row[ $sub_field ];
+    }
+
+    return $repeater_field;
+}
 function get_product_post_count($taxonomy_id) {
     $products = get_posts(array(
         'post_type' => 'product',
@@ -415,6 +429,7 @@ function ri_get_labels_from_terms($taxonomy) {
 
 	return ucwords(str_replace('server ', '', $label));
 }
+//endregion
 
 //-----------------------------------------------------
 // RI - Page & Post Content
@@ -462,8 +477,8 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 	acf_add_options_page(array(
-		'page_title' 	=> 'Global - Products',
-		'menu_title'	=> 'Global - Products',
+		'page_title' 	=> 'Footer',
+		'menu_title'	=> 'Footer',
 	));
 
 }
