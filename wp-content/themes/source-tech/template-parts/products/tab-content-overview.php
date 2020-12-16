@@ -52,10 +52,11 @@
                 $sale_copy = replace_product_variable_in_string(get_field($sale_copy_field, 'option'), $post->ID);
                 $sale_subtitle_field = 'global_' . $post->post_type . '_sale_subtitle';
                 ?>
-                <p class="model-page-discount mb-2"><?php echo $sale_copy; ?></p>
-                <p class="model-page-discount-sub"><?php the_field($sale_subtitle_field, 'option'); ?></p>
+<!--                <p class="model-page-discount mb-2">--><?php //echo $sale_copy; ?><!--</p>-->
+<!--                <p class="model-page-discount-sub">--><?php //the_field($sale_subtitle_field, 'option'); ?><!--</p>-->
             </div>
-            <p class="model-page-description mt-3"><?php the_field($product_description_field); ?></p>
+            <div class="panel shadow bt-blue">
+                <p class="mt-3"><?php the_field($product_description_field); ?></p></div>
         </div>
     </div>
 </div>

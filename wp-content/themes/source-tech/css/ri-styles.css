@@ -11,6 +11,9 @@
 	padding: .3rem 1rem;
 	border-radius: 4px;
 }
+.hero-btn.orange {
+	background-color: #EA672B;
+}
 /*region Images */
 .image-container {
 	height: 150px;
@@ -26,7 +29,26 @@
 	border-top-right-radius: 4px;
 }
 /*endregion*/
+/*region Content: Panels */
+.h-section-left .col-md-4:last-of-type .panel, .h-section-right .col-md-4:nth-of-type(2) .panel {
+	padding: 3rem 2rem;
+}
+/*endregion*/
 /*region Global */
+.line-through {
+	text-decoration: line-through;
+}
+ul.flush {
+	padding-inline-start: 0;
+	margin-left: 0;
+}
+ul.flush li {
+	padding: .3rem 0;
+	line-height: 1.3;
+}
+ul.flush li:last-of-type {
+	border-bottom: none;
+}
 .thin {
 	font-weight: 300;
 }
@@ -70,7 +92,7 @@
 }
 /*endregion*/
 /*region Cards & Panels */
-.panel.blue-top {
+.panel.blue-top, .panel.bt-blue {
 	border-top: 6px solid #0087c7;
 }
 .panel.orange-top {
@@ -244,6 +266,9 @@
 /* Layout: Colors */
 .text-white {
 	color: #fff;
+}
+.text-blue {
+	color: #0087c7;
 }
 .bg-grey-dark {
 	background-color: #424242;
@@ -526,7 +551,7 @@ header #middle-column {
 /*endregion*/
 /*region Footer */
 footer.site-footer {
-	background: #f8f8f8;
+	background: #fff;
 }
 .logo-footer {
 	max-width: 300px;
@@ -550,6 +575,12 @@ footer.site-footer {
 }
 .site-footer .site-info {
 	background-color: #222;
+}
+.footer-mission {
+	font-size: .9rem;
+	font-weight: 600;
+	letter-spacing: -.015rem;
+	color: #222;
 }
 /*endregion*/
 /* Homepage Slider */

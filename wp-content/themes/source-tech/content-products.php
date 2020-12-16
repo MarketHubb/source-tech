@@ -8,19 +8,29 @@ set_query_var('title', $title);
 
 <div class="custom-page-content" id="custom-model-page-template">
 
-    <div class="container">
-
         <?php get_template_part('template-parts/products/content', 'title'); ?>
 
-        <?php get_template_part('template-parts/products/tab-headings'); ?>
+        <?php get_template_part('template-parts/products/content', 'overview'); ?>
 
-        <?php get_template_part('template-parts/products/tab-content'); ?>
+        <?php get_template_part('template-parts/products/content', 'configured'); ?>
 
-        <?php get_template_part('template-parts/products/how-it-works'); ?>
+        <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
 
-        <?php get_template_part('template-parts/products/testimonials'); ?>
+        <?php get_template_part('template-parts/products/content', 'warranty'); ?>
 
-    </div><!-- .container-->
+        <?php get_template_part('template-parts/products/content', 'specs'); ?>
+
+        <?php get_template_part('template-parts/products/content', 'easy123'); ?>
+
+        <?php get_template_part('template-parts/products/content', 'faq'); ?>
+
+    </div> <!-- End .container-->
+
+        <?php //get_template_part('template-parts/products/tab-content'); ?>
+
+        <?php // get_template_part('template-parts/products/how-it-works'); ?>
+
+        <?php // get_template_part('template-parts/products/testimonials'); ?>
 
 </div><!-- .custom-page-content-->
 

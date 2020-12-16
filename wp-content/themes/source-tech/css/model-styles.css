@@ -1,3 +1,18 @@
+.product-subtitle span {
+	padding: 0 .75rem;
+	margin: 0;
+	display: inline;
+}
+.product-subtitle span:not(:first-of-type) {
+	border-left: 1px solid #aaa;
+}
+.product-subtitle span:first-of-type {
+	padding-left: 0;
+}
+#model-page-image-container {
+	position: relative;
+	bottom: 2.5rem;
+}
 /*region CTA */
 .server-cta-list {
 	margin-left: 0;
@@ -19,11 +34,6 @@
 }
 
 /*endregion*/
-/* CTA Module */
-.cta-card {
-	position: relative;
-	bottom: 1rem;
-}
 /* Breadcrumbs */
 .breadcrumbs {
 	display: none;
@@ -142,8 +152,11 @@
 #server-tab-content {
 	margin-bottom: 3rem;
 }
+#server-tab-content .model-page-tab-content-heading, #server-tab-content .model-page-tab-content-subheading {
+	display: none;
+}
 #server-tab-content .tab-pane {
-	padding-left: 1.1rem;
+	padding: 3rem 0 2rem;
 }
 #accordion button:hover {
 	outline: 0;
@@ -231,10 +244,10 @@
 }
 .image-thumb-container .thumb-images img:hover {
 	cursor: pointer;
-	border: 1px solid #0087c7;
+	border: 2px solid #0087c7;
 }
 .image-thumb-container .thumb-images.active img {
-	border: 1px solid #0087c7;
+	border: 2px solid #0087c7;
 }
 /* How it Works */
 .model-page-how-title h2.section-heading {
@@ -256,9 +269,6 @@
 	letter-spacing: -.025em;
 }
 /* Tabs */
-#model-page-tabs {
-	margin: 1rem 0 3rem;
-}
 #model-page-tabs .nav .nav-item .nav-link {
 	font-size: .9em;
 	font-weight: bold;

@@ -292,6 +292,13 @@ function ri_new_loop_shop_per_page( $cols ) {
   return $cols;
 }
 //region Global Helper Functions
+function explode_content($delimiter, $content)
+{
+    $formatted = explode( $delimiter, $content );
+    $formatted = array_map( 'trim', $formatted );
+
+    return $formatted;
+}
 function get_first_sentence($content)
 {
     $pos = strpos($content, '.');
@@ -430,6 +437,22 @@ function ri_get_labels_from_terms($taxonomy) {
 	return ucwords(str_replace('server ', '', $label));
 }
 //endregion
+function get_background_banner_image_start($container_classes, $image,  $gradient = '')
+{
+$gradient = (isset($gradient)) ? $gradient : .75;
+$linear_gradient = 'linear-gradient(to bottom, rgba(0,0,0,' .  $gradient . ') 0%,rgba(0,0,0,' . $gradient . ') 100%)';
+
+$banner_start  = '<div class="jumbotron bg-cover ' . $container_classes . '" ';
+$banner_start .= 'style="background-image: ' . $linear_gradient . ',';
+$banner_start .= 'url(' . $image . ')">';
+
+return $banner_start;
+}
+function get_background_image_banner_end()
+{
+
+}
+
 
 //-----------------------------------------------------
 // RI - Page & Post Content

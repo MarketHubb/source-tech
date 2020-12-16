@@ -1,5 +1,11 @@
 /* jQuery (Footer) */
 (function($) {
+    // Prevent links from page refresh
+    $('body a').each(function(e) {
+       if ($(this).attr('href') === '#prevent') {
+           e.preventDefault();
+        }
+    });
     // Remove empty <p></p> tags from editor
     $('p:empty').remove();
 
