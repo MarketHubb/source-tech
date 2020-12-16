@@ -16,24 +16,21 @@
 <footer id="colophon" class="site-footer">
 
     <!-- Callout -->
-    <?php get_template_part('template-parts/global/content', 'footer-callout'); ?>
+    <?php //get_template_part('template-parts/global/content', 'footer-callout'); ?>
 <!--    <div class="quote-block my-0">-->
 <!--        <h3><a href="--><?php //echo get_permalink(726); ?><!--" class="button request-quote">Request a Quote</a></h3>-->
 <!--        <p>Top Quality Servers, Networking & Storage Equipment at Great Prices.</p>-->
 <!--    </div>-->
 
-    <div class="bg-white pt-5">
+    <div class="bg-light-blue pt-5 mt-5">
         <div class="container-fluid">
             <div class="wrapper">
                 <!-- Logo + Mission -->
-                <div class="row">
-                    <div class="col text-center">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 text-center">
                         <img src="<?php echo get_home_url() . '/wp-content/uploads/2020/05/SourceTech-Systems.svg' ?>"
-                             class="logo-footer inline-block mb-3 pb-1" alt="Source Tech" itemprop="logo">
-                        <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                             class="logo-footer inline-block mb-2 pb-1" alt="Source Tech" itemprop="logo">
+                        <p class="footer-mission pb-5 mb-2">Our mission is to ensure that visitors & customers receive dedicated, one-on-one support from our team of enterprise IT hardware & maintenance services experts. Whether you're on our site to purchase servers for a large data center or just browsing our inventory, we promise to provide you with personal & professional service via chat, phone or email. It's our goal to make the purchase of enterprise servers, networking equipment & service contracts easy & convenient. In doing so we strive to build long term relationships with all of our customers, which is the reason they continue to come back to us time and again.  </p>
                     </div>
                 </div>
             </div>
@@ -48,7 +45,7 @@
 
                     <!-- Top Pages -->
                     <div class="col-md-4 px-md-3 px-lg-4">
-                        <h5 class="font-weight-bold bb-grey pb-3 mb-3">Top Pages</h5>
+                        <h5 class="font-weight-bold  pb-3 mb-3">Top Pages</h5>
                         <ul class="link-list">
                             <?php
                             if (have_rows('footer_pages', 'option')):
@@ -66,7 +63,7 @@
                     </div>
                     <!-- Latest Post -->
                     <div class="col-md-4 px-md-3 px-lg-4">
-                        <h5 class="font-weight-bold bb-grey pb-3 mb-3">Latest Post</h5>
+                        <h5 class="font-weight-bold  pb-3 mb-3">Latest Post</h5>
                         <?php $footer_post = get_field('footer_post', 'option'); ?>
                         <img src="<?php echo get_field('post_featured_image', $footer_post->ID); ?>" alt="" class="mt-2"/>
                         <p class="font-weight-bold mt-3 mb-1"><?php echo get_the_title($footer_post->ID); ?></p>
@@ -75,7 +72,7 @@
                     </div>
                     <!-- Featured Products -->
                     <div class="col-md-4 px-md-3 px-lg-4">
-                        <h5 class="font-weight-bold bb-grey pb-3 mb-3">Featured Products</h5>
+                        <h5 class="font-weight-bold  pb-3 mb-3">Featured Products</h5>
                         <?php
                         if (have_rows('footer_products', 'option')):
                             $footer_products = '';
@@ -105,7 +102,7 @@
         <div class="container-fluid">
             <div class="wrapper">
                 <div class="row">
-                    <ul class="list-group w-100 list-group-horizontal no-border">
+                    <ul class="list-group pt-3 pb-2 w-100 list-group-horizontal no-border">
                         <?php
                         if (have_rows('footer_payment', 'option')):
                             $payment = '';
