@@ -12,7 +12,11 @@ set_query_var('title', $title);
 
         <?php get_template_part('template-parts/products/content', 'overview'); ?>
 
-        <?php get_template_part('template-parts/products/content', 'configured'); ?>
+        <?php 
+        if (have_rows('post_servers_pre_configured')):
+            get_template_part('template-parts/products/content', 'configured');
+        endif;
+        ?>
 
         <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
 
