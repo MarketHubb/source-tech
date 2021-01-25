@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="warranty">
     <div class="wrapper">
         <div class="row content h-section-right align-items-center">
             <div class="col-md-4 pl-md-4 order-sm-12">

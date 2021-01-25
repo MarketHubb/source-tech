@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="specs">
     <div class="wrapper">
         <div class="row content">
             <div class="col-md-12 text-center mb-3">
