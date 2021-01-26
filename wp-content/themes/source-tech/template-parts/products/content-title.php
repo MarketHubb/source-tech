@@ -10,6 +10,7 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
         <div class="row mt-4 pt-3">
             <div class="col">
                 <?php
+                $tag_items = '';
                 foreach ($tags as $tag => $value) {
                     if ($tag != 'title' && $tag != 'product') {
                         $tag_items .= '<span class="badge badge-pill badge-primary model-page-tags">' . $value . '</span>';

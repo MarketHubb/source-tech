@@ -13,11 +13,21 @@ if (get_field('post_read_time')) {
 ?>
 
 <?php if (!get_field('post_featured_image')) { ?>
-<div class="bg-blue">
+<div class="bg-light-blue">
     <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h1 class="blog-title pt-3 pb-3 mt-2 mb-2"><?php echo $heading; ?></h1>
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center pt-4">
+                <?php
+                $cats = '<ul class="post-categories">';
+                foreach ($categories as $category) {
+                    if ($category->name != 'Uncategorized') {
+                        $cats .= '<li><i class="fas fa-tag text-blue mr-2"></i>' . $category->name . '</li>';
+                    }
+                }
+                $cats .= '</ul>';
+                echo $cats;
+                ?>
+                <h1 class="single-title font-weight-bold mt-2 pb-3"><?php echo $heading; ?></h1>
                 <p class="blog-subtitle"><?php echo $sub_heading; ?></p>
                 <div class="publish-container">
                     <?php echo $published_read; ?>

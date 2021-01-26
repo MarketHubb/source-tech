@@ -113,7 +113,7 @@
 		echo '</div>';
 	}?>
 	
-	<?php if (is_page(777) || is_singular('networking') || is_singular('servers') || is_page(2055) || is_page(661) || is_page(2415) || is_page(2488)) { ?>
+	<?php if (is_page(777) || is_singular('networking') || is_singular('servers') || is_page(2055) || is_page(661) || is_page(2415) || is_page(2488) || is_category()) { ?>
 		<div id="custom-content" class="custom-site-content">
 		<?php } else if (!is_singular('post')) { ?>
 			<div id="content" class="site-content">

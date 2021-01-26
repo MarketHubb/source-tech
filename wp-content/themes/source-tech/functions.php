@@ -1,4 +1,6 @@
 <?php
+require_once 'includes/helpers.php';
+require_once 'includes/content.php';
 /**
  * Source Tech functions and definitions
  *
@@ -292,30 +294,6 @@ function ri_new_loop_shop_per_page( $cols ) {
   return $cols;
 }
 //region Global Helper Functions
-function explode_content($delimiter, $content)
-{
-    $formatted = explode( $delimiter, $content );
-    $formatted = array_map( 'trim', $formatted );
-
-    return $formatted;
-}
-function get_first_sentence($content)
-{
-    $pos = strpos($content, '.');
-
-    return substr($content, 0, $pos+1);
-}
-function get_repeater_field_row( $repeater_field, $row_index, $sub_field, $post_id ) {
-    $rows = get_field( $repeater_field, $post_id );
-    $row_index      = $row_index - 1;
-
-    if ( $rows ) {
-        $repeater_field_row = $rows[$row_index];
-        $repeater_field  = $repeater_field_row[ $sub_field ];
-    }
-
-    return $repeater_field;
-}
 function get_product_post_count($taxonomy_id) {
     $products = get_posts(array(
         'post_type' => 'product',
@@ -331,17 +309,33 @@ function get_product_post_count($taxonomy_id) {
 
     return count($products);
 }
+
+function get_random_date_for_legacy_posts()
+{
+    $date = [];
+
+    $timestamp = mt_rand(1465171200, 1514937600);
+
+    return date("F j, Y", $timestamp);
+
+}
+
 function compare_published_updated_dates($post_id) {
     $dates = [];
     $published_time = strtotime(get_the_date('', $post_id));
-    $updated_time = strtotime(get_the_modified_date('', $post_id));
-    $date_diff = $updated_time - $published_time;
-    $days_diff = round($date_diff / (60 * 60 * 24));
 
-    if ($days_diff > 30) {
-        $dates['updated'] = get_the_modified_date('', $post_id);
+    if ($published_time === 1465171200) {
+        $dates['updated'] = get_random_date_for_legacy_posts();
     } else {
-        $dates['published'] = get_the_date('', $post_id);
+        $updated_time = strtotime(get_the_modified_date('', $post_id));
+        $date_diff = $updated_time - $published_time;
+        $days_diff = round($date_diff / (60 * 60 * 24));
+
+        if ($days_diff > 30) {
+            $dates['updated'] = get_the_modified_date('', $post_id);
+        } else {
+            $dates['published'] = get_the_date('', $post_id);
+        }
     }
 
     return $dates;
