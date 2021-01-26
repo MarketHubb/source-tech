@@ -54,7 +54,10 @@
     line-height: 165%;
     font-weight: 600;
 }
-#single-post ul li:not(:last-of-type) {
+#single-post ul, #single-post ol {
+    margin: 2rem 0;
+}
+#single-post ul li:not(:last-of-type), #single-post ol li:not(:last-of-type) {
     padding-bottom: 1rem;
 }
 
@@ -260,9 +263,6 @@ ul.post-categories li {
     box-shadow: 0 10px 50px -5px rgba(51,71,91,0.12);
     position: relative;
     bottom: 2rem;
-}
-#single-post ul {
-    margin: 2rem 0;
 }
 #single-post h3:not(.font-weight-bold) > ul, #single-post h3:not(.font-weight-bold) strong > ul {
     margin-top: 1rem;

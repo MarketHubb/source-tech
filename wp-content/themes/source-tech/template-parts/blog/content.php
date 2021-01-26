@@ -4,7 +4,7 @@
     <div class="wrapper">
         <div class="row">
             <div class="col shadow">
-                <div class="px-sm-3 px-md-4 px-lg-5 py-2">
+                <div class="px-sm-3 px-md-4 px-lg-5 pt-2 pb-5">
 
                 <?php
                 if (!get_field('post_content_migrated')) {
@@ -14,9 +14,9 @@
                         $content = '';
                         if( have_rows('post_overview') ):
                             $content .= '<div id="post-overview">';
-                            $content .= '<ul>';
+                            $content .= '<ul class="">';
                             while ( have_rows('post_overview') ) : the_row();
-                                $content .= '<li>' .get_sub_field('post_overview_bullet') . '</li>';
+                                $content .= '<li class="font-weight-bold">' .get_sub_field('post_overview_bullet') . '</li>';
                             endwhile;
                             $content .= '</ul></div>';
                         endif;
