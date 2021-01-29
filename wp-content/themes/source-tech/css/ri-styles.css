@@ -361,9 +361,10 @@ ul.flush li:last-of-type {
 }
 
 #zsiq_maintitle, #zsiq_byline {
-	font-family: "ZSIQ Oxygen";
-    color: #333;
+    color: #222;
     font-size: 14px;
+	font-weight: 600;
+	letter-spacing: -.01rem;
     -webkit-font-smoothing: antialiased;
 	-webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.1);
 	padding-bottom: 1px;
