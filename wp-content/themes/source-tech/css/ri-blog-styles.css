@@ -13,7 +13,7 @@
 #single-post .entry-content {
     padding: 0 2.5rem;
 }
-#single-post .row:first-of-type .col {
+#single-post .wrapper .row:first-of-type > div {
     border-radius: 4px;
     border-top: 6px solid #0087c7;
     position: relative;

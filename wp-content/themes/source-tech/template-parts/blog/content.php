@@ -2,8 +2,8 @@
 
 <div class="container-fluid" id="single-post">
     <div class="wrapper">
-        <div class="row">
-            <div class="col shadow">
+        <div class="row justify-content-center">
+            <div class="col-md-10 shadow">
                 <div class="px-sm-3 px-md-4 px-lg-5 pt-2 pb-5">
 
                 <?php
@@ -25,7 +25,7 @@
                         while ( have_rows('post_section') ) : the_row();
 
                             if (get_sub_field('post_section_content_heading')) {
-                                $content .= '<h3 class="display-4 font-weight-bold my-4">' . get_sub_field('post_section_content_heading') . '</h3>';
+                                $content .= '<h3 class="display-5 font-weight-bold my-4">' . get_sub_field('post_section_content_heading') . '</h3>';
                             }
 
                             if (get_sub_field('post_section_content_type') == 'Text') {
