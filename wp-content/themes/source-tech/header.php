@@ -54,8 +54,22 @@
 <body <?php body_class(); ?>>
 
     <!-- Global Alert Bar -->
+    <?php
+    // Modify alert message if Google Ads promotion in ad copy
+
+    // 30 === "up to 30% off"
+    if (isset($_GET['ga']) && $_GET['ga'] == 30) {
+        $alert_copy = 'This week only <span class="global-alert-promo">save up to 30%</span> on ' . get_the_title() . 's: ';
+    } else {
+        $alert_copy = 'Fully operational during COVID-19 with fast shipping & same-day quotes:';
+    }
+    ?>
+
+
+
+
     <div class="bg-orange global-alert fixed shadow">
-        <p class="text-center text-white">Fully operational during COVID-19 with fast shipping & same-day quotes:
+        <p class="text-center text-white"><?php echo $alert_copy; ?>
             <span class="alert-cta" onclick='$zoho.salesiq.floatwindow.visible("show");'><i class="fas fa-comments-alt text-white"></i> Live Chat</span><span class="alert-cta"><a href="mailto:info@source-tech.net"><i class="fas fa-envelope"></i> info@source-tech.net</a></span><span class="alert-cta"><a href="tel:800-932-0657"><i class="fas fa-phone"></i> 800-932-0657</a></span>
         </p>
     </div>

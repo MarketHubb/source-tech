@@ -332,6 +332,9 @@ ul.flush li:last-of-type {
 	font-size: 1.25rem;
 }
 /* Helper Classes */
+.inline {
+	display: inline;
+}
 .inline-block, .dib {
 	display: inline-block;
 }
@@ -507,12 +510,15 @@ h2.sub-heading, h3.sub-heading {
 	margin: 0;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	letter-spacing: -.015rem;
-	font-weight: 500;
-	font-size: .75rem;
+	font-weight: 600;
+	font-size: .8rem;
 	padding: .4rem 0;
 }
-.global-alert p span.alert-cta:not(:first-of-type) {
+.global-alert p span.alert-cta:nth-child(n+3) {
 	border-left: 1px solid #FFA67E;
+}
+.global-alert-promo {
+	border-bottom: 2px solid;
 }
 .global-alert .alert-cta {
 	padding: 0 17px;
@@ -522,7 +528,8 @@ h2.sub-heading, h3.sub-heading {
 }
 .global-alert .alert-cta, .global-alert .alert-cta a {
 	color: #fff !important;
-	font-weight: 600 !important;
+	font-weight: 800 !important;
+	letter-spacing: .01rem;
 }
 .global-alert .alert-cta:hover, .global-alert .alert-cta a:hover {
 	cursor: pointer;
