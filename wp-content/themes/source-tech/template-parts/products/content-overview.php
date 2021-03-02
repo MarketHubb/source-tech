@@ -43,7 +43,7 @@
 
                     $description = 'post_' . $post->post_type . '_description';
                     ?>
-                    <p class="lead"><strong><?php echo $description_lead; ?></strong></p>
+                    <p class="lead mb-0"><strong><?php echo $description_lead; ?></strong></p>
                     <p class="mb-0"><?php echo get_field($description); ?></p>
                     <a href="#prevent" onclick='$zoho.salesiq.floatwindow.visible("show");' class="hero-btn shadow text-link">Get a
                         Quote Now</a>
