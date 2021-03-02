@@ -1,4 +1,72 @@
 <?php
+function return_brand_image_path($manufacturer)
+{
+    $root_path = get_home_url() . '/wp-content/uploads/';
+
+    if ($manufacturer === 'Dell') {
+        return $root_path . '2020/05/Dell-Logo.png';
+    } elseif ($manufacturer === 'EMC') {
+        return $root_path . '2020/11/Logo-EMC.png';
+    }
+
+}
+
+function get_list_content($content) {
+
+    $content = explode("\n", $content);
+    $content = array_map('trim', $content);
+
+    if( is_array($content) ) {
+
+        $list = '<ul class="list-group list-group-flush m-0">';
+
+        foreach( $content as $list_item ) {
+            $list .= '<li class="list-group-item font-weight-bold">' . $list_item . '</li>';
+        }
+
+        $list .= '</ul>';
+
+        return $list;
+    }
+}
+
+function return_alternate_content($args=array())
+{
+    $content = '';
+
+    if (isset($args['product_image'])) {
+
+        $content .= '<img src="' . $args['product_image'] . '" class="alternate-product-image mb-4" />';
+
+    }
+
+    if ($args['content_type'] === 'list') {
+
+        $content .= get_list_content($args['content']);
+    }
+
+    return $content;
+
+}
+
+function return_alternate_content_section_heading($args=array())
+{
+    $heading = [];
+
+    if (isset($args['image'])) {
+        $heading['image'] = '<img src="' . $args['image'] . '" class="alternate-heading-image" />';
+    }
+
+    if (isset($args['heading'])) {
+        $heading['heading'] = '<h2 class="font-weight-bold">' . $args['heading'] . '</h2>';
+    }
+
+    if (isset($args['description'])) {
+        $heading['description'] = '<p class="lead">' . $args['description'] . '</p>';
+    }
+
+    return $heading;
+}
 function return_hero_gradient($direction="", $custom_gradient="")
 {
     $gradient_direction = !empty($direction) ? $direction : 'bottom';

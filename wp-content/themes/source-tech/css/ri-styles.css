@@ -15,6 +15,12 @@
 	background-color: #EA672B;
 }
 /*region Images */
+.alternate-heading-image {
+	max-width: 250px;
+}
+.alternate-product-image {
+	max-width: 450px;
+}
 .image-container {
 	height: 150px;
 	width: 100%;
