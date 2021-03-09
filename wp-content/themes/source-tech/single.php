@@ -10,7 +10,7 @@ get_header();
 ?>
 
 <?php
-if ($post->post_type == 'servers' || $post->post_type == 'networking') {
+if ($post->post_type == 'servers' || $post->post_type == 'networking' || $post->post_type == 'storage') {
 
     get_template_part('content-products');
 

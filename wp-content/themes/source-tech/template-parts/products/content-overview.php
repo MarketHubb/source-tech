@@ -4,8 +4,9 @@
             <div class="col-md-6">
                 <div id="model-page-image-container">
                     <?php
-                    $images_repeater_field = 'post_' . $post->post_type . '_images';
-                    $images_sub_field = 'post_' . $post->post_type . '_images_image';
+                    $post_type_for_acf = get_query_var('post_type_for_acf');
+                    $images_repeater_field = 'post_'. $post_type_for_acf . '_images';
+                    $images_sub_field = 'post_'. $post_type_for_acf . '_images_image';
 
                     if (have_rows($images_repeater_field)):
                         $i = 1;
@@ -34,15 +35,16 @@
             <div class="col-md-5">
 
                 <div class="">
+
                     <?php
                     if (get_field('post_servers_description_lead')) {
                         $description_lead = get_field('post_servers_description_lead');
                     } else {
-                        $description_lead = get_the_title() . ' Overview';
+                        $description_lead = 'Product Overview';
                     }
-
-                    $description = 'post_' . $post->post_type . '_description';
+                    $description = 'post_' . $post_type_for_acf . '_description';
                     ?>
+
                     <p class="lead mb-0"><strong><?php echo $description_lead; ?></strong></p>
                     <p class="mb-0"><?php echo get_field($description); ?></p>
                     <a href="#prevent" onclick='$zoho.salesiq.floatwindow.visible("show");' class="hero-btn shadow text-link">Get a

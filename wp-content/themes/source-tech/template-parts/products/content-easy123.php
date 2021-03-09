@@ -1,5 +1,6 @@
  <?php
-    $repeater_field = 'global_' . get_post_type() . '_how_it_works';
+ $post_type_for_acf = get_query_var('post_type_for_acf');
+ $repeater_field = 'global_' . $post_type_for_acf . '_how_it_works';
 
     if( have_rows($repeater_field, 'option') ):
         $how = get_background_banner_image_start('row content', get_field('global_server_how_background_image', 'option'), .75);
@@ -11,9 +12,9 @@
         $how .= '<div class="row row-eq-height mb-2">';
 
         while ( have_rows($repeater_field, 'option') ) : the_row();
-            $heading_field = 'global_' . get_post_type() . '_how_it_works_heading';
-            $icon_field = 'global_' . get_post_type() . '_how_it_works_icon';
-            $description_field = 'global_' . get_post_type() . '_how_it_works_description';
+            $heading_field = 'global_' . $post_type_for_acf . '_how_it_works_heading';
+            $icon_field = 'global_' . $post_type_for_acf . '_how_it_works_icon';
+            $description_field = 'global_' . $post_type_for_acf . '_how_it_works_description';
             $description = replace_product_variable_in_string(get_sub_field($description_field, 'option'), $post->ID);
 
             $how .= '<div class="col col-md-4 col-lg-4 text-center">';

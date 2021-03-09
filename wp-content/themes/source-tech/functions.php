@@ -197,7 +197,7 @@ function source_tech_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 	// Demo model page
-	if ( is_page(1574) || is_singular('servers') || is_singular('networking')) {
+	if ( is_page(1574) || is_singular('servers') || is_singular('networking') || is_singular('storage')) {
 		wp_enqueue_style( 'model-styles' );
 		wp_enqueue_script( 'model-scripts' );
 		wp_enqueue_script( 'bootstrap-scripts' );
@@ -340,6 +340,20 @@ function compare_published_updated_dates($post_id) {
 
     return $dates;
 }
+function get_formatted_product_type($post_id)
+{
+    $post_type = get_post_type($post_id);
+
+    if ($post_type === 'servers') {
+        $product_type = 'Servers';
+    } elseif ($post_type === 'storage') {
+        $product_type = 'Storage Array';
+    } else {
+        $product_type = get_field('post_networking_equipment_type', $post_id);
+    }
+
+    return $product_type;
+}
 function get_formatted_product_terms($post_id) {
     $tag_terms = array('server_manufacturers', 'product_line', 'server_types', 'form_factor', 'networking_type');
     $tags = array();
@@ -352,7 +366,7 @@ function get_formatted_product_terms($post_id) {
         }
     }
     $tags['title'] = get_formatted_product_title($post_id);
-    $tags['product'] = get_post_type($post_id) == 'servers' ? 'Servers' : get_field('post_networking_equipment_type', $post_id);
+    $tags['product'] = get_formatted_product_type($post_id);
 
     return $tags;
 }
