@@ -411,7 +411,7 @@ h2.sub-heading, h3.sub-heading {
 .text-link {
 	display: inline-block;
 	font-weight: bold !important;
-	margin-top: 1em !important;
+	margin-top: 1em;
 	border-bottom: 2px solid transparent !important;
 	color: #007bff;
 }
