@@ -17,6 +17,8 @@ set_query_var('product_type', $product_type);
 
         <?php get_template_part('template-parts/products/content', 'overview'); ?>
 
+        <?php get_template_part('template-parts/products/content', 'specs'); ?>
+
         <?php 
         if (have_rows('post_servers_pre_configured')):
             get_template_part('template-parts/products/content', 'configured');
@@ -26,8 +28,6 @@ set_query_var('product_type', $product_type);
         <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
 
         <?php get_template_part('template-parts/products/content', 'warranty'); ?>
-
-        <?php get_template_part('template-parts/products/content', 'specs'); ?>
 
         <?php get_template_part('template-parts/products/content', 'easy123'); ?>
 
