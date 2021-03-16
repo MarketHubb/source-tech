@@ -1,5 +1,6 @@
 /* jQuery (Footer) */
 (function($) {
+
     // Variant copy testing for primary CTA button
     var variant = $('header').data('buttonvariant');
     var cta_button = $('a.button.request-quote span');

@@ -128,6 +128,10 @@
 </footer><!-- #colophon -->
 </div><!-- #page -->
 
+<?php if (is_singular()) {
+    get_template_part('template-parts/modals/content', 'product');
+} ?>
+
 <?php wp_footer(); ?>
 
 <!-- Zoho Live Chat widget -->

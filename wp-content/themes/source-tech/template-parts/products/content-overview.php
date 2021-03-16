@@ -47,8 +47,7 @@
 
                     <p class="lead mb-0"><strong><?php echo $description_lead; ?></strong></p>
                     <p class="mb-0"><?php echo get_field($description); ?></p>
-                    <a href="#prevent" onclick='$zoho.salesiq.floatwindow.visible("show");' class="hero-btn shadow text-link">Get a
-                        Quote Now</a>
+                    <button type="button" class="btn btn-primary bg-orange cta-btn mt-4" data-toggle="modal" data-target="#quoteModal" data-product="<?php the_title(); ?>">Request a Quote</button>
                 </div>
             </div>
         </div>
