@@ -1,5 +1,12 @@
 <?php
 get_header();
+
+
+if (isset($_GET) && !empty($_GET)) {
+//    $query_string_cta = get_query_string_message($post->ID, $_GET);
+//    echo get_query_string_message($post->ID, $_GET);
+}
+set_query_var('query_params', $_GET);
 $tags = get_formatted_product_terms($post->ID);
 set_query_var('tags', $tags);
 $title = get_formatted_product_title($post->ID);

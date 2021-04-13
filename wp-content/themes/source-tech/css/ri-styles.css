@@ -8,6 +8,9 @@
 	box-shadow: none;
 	background-color: #EA672B;
 }
+.cta-btn:focus, .cta-btn:active {
+	background-color: #EA672B;
+}
 .modal {
 	z-index: 1000000;
 }
@@ -300,6 +303,9 @@ ul.flush li:last-of-type {
 	color: #0087c7;
 	font-size: 1rem;
 }
+.cta-copy, .cta-copy:hover {
+	color: #007bff;
+}
 .cta-copy i {
 	display: none;
 	position: absolute;
@@ -321,6 +327,9 @@ ul.flush li:last-of-type {
 	text-decoration: underline;
 }
 /* Layout: Colors */
+.text-black {
+	color: #111;
+}
 .text-white {
 	color: #fff;
 }

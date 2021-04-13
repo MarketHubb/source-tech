@@ -21,7 +21,7 @@
                             <p class="lead font-weight-bold mb-0">Chat</p>
                         </div>
                         <div class="col-md-7">
-                            <p class="mb-0"><span class="cta-chat cta-copy" onclick='$zoho.salesiq.floatwindow.visible("show");'>Click here</span> to start a chat with one of our U.S. based enterprise IT hardware specialists</p>
+                            <p class="mb-0 text-black"><span class="cta-chat cta-copy" onclick='$zoho.salesiq.floatwindow.visible("show");'>Click here</span> to start a chat with one of our U.S. based enterprise IT hardware specialists</p>
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center py-4 ">
@@ -30,7 +30,7 @@
                             <p class="lead font-weight-bold pb-0 mb-0">Call</p>
                         </div>
                         <div class="col-md-7">
-                            <p class="mb-0">Call <a href="tel:800-932-0657" class="cta-phone cta-copy">800-932-0657</a> to speak to our live support team available Mon-Fri, 8:00am - 6:00pm CST</p>
+                            <p class="mb-0 text-black">Call <a href="tel:800-932-0657" class="cta-phone cta-copy">800-932-0657</a> to speak to our live support team available Mon-Fri, 8:00am - 6:00pm CST</p>
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center py-4">
@@ -48,7 +48,7 @@
                                 $mail_subject = "Website Inquiry | SourceTech Systems";
                             }
                             ?>
-                            <p class="mb-0"><a href="mailto:info@source-tech.net?subject=<?php echo rawurlencode($mail_subject); ?>" class="cta-email cta-copy">Email us</a> your configuration details, or a competitor's quote and we'll try and beat it</p>
+                            <p class="mb-0 text-black"><a href="mailto:info@source-tech.net?subject=<?php echo rawurlencode($mail_subject); ?>" class="cta-email cta-copy">Email us</a> your configuration details, or a competitor's quote and we'll try and beat it</p>
                         </div>
                     </div>
                 </div>
