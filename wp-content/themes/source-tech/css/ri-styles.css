@@ -305,6 +305,7 @@ ul.flush li:last-of-type {
 }
 .cta-copy, .cta-copy:hover {
 	color: #007bff;
+	font-size: 1.15rem;
 }
 .cta-copy i {
 	display: none;

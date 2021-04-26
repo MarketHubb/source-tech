@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <h2 class="font-weight-bold modal-product w-100 text-center mb-0"></h2>
-                <h4 class="modal-title text-center w-100" id="exampleModalLabel">3 Easy Ways to Get a Quote</h4>
+                <p class="modal-title text-center w-100" id="exampleModalLabel">- 3 Easy Ways to Get a Quote -</p>
 
                 <div class="text-center mt-3">
                     <img src="" id="modal-image" alt="">

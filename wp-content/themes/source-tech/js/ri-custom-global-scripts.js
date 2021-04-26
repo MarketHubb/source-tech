@@ -27,5 +27,14 @@
             'event_label' : 'Open email application'
         });
     });
+
+    // Google Analytics Event: Launch Modal Window
+    $('.cta-btn').on('click', function() {
+        let buttonText = $(this).text();
+        gtag('event', 'Click', {
+            'event_category' : 'Launch Modal',
+            'event_label' : buttonText
+        });
+    });
     
 })( jQuery );

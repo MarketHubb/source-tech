@@ -70,7 +70,7 @@
 
     <div class="bg-orange global-alert fixed shadow">
         <p class="text-center text-white"><?php echo $alert_copy; ?>
-            <span class="alert-cta" onclick='$zoho.salesiq.floatwindow.visible("show");'><i class="fas fa-comments-alt text-white"></i> Live Chat</span><span class="alert-cta"><a href="mailto:info@source-tech.net"><i class="fas fa-envelope"></i> info@source-tech.net</a></span><span class="alert-cta"><a href="tel:800-932-0657"><i class="fas fa-phone"></i> 800-932-0657</a></span>
+            <span class="alert-cta cta-chat" onclick='$zoho.salesiq.floatwindow.visible("show");'><i class="fas fa-comments-alt text-white"></i> Live Chat</span><span class="alert-cta"><a href="mailto:info@source-tech.net" class="cta-email"><i class="fas fa-envelope"></i> info@source-tech.net</a></span><span class="alert-cta"><a href="tel:800-932-0657"><i class="fas fa-phone"></i> 800-932-0657</a></span>
         </p>
     </div>
 
