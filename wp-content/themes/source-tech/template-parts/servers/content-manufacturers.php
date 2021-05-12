@@ -11,9 +11,9 @@ if( have_rows('page_refurbished_servers_manufacturers', 661) ):
         $servers .= '<div class="manufacturer-container">';
 
         if( have_rows('page_refurbished_servers_form_factors', 661) ):
-            $servers .= '<div class="container-fluid fluid-constrained d-flex h-100">';
-            $servers .= '<div class="row row-eq-height">';
-            $servers .= '<div class="col-md-3 mx-auto">';
+            $servers .= '<div class="container-fluid fluid-constrained h-100">';
+            $servers .= '<div class="row justify-content-start row-eq-height">';
+            $servers .= '<div class="col-md-3">';
             $servers .= '<div class="v-align-center h-100">';
             $servers .= '<img src="' . $logo . '" class="manufacturer-logo" />';
             $servers .= '<p class="manufacturer-desc mb-0">' . $manufacturer_description . '</p>';

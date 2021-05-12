@@ -10,9 +10,8 @@ get_header(); ?>
             <div class="col">
                 <h1 class="page-title text-center">New & Refurbished Servers for Sale</h1>
                 <div class="divider"></div>
-                <p class="text-center">Save thousands on new and refurbished servers from Dell, HPE, Oracle and more.
-                    Every server we sell is custom-configured to order. Call our chat with one of our server-expert
-                    technicians today for help configuring or a super-fast custom quote.</p>
+                <p class="text-center">Save thousands on new and refurbished servers from Dell, HPE, Lenovo, Oracle and more.
+                    Every server we sell is custom-configured to order. Call our chat with one of our expert server technicians today for help configuring or a super-fast custom quote.</p>
             </div>
         </div>
     </div>
