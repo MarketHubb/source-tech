@@ -1,0 +1,47 @@
+.product-cat-panel {
+    padding: 0 1rem 2rem !important;
+}
+.product-cat-panel:hover {
+    box-shadow: 0 10px 35px -5px rgb(51 71 91 / 30%) !important;
+    cursor: pointer;
+}
+.product-cat-hover {
+    opacity: .85;
+}
+.product-cat-panel:hover .product-cat-hover {
+    opacity: 100%;
+}
+.dell .panel {
+    border-top: 7px solid #007db8;
+}
+.dell .badge {
+    background-color: #007db8;
+}
+.hp .panel, .hpe .panel {
+    border-top: 7px solid #00b388;
+}
+.lenovo .panel {
+    border-top: 7px solid #E60012;
+}
+.lenovo .badge {
+    background-color: #E60012;
+}
+.hp .badge, .hpe .badge {
+    background-color: #00b388;
+}
+.product-rack-class .product-cat-copy{
+    position: relative;
+    bottom: 3rem;
+    margin-bottom: -3rem;
+}
+.product-cat-link {
+    font-weight: normal !important;
+}
+.product-cat-part {
+    color: #111;
+}
+.product-cat-model {
+    letter-spacing: .05rem;
+    color: #666;
+    margin-bottom: -.25rem;
+}

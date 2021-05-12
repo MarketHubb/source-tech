@@ -212,6 +212,9 @@ function source_tech_scripts() {
 		wp_enqueue_style( 'ri_custom_rfq_styles', get_stylesheet_directory_uri() . '/css/ri-rfq-styles.css' );
         wp_enqueue_script( 'ri_custom_rfq_scripts' );
     }
+    if (is_product_category()) {
+        wp_enqueue_style( 'ri-product-cat-styles', get_stylesheet_directory_uri() . '/css/ri-product-cat-styles.css' );
+    }
     if (is_front_page()) {
         wp_enqueue_style( 'home-styles', get_stylesheet_directory_uri() . '/css/home.css' );
         wp_enqueue_script( 'bootstrap-scripts' );

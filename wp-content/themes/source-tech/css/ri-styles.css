@@ -364,6 +364,9 @@ ul.flush li:last-of-type {
 .bg-light-blue {
 	background-color: #f5f8fa;
 }
+.bg-light-grey {
+	background-color: #f9f9f9;
+}
 /* Layout: Borders & Shadows */
 .shadow {
 	box-shadow: 0 10px 35px -5px rgba(51,71,91,0.1) !important;
@@ -475,6 +478,18 @@ h2.sub-heading, h3.sub-heading {
 	text-decoration: none;
 }
 /* Global Elements */
+.page-heading::after {
+	background: #0087c7;
+	content: "";
+	display: block;
+	height: 5px;
+	width: 60px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	top: .75rem;
+	margin-bottom: 1.5rem;
+}
 .custom-container-section {
 	padding: 3rem 0;
 }

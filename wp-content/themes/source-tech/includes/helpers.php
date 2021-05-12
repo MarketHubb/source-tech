@@ -1,5 +1,10 @@
 <?php
 //region Global
+function return_only_numbers($model)
+{
+    return preg_replace('/\D/', '', $model);
+}
+
 function explode_content($delimiter, $content)
 {
     $formatted = explode($delimiter, $content);
@@ -70,4 +75,74 @@ function get_tax_terms($tax)
 
     return $terms;
 }
+function get_server_manufacturer_logo($title)
+{
+    $logo = [];
+
+    if (strpos(strtoupper($title), 'HP') !== false || strpos(strtoupper($title), 'HPE') !== false) {
+        $logo['image'] = '/wp-content/uploads/2020/05/HPE.jpg';
+        $logo['class'] = 'w-50';
+    }
+
+    if (strpos(strtoupper($title), 'DELL') !== false) {
+        $logo['image'] = '/wp-content/uploads/2020/05/Dell-Logo.png';
+        $logo['class'] = 'w-25';
+    }
+
+    if (strpos(strtoupper($title), 'SUN') !== false || strpos(strtoupper($title), 'SUN/ORACLE') !== false) {
+        $logo['image'] = '/wp-content/uploads/2020/05/Sun-Oracle-Logo-Space.jpg';
+        $logo['class'] = 'w-25';
+    }
+
+    if (strpos(strtoupper($title), 'LENOVO') !== false) {
+        $logo['image'] = '/wp-content/uploads/2020/11/Logo-Lenovo.png';
+        $logo['class'] = 'w-50';
+    }
+
+    return $logo;
+}
+function get_form_factor_size($post_id)
+{
+    $size = wp_get_post_terms($post_id, 'size');
+
+    if (is_array($size) && !empty($size)) {
+
+        return $size[0]->name;
+
+    }
+}
+function get_server_part_number($title = array())
+{
+    if (is_array($title)) {
+
+        $title = array_slice($title, 2);
+
+        return implode(" ", $title);
+
+    }
+}
+function return_server_category_heading($cat_title)
+{
+    $heading = [];
+
+    $cat_title_array = explode_content(" ", $cat_title);
+
+    $heading['manufacturer'] = strtolower($cat_title_array[0]);
+
+    $heading['description'] = 'We stock all models of ' . $cat_title . ' that streamline the workload for small businesses, departments and work-group environments as well as web, cloud and data center applications. ' . $cat_title_array[0] . ' servers are an ideal platform for enterprise-level Linux, Windows Server, and VMware operating systems.';
+    
+    return $heading;
+}
 //endregion
+
+
+
+
+
+
+
+
+
+
+
+
