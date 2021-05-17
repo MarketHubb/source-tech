@@ -38,6 +38,7 @@ $heading = return_server_category_heading(get_queried_object()->name);
             $query_args = array(
                 'post_type' => 'product',
                 'posts_per_page' => -1,
+                'orderby' => 'menu_order',
                 'tax_query' => array(
                     array(
                         'taxonomy' => get_queried_object()->taxonomy,
