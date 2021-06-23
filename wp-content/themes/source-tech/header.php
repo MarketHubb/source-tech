@@ -127,7 +127,7 @@
 		echo '</div>';
 	}?>
 	
-	<?php if (is_page(777) || is_singular('networking') || is_singular('servers') || is_singular('storage') || is_page(2055) || is_page(661) || is_page(2415) || is_page(2488) || is_category() || is_page(577) || is_product_category() ) { ?>
+	<?php if (is_page(777) || is_singular('networking') || is_singular('servers') || is_singular('storage') || is_page(2055) || is_page(661) || is_page(2415) || is_page(2488) || is_category() || is_page(577) || is_product_category() || is_page(620)) { ?>
 		<div id="custom-content" class="custom-site-content">
 		<?php } else if (!is_singular('post')) { ?>
 			<div id="content" class="site-content">
