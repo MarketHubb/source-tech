@@ -1,5 +1,28 @@
 <?php
 //region Global
+function return_season_of_year()
+{
+    $today = new DateTime();
+
+    $spring = new DateTime('March 20');
+    $summer = new DateTime('June 20');
+    $fall = new DateTime('September 22');
+    $winter = new DateTime('December 21');
+
+    switch(true) {
+        case $today >= $spring && $today < $summer:
+            return 'Spring';
+
+        case $today >= $summer && $today < $fall:
+            return 'Summer';
+
+        case $today >= $fall && $today < $winter:
+            return 'Fall';
+
+        default:
+            return 'Winter';
+    }
+}
 function return_only_numbers($model)
 {
     return preg_replace('/\D/', '', $model);
@@ -132,6 +155,49 @@ function return_server_category_heading($cat_title)
     $heading['description'] = 'We stock all models of ' . $cat_title . ' that streamline the workload for small businesses, departments and work-group environments as well as web, cloud and data center applications. ' . $cat_title_array[0] . ' servers are an ideal platform for enterprise-level Linux, Windows Server, and VMware operating systems.';
     
     return $heading;
+}
+
+function order_hpe_rack_servers($term_id, $taxonomy)
+{
+    $ordered_array = [];
+
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field' => 'term_id',
+                'terms' => $term_id
+            ),
+        ),
+    );
+
+    $hp_racks = get_posts($args);
+
+    foreach ($hp_racks as $post) {
+        $title_explode = explode_content(" ", get_the_title());
+        $part_number = get_server_part_number($title_explode);
+        $hpe_explode = explode(" ", $part_number);
+
+        foreach ($hpe_explode as $c) {
+            preg_replace('/\D/', '', $c);
+            $ordered_array[] = $c;
+        }
+
+
+
+
+//preg_replace('/\D/', '', get_the_title($post->ID)
+
+//        $ordered_array[] = $hpe_explode;
+    }
+
+
+
+
+
+    return $ordered_array;
 }
 //endregion
 

@@ -50,13 +50,13 @@
 //                if (isset($query_params) && !empty($query_params)) {
 
 //                    $callout = $query_params['c'] === 'warranty' ? 'free 24-month warranty' : 'free domestic shipping';
-                    $savings = 'Save up to 60%';
+                    $savings = 'Save 30%';
                     $callout = 'free 24-month warranty';
 
                     $q  = '<div class="query_cta_container">';
-                    $q .= '<h4 class="text-orange font-weight-bold mb-0 pb-0">Huge Clearance Sale!</h4>';
-                    $q .= '<p class="lead text-black font-weight-normal mb-0 pb-0">';
-                    $q .= $savings . ' + ' . $callout;
+                    $q .= '<h4 class="text-orange font-weight-bold mb-0 pb-0">Huge ' . return_season_of_year() . ' Sale!</h4>';
+                    $q .= '<p class="lead letter-tight text-black font-weight-normal mb-0 pb-0">';
+                    $q .= '<strong>' . $savings . ' + ' . $callout . '</strong>';
                     $q .= ' on all ' . get_the_title() . ' ' . get_post_type($post->ID) . '</p>';
                     $q .= $button;
                     $q .= '</div>';

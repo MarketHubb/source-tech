@@ -478,6 +478,9 @@ h2.sub-heading, h3.sub-heading {
 	text-decoration: none;
 }
 /* Global Elements */
+.letter-tight {
+	letter-spacing: -.02rem;
+}
 .page-heading::after {
 	background: #0087c7;
 	content: "";
