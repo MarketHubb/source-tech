@@ -39,7 +39,6 @@
                 <?php
 
                 $button_copy = array(
-                    'Request a Quote',
                     'Get Sale Pricing',
                     'Get Discounted Pricing Now',
                     'Get a Custom Quote',
