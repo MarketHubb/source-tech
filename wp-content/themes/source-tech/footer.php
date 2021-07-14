@@ -72,7 +72,25 @@
                     </div>
                     <!-- Featured Products -->
                     <div class="col-md-4 px-md-3 px-lg-4">
-                        <h5 class="font-weight-bold  pb-3 mb-3">Featured Products</h5>
+                        <h5 class="font-weight-bold  pb-3 mb-3">Contact Us</h5>
+                        <div class="footer-address">
+                            <p>
+                                <strong>SourceTech Systems</strong><br>
+                                1701 Bingle Rd | Suite #4 <br>
+                                Houston, TX 77055
+                            </p>
+                            <p>
+                                <strong>Tel:</strong> (800) 932-0657 <br>
+                                <strong>Email:</strong> info@sourcetech.net <br>
+                                <strong>Chat:</strong> <span class="cta-chat" onclick="$zoho.salesiq.floatwindow.visible(&quot;show&quot;);">Click to Start</span>
+
+                            </p>
+                            <p>
+                                <i class="fab fa-linkedin fa-lg"></i> <a href="https://www.linkedin.com/company/sourcetech-systems">LinkedIn</a>
+                            </p>
+
+
+                        </div>
                         <?php
                         if (have_rows('footer_products', 'option')):
                             $footer_products = '';
@@ -89,7 +107,7 @@
                                 $footer_products .= 'View Product Details' . '</a>';
                                 $footer_products .= '</div></div>';
                             endwhile;
-                            echo $footer_products;
+                            //echo $footer_products;
                         endif;
                         ?>
                     </div>
