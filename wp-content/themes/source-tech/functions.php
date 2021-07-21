@@ -212,7 +212,7 @@ function source_tech_scripts() {
 		wp_enqueue_style( 'ri_custom_rfq_styles', get_stylesheet_directory_uri() . '/css/ri-rfq-styles.css' );
         wp_enqueue_script( 'ri_custom_rfq_scripts' );
     }
-    if (is_product_category()) {
+    if (is_product_category() || is_singular('servers')) {
         wp_enqueue_style( 'ri-product-cat-styles', get_stylesheet_directory_uri() . '/css/ri-product-cat-styles.css' );
     }
     if (is_front_page()) {
@@ -361,7 +361,7 @@ function get_formatted_product_type($post_id)
     return $product_type;
 }
 function get_formatted_product_terms($post_id) {
-    $tag_terms = array('server_manufacturers', 'product_line', 'server_types', 'form_factor', 'networking_type');
+    $tag_terms = array('server_manufacturers', 'product_line', 'server_types', 'form_factor', 'networking_type', 'generation');
     $tags = array();
 
     foreach ($tag_terms as $tag_cat) {

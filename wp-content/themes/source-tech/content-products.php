@@ -40,6 +40,13 @@ set_query_var('product_type', $product_type);
 
         <?php get_template_part('template-parts/products/content', 'faq'); ?>
 
+        <?php
+        $terms = get_the_terms($post_id, 'generation');
+        if ($terms) {
+            get_template_part('template-parts/products/content', 'related');
+         }
+        ?>
+
     </div> <!-- End .container-->
 
         <?php //get_template_part('template-parts/products/tab-content'); ?>
