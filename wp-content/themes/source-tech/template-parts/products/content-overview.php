@@ -2,8 +2,9 @@
 
 <div class="container">
     <div class="wrapper">
-        <div class="row content align-items-center justify-content-between">
+        <div class="row content  justify-content-between">
             <div class="col-md-6">
+                <div class="no"></div>
                 <div id="model-page-image-container">
                     <?php
                     $post_type_for_acf = get_query_var('post_type_for_acf');
@@ -42,14 +43,11 @@
                     'Get Sale Pricing',
                     'Get Discounted Pricing Now',
                     'Get a Custom Quote',
-                    'Get a Quote in Minutes'
+                    'Get a Quote Now'
                 );
                 $button = '<button type="button" class="btn btn-primary bg-orange cta-btn mt-3 mb-2" data-toggle="modal" data-target="#quoteModal" data-product="';
                 $button .= get_the_title() . '">' . $button_copy[array_rand($button_copy)] . '<i class="fas fa-long-arrow-right pl-2"></i></button>';
 
-//                if (isset($query_params) && !empty($query_params)) {
-
-//                    $callout = $query_params['c'] === 'warranty' ? 'free 24-month warranty' : 'free domestic shipping';
                     $savings = 'Save 30%';
                     $callout = 'free 24-month warranty';
 
@@ -57,13 +55,38 @@
                     $q .= '<h4 class="text-orange font-weight-bold mb-0 pb-0">Huge ' . return_season_of_year() . ' Sale!</h4>';
                     $q .= '<p class="lead letter-tight text-black font-weight-normal mb-0 pb-0">';
                     $q .= '<strong>' . $savings . ' + ' . $callout . '</strong>';
-                    $q .= ' on all ' . get_the_title() . ' ' . get_post_type($post->ID) . '</p>';
+//                    $q .= ' on all ' . get_the_title() . ' ' . get_post_type($post->ID) . '</p>';
+                    $q .= '</p>';
                     $q .= $button;
                     $q .= '</div>';
 
                     echo $q;
-//              m  }
                 ?>
+
+                <!-- Order Your Way -->
+                <div class="order-type-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="lead mb-3 font-weight-bold">Order a refurbished <?php the_title(); ?></p>
+                        </div>
+                        <div class="col-md-12">
+                            <p><i class="fa-solid fa-server text-blue"></i> Custom configured to order</p>
+                            <p><i class="fa-solid fa-circle-info text-blue"></i> In-stock & ready to ship</p>
+                            <p><i class="fa-solid fa-truck"></i> Free ground shipping</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="lead mb-3 font-weight-bold">Upgrade your existing server</p>
+                        </div>
+
+                        <div class="col-md-6"> <p><i class="fa-solid fa-microchip text-blue"></i> Intel CPU</p></div>
+                        <div class="col-md-6"> <p><i class="fa-solid fa-memory text-blue"></i> RAM</p></div>
+                        <div class="col-md-6"> <p><i class="fa-solid fa-hard-drive text-blue"></i> SSD & HDD</p></div>
+                        <div class="col-md-6"> <p><i class="fa-solid fa-router text-blue"></i> Network Adaptors</p></div>
+                    </div>
+
+                </div>
 
 
                 <?php
@@ -75,7 +98,7 @@
                 $description = 'post_' . $post_type_for_acf . '_description';
                 ?>
 
-                <p class="mb-0 text-black"><?php echo get_field($description); ?></p>
+<!--                <p class="mb-0 text-black">--><?php //echo get_field($description); ?><!--</p>-->
 
                 <?php if (!isset($query_params) || empty($query_params)) { ?>
 

@@ -198,7 +198,8 @@ function source_tech_scripts() {
 	}
 	// Demo model page
 	if ( is_page(1574) || is_singular('servers') || is_singular('networking') || is_singular('storage')) {
-		wp_enqueue_style( 'model-styles' );
+        wp_enqueue_style( 'fontawesome6-styles', get_stylesheet_directory_uri() . '/fontawesome6/css/all.min.css' );
+        wp_enqueue_style( 'model-styles' );
 		wp_enqueue_script( 'model-scripts' );
 		wp_enqueue_script( 'bootstrap-scripts' );
 	}

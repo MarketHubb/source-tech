@@ -24,6 +24,8 @@ set_query_var('product_type', $product_type);
 
         <?php get_template_part('template-parts/products/content', 'overview'); ?>
 
+        <?php get_template_part('template-parts/products/content', 'cta'); ?>
+
         <?php get_template_part('template-parts/products/content', 'specs'); ?>
 
         <?php 

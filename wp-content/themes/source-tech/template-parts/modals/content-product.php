@@ -7,8 +7,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h2 class="font-weight-bold modal-product w-100 text-center mb-0"></h2>
-                <p class="modal-title text-center w-100" id="exampleModalLabel">- 3 Easy Ways to Get a Quote -</p>
+                <h2 class="modal-title font-weight-bold text-center w-100" id="exampleModalLabel">3 Easy Ways to Get a Quote</h2>
+                <h4 class="modal-product w-100 text-center mb-0"></h4>
 
                 <div class="text-center mt-3">
                     <img src="" id="modal-image" alt="">
@@ -33,7 +33,7 @@
                             <p class="mb-0 text-black">Call <a href="tel:800-932-0657" class="cta-phone cta-copy">800-932-0657</a> to speak to our live support team available Mon-Fri, 8:00am - 6:00pm CST</p>
                         </div>
                     </div>
-                    <div class="row justify-content-center align-items-center py-4">
+                    <div class="row justify-content-center align-items-center py-4 ">
                         <div class="col-md-5 text-center">
                             <i class="fas fa-envelope-open-text text-orange fa-2x mb-2"></i>
                             <p class="lead font-weight-bold pb-0 mb-0">Email</p>

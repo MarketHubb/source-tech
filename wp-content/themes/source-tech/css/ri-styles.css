@@ -341,6 +341,9 @@ ul.flush li:last-of-type {
 .text-blue {
 	color: #0087c7;
 }
+.text-blue-dark {
+	color: #33475b;
+}
 .text-orange {
 	color: #EA672B;
 }
