@@ -72,7 +72,7 @@
                         <div class="col-md-12">
                             <p><i class="fa-solid fa-server text-blue"></i> Custom configured to order</p>
                             <p><i class="fa-solid fa-circle-info text-blue"></i> In-stock & ready to ship</p>
-                            <p><i class="fa-solid fa-truck"></i> Free ground shipping</p>
+                            <p><i class="fa-solid fa-truck text-blue"></i> Free ground shipping</p>
                         </div>
                     </div>
                     <div class="row">
