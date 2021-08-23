@@ -3,9 +3,12 @@
 	height: 300px;
 }
 .cta-btn {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-bottom: .5rem;
 	border: none;
 	font-weight: 600;
-	font-size: .9rem;
+	font-size: 1rem;
 	box-shadow: 0 10px 15px -5px rgb(51 71 91 / 20%);
 }
 .cta-btn:hover {
@@ -1002,6 +1005,9 @@ body .gform_wrapper h2.gsection_title {
 }
 /* Responsive Styles Desktop Only */
 @media all and (min-width: 981px) {
+	.cta-btn-lg {
+		font-size: 1.15rem;
+	}
 	.masthead h1 {
 		font-size: 3rem;
 	}

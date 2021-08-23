@@ -1,6 +1,16 @@
 /* jQuery (Footer) */
 (function($) {
-	
+
+    // Image thumbnail gallery
+    $('#model-page-image-container .image-thumb-container .thumb-images img').on('click', function(){
+        $('#model-page-image-container .image-thumb-container .thumb-images').each(function(){
+            $(this).removeClass('active');
+        })
+        $(this).closest('.thumb-images').addClass('active');
+        let selectedFeatureSrc = $(this).attr('src');
+        $('.model-page-featured-image').attr('src', selectedFeatureSrc);
+    });
+
 	// URL query parameters
     $.extend({
         getUrlVars: function(){
@@ -40,14 +50,5 @@
         modal.find('#modal-image').attr('src', firstImage);
     })
 
-	// Image thumbnail gallery
-	$('#model-page-image-container .image-thumb-container .thumb-images img').on('click', function(){
-		$('#model-page-image-container .image-thumb-container .thumb-images').each(function(){
-			$(this).removeClass('active');
-		})
-		$(this).closest('.thumb-images').addClass('active');
-		let selectedFeatureSrc = $(this).attr('src');
-		$('.model-page-featured-image').attr('src', selectedFeatureSrc);
-	});
 
 })( jQuery );
