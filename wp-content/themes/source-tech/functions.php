@@ -164,7 +164,7 @@ add_action( 'widgets_init', 'source_tech_widgets_init' );
 function source_tech_scripts() {
 
 
-    wp_enqueue_style( 'bootstrap-styles', get_stylesheet_directory_uri() . '/css/bootstrap.min.css' );
+//    wp_enqueue_style( 'bootstrap-styles', get_stylesheet_directory_uri() . '/css/bootstrap.min.css' );
     wp_enqueue_style( 'source-tech-style', get_stylesheet_uri() );
     wp_enqueue_style( 'ri_custom_styles', get_stylesheet_directory_uri() . '/css/ri-styles.css' );
     wp_enqueue_style( 'ri_blog_styles', get_stylesheet_directory_uri() . '/css/ri-blog-styles.css' );
@@ -181,7 +181,7 @@ function source_tech_scripts() {
     wp_register_style( 'font-awesome-pro', get_stylesheet_directory_uri() . '/fontawesome/css/all.css' );
     wp_register_style( 'model-styles', get_stylesheet_directory_uri() . '/css/model-styles.css' );
     wp_register_style( 'home-styles', get_stylesheet_directory_uri() . '/css/home.css' );
-    wp_register_script( 'bootstrap-scripts', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true );
+//    wp_register_script( 'bootstrap-scripts', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true );
 	wp_register_script( 'model-scripts', get_template_directory_uri() . '/js/model-scripts.js', array('bootstrap-scripts'), '', true );
 
 	if (is_singular( 'product' )) {
@@ -221,9 +221,11 @@ function source_tech_scripts() {
         wp_enqueue_script( 'bootstrap-scripts' );
     }
 	if (!is_admin()) {
+        wp_enqueue_style('bootstrap-styles', get_stylesheet_directory_uri() . '/bootstrap5/css/bootstrap.min.css', [], '5.1.0');
+        wp_enqueue_script('bootstrap-scripts', get_stylesheet_directory_uri() . '/bootstrap5/js/bootstrap.bundle.min.js', [], '5.1.0', true);
 		wp_enqueue_style('font-awesome-pro');
 		wp_enqueue_style('ri_web_fonts_roboto');
-		wp_enqueue_style('boostrap-styles');
+//		wp_enqueue_style('boostrap-styles');
 	}
 	if (is_home()) {
         wp_enqueue_style( 'ri-blog-list-styles', get_stylesheet_directory_uri() . '/css/ri-blog-list.css' );
