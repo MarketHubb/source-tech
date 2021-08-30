@@ -17,10 +17,6 @@
 .product-subtitle span:first-of-type {
 	padding-left: 0;
 }
-#model-page-image-container {
-	position: relative;
-	bottom: 2.5rem;
-}
 /*region CTA */
 .server-cta-list {
 	margin-left: 0;

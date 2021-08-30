@@ -25,8 +25,9 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
                 <p class="lead product-subtitle mb-0">
 
                     <?php if (is_singular('storage')) { ?>
+                        <?php $warranty = is_single(3226) ? '3-Year Warranty' : '24-Month Warranty'; ?>
                         <span>Factory Sealed</span>
-                        <span>24-Month Warranty</span>
+                        <span><?php echo $warranty; ?></span>
                         <span>Free Domestic Shipping</span>
                     <?php } ?>
 

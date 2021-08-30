@@ -29,14 +29,6 @@
         }
     });
 
-    // Get object of URL parameters
-    var allVars = $.getUrlVars();
-    var speciality = decodeURIComponent(allVars['section']);
-    
-    if (typeof speciality != 'undefined') {
-        $('#model-tabs a[href="#' + speciality + '"]').tab('show');
-    }
-
     // Pass product info to modal
     $('#quoteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal

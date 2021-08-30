@@ -1,4 +1,12 @@
 <?php
+function return_product_single_button($post_id, $btn_text)
+{
+    $btn  = '<button type="button" class=" cta-btn cta-btn-large cta-btn-primary shadow" ';
+    $btn .= 'data-bs-toggle="modal" data-bs-target="#quoteModal" data-product="';
+    $btn .= get_the_title($post_id) .  '">' . $btn_text . '<i class="fas fa-long-arrow-right ps-2"></i></button>';
+
+    return $btn;
+}
 function return_brand_image_path($manufacturer)
 {
     $root_path = get_home_url() . '/wp-content/uploads/';

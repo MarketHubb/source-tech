@@ -28,12 +28,20 @@ $heading = return_server_category_heading(get_queried_object()->name);
     </div>
 </div>
 
-<div class="">
     <div class="container-fluid">
         <div class="wrapper">
             <div class="row">
 
             <?php
+
+//            var_dump(get_queried_object());
+
+            if (get_queried_object()->term_id === 150) {
+                $hpe = order_hpe_rack_servers(get_queried_object()->term_id, get_queried_object()->taxonomy);
+                var_dump($hpe);
+            }
+
+
 
             $query_args = array(
                 'post_type' => 'product',
@@ -62,7 +70,7 @@ $heading = return_server_category_heading(get_queried_object()->name);
                     $title_explode = explode_content(" ", get_the_title());
                     $part_number = get_server_part_number($title_explode);
 
-                    $p .= '<div class="col-md-3 mb-4 ' . strtolower($manufacturer[0]) . '">';
+                    $p .= '<div class="col-md-3 mb-4 position-relative ' . strtolower($manufacturer[0]) . '">';
                     $p .= '<div class="panel bg-white product-cat-panel shadow h-100 text-center ' . $custom_rack_class . '">';
                     $p .= '<img class="product-cat-img" src="' . wp_get_attachment_url( $product->get_image_id() ) . '" />';
                     $p .= '<a href="' . get_permalink() . '" class="link stretched-link font-weight-normal"></a>';
@@ -89,4 +97,3 @@ $heading = return_server_category_heading(get_queried_object()->name);
             </div>
         </div>
     </div>
-</div>

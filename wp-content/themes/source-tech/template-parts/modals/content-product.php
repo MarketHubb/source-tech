@@ -1,14 +1,9 @@
 <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
-                <h2 class="modal-title font-weight-bold text-center w-100" id="exampleModalLabel">3 Easy Ways to Get a Quote</h2>
-                <h4 class="modal-product w-100 text-center mb-0"></h4>
+                <h2 class="modal-product fw-bold w-100 text-center mb-0"></h2>
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">3 Easy Ways to Get a Quote</h4>
 
                 <div class="text-center mt-3">
                     <img src="" id="modal-image" alt="">
