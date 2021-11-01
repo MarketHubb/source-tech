@@ -3,68 +3,76 @@ $tags = get_query_var('tags');
 $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the_title();
 ?>
 
-<!-- Product Title -->
 
-<div class="container">
-    <div class="wrapper">
-        <div class="row mt-4 pt-3">
-            <div class="col-md-8">
-                <?php
-                $tag_items = '';
-                foreach ($tags as $tag => $value) {
-                    if ($tag != 'title' && $tag != 'product') {
-                        if ($value == 'HP') {
-                            $value = 'HPE';
-                        }
-                        $tag_items .= '<span class="badge badge-pill badge-primary model-page-tags">' . $value . '</span>';
+    <div class="row justify-content-between my-4 pt-3">
+
+        <div class="col-md-6">
+
+            <?php
+            $tag_items = '';
+            foreach ($tags as $tag => $value) {
+                if ($tag != 'title' && $tag != 'product') {
+                    if ($value == 'HP') {
+                        $value = 'HPE';
                     }
+                    $tag_items .= '<span class="badge badge-pill badge-primary model-page-tags">' . $value . '</span>';
                 }
-                echo $tag_items;
-                ?>
-                <h1 class="mt-1 mb-2 display-4"><?php echo $title; ?></h1>
-                <p class="lead product-subtitle mb-0">
+            }
+            //echo $tag_items;
+            ?>
+
+            <h1 class="mt-3 fw-800 letter-tight"><?php echo $title; ?></h1>
+
+            <div class="mb-3 product-subtitle">
+
+                <?php if( !have_rows('configurations')) { ?>
 
                     <?php if (is_singular('storage')) { ?>
                         <?php $warranty = is_single(3226) ? '3-Year Warranty' : '24-Month Warranty'; ?>
-                        <span>Factory Sealed</span>
-                        <span><?php echo $warranty; ?></span>
-                        <span>Free Domestic Shipping</span>
+                        <p class="d-inline-block lead mb-3">Factory Sealed</p>
+                        <p class="d-inline-block lead mb-3 ps-3 bl-grey"><?php echo $warranty; ?></p>
+                        <p class="d-inline-block lead mb-3 ps-3 bl-grey">Free Domestic Shipping</p>
                     <?php } ?>
 
                     <?php if (is_singular('servers') || is_singular('networking')) { ?>
-                        <span>Factory Tested</span>
-                        <span>Configured to Order</span>
-                        <span>24-Month Warranty</span>
-                    <?php } ?>
+                        <p class="icon-subtitle lead d-inline-block"><i class="fa-light fa-server me-1 text-blue"></i> Refurbished Servers</p>
+                        <p class="icon-subtitle lead d-inline-block ms-3"><i class="fa-solid fa-check me-1 text-blue"></i> In-stock & ready to ship</p>                    <?php } ?>
 
-                </p>
+                <?php } else { ?>
+                    <p class="lead d-inline-block"><i class="fa-light fa-server me-1 text-blue"></i> Refurbished Servers</p>
+                    <p class="lead d-inline-block ms-3"><i class="fa-solid fa-check me-1 text-blue"></i> In-stock & ready to ship</p>
+                <?php }  ?>
 
             </div>
-<!--            <div class="col-md-4">-->
-                <?php
 
-                $button_copy = array(
-                    'Get Sale Pricing',
-                    'Get Discounted Pricing Now',
-                    'Get a Custom Quote',
-                    'Get a Quote Now'
-                );
-//                $button = '<button type="button" class="btn btn-primary bg-orange cta-btn mt-3 mb-2" data-toggle="modal" data-target="#quoteModal" data-product="';
-//                $button .= get_the_title() . '">' . $button_copy[array_rand($button_copy)] . '<i class="fas fa-long-arrow-right pl-2"></i></button>';
-//
-//                $savings = 'Save 30%';
-//                $callout = 'free 24-month warranty';
-//
-//                $q  = '<div class="query_cta_container bg-light-blue text-center shadow-sm">';
-//                $q .= '<h4 class="text-orange font-weight-bold mb-0 pb-1"><i class="fa-solid fa-bullhorn fa-flip-horizontal"></i> <span class="px-3">Our Biggest Sale Ever</span> <i class="fa-solid fa-bullhorn"></i></h4>';
-//                $q .= '<p class="lead letter-tight text-black font-weight-normal mb-0 pb-0">';
-//                $q .= '<strong>' . $savings . ' + ' . $callout . '</strong>';
-//                $q .= ' on ' . get_the_title() . ' ' . get_post_type($post->ID) . '</p>';
-//                $q .= '</p>';
-//                $q .= '</div>';
-//                echo $q;
+            <div id="model-page-image-container">
+                <?php
+                $post_type_for_acf = get_query_var('post_type_for_acf');
+                $images_repeater_field = 'post_'. $post_type_for_acf . '_images';
+                $images_sub_field = 'post_'. $post_type_for_acf . '_images_image';
+
+                if (have_rows($images_repeater_field)):
+                    $i = 1;
+                    $images = '<div class="row image-thumb-container">';
+                    while (have_rows($images_repeater_field)) : the_row();
+                        if ($i === 1) {
+                            $image_class = ' active';
+                            $load_image = '<img src="' . get_sub_field($images_sub_field) . '" class="model-page-featured-image" />';
+                        } else {
+                            $image_class = ' ';
+                        }
+                        $images .= '<div class="col-4 col-sm-4 col-md-4 thumb-images' . $image_class . '">';
+                        $images .= '<img src="' . get_sub_field($images_sub_field) . '" class="img-thumbnail rounded" />';
+                        $images .= '</div>';
+
+                        $i++;
+                    endwhile;
+                    $images .= '</div>';
+                endif;
+
+                echo $load_image;
+                echo $images;
                 ?>
-<!--            </div>-->
-        </div>
+            </div>
+
     </div>
-</div>

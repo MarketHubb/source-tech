@@ -1,21 +1,7 @@
 .query_cta_container {
 	position: relative;
-	/*bottom: 6rem;*/
-	/*margin-bottom: -3rem;*/
-	/*background: #f8f8f8;*/
 	padding: 1rem  1.5rem;
 	border-radius: 4px;
-}
-.product-subtitle span {
-	padding: 0 .75rem;
-	margin: 0;
-	display: inline;
-}
-.product-subtitle span:not(:first-of-type) {
-	border-left: 1px solid #aaa;
-}
-.product-subtitle span:first-of-type {
-	padding-left: 0;
 }
 /*region CTA */
 .server-cta-list {
@@ -240,8 +226,7 @@
 	margin-top: 1em;
 }
 .model-page-featured-image {
-	position: relative;
-	margin-bottom: -1em;
+	margin-bottom: 1em;
 }
 .image-thumb-container .thumb-images img {
 	padding: 10px;

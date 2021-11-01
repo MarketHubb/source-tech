@@ -169,7 +169,7 @@ function source_tech_scripts() {
     wp_enqueue_style( 'ri_custom_styles', get_stylesheet_directory_uri() . '/css/ri-styles.css' );
     wp_enqueue_style( 'ri_blog_styles', get_stylesheet_directory_uri() . '/css/ri-blog-styles.css' );
     wp_register_script( 'ri-blog-scripts', get_template_directory_uri() . '/js/ri-blog-scripts.js', array(), '', true );
-    wp_enqueue_style( 'ri_web_fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:300,500,600,700&display=swap' );
+    wp_enqueue_style( 'ri_web_fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap' );
     wp_enqueue_style( 'ri_web_fonts_roboto', 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' );
     wp_enqueue_style( 'fontello', get_template_directory_uri() . '/css/fontello.css');
     wp_enqueue_script( 'source-tech-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );

@@ -1,6 +1,16 @@
 <?php
 function return_product_single_button($post_id, $btn_text)
 {
+//    $btn  = '<button type="button" class=" cta-btn cta-btn-large cta-btn-primary shadow" ';
+    $btn  = '<button type="button" class="w-100 btn fw-bold cta-btn-primary shadow-sm" ';
+    $btn .= 'data-bs-toggle="modal" data-bs-target="#quoteModal" data-product="';
+    $btn .= get_the_title($post_id) .  '">';
+    $btn .= '<i class="fa-solid fa-file-lines me-2 text-white"></i>' . $btn_text . '</button>';
+
+    return $btn;
+}
+function return_product_single_custom_button($post_id, $btn_text)
+{
     $btn  = '<button type="button" class=" cta-btn cta-btn-large cta-btn-primary shadow" ';
     $btn .= 'data-bs-toggle="modal" data-bs-target="#quoteModal" data-product="';
     $btn .= get_the_title($post_id) .  '">' . $btn_text . '<i class="fas fa-long-arrow-right ps-2"></i></button>';

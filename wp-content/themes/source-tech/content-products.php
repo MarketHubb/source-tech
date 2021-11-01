@@ -15,39 +15,48 @@ $post_type_for_acf = $post->post_type === 'networking' ? 'networking' : 'servers
 set_query_var('post_type_for_acf', $post_type_for_acf);
 $product_type = get_formatted_product_type($post->ID);
 set_query_var('product_type', $product_type);
+$manufacturer = explode(' ',trim(get_the_title()));
+set_query_var('manufacturer', $manufacturer);
+$title_explode = explode_content(" ", get_the_title());
+$part_number = get_server_part_number($title_explode);
+set_query_var('part_number', $part_number);
 
 ?>
 
 <div class="custom-page-content" id="custom-model-page-template">
 
-        <?php get_template_part('template-parts/products/content', 'title'); ?>
+    <div class="container">
 
-        <?php get_template_part('template-parts/products/content', 'overview'); ?>
+            <?php get_template_part('template-parts/products/content', 'title'); ?>
 
-        <?php get_template_part('template-parts/products/content', 'cta'); ?>
+            <?php get_template_part('template-parts/products/content', 'overview'); ?>
 
-        <?php get_template_part('template-parts/products/content', 'specs'); ?>
+            <?php get_template_part('template-parts/products/content', 'cta'); ?>
 
-        <?php 
-        if (have_rows('post_servers_pre_configured')):
-            get_template_part('template-parts/products/content', 'configured');
-        endif;
-        ?>
+            <?php get_template_part('template-parts/products/content', 'specs'); ?>
 
-        <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
+            <?php
+            if(!have_rows('configurations')) {
+                if (have_rows('post_servers_pre_configured')):
+                    get_template_part('template-parts/products/content', 'configured');
+                endif;
+            }
+            ?>
 
-        <?php get_template_part('template-parts/products/content', 'warranty'); ?>
+            <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
 
-        <?php get_template_part('template-parts/products/content', 'easy123'); ?>
+            <?php get_template_part('template-parts/products/content', 'warranty'); ?>
 
-        <?php get_template_part('template-parts/products/content', 'faq'); ?>
+            <?php get_template_part('template-parts/products/content', 'easy123'); ?>
 
-        <?php
-        $terms = get_the_terms($post_id, 'generation');
-        if ($terms) {
-            get_template_part('template-parts/products/content', 'related');
-         }
-        ?>
+            <?php get_template_part('template-parts/products/content', 'faq'); ?>
+
+            <?php
+            $terms = get_the_terms($post_id, 'generation');
+            if ($terms) {
+                get_template_part('template-parts/products/content', 'related');
+             }
+            ?>
 
     </div> <!-- End .container-->
 
