@@ -42,6 +42,9 @@
 		gtag('config', 'AW-1033984787');
 	</script>
 
+    <!-- Google Merchant Account -->
+    <meta name="google-site-verification" content="emirZi010pgv2WQnh--XoePUQtuyWqaoMVe_kjYZMoM" />
+
 	<!-- Google Adwords forwarding phone number snippet  -->
 	<script>
 		gtag('config', 'AW-1033984787/8p-5CPax_ZQBEJO2he0D', {
