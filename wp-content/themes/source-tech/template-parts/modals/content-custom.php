@@ -7,7 +7,7 @@
                 <h4 class="modal-title text-center w-100" id="exampleModalLabel">3 Easy Ways to Get a Quote</h4>
 
                 <div class="text-center mt-3">
-                    <img src="" id="modal-image" alt="">
+                    <img src="" id="modal-image" alt="" class="w-50">
                 </div>
 
                 <div class="container mt-3 mb-4 px-5" id="modal-cta">

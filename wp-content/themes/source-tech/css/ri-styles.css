@@ -1,4 +1,11 @@
+.storage-details h5:not(:first-of-type) {
+	margin-top: 2rem;
+}
 /*region Bootstrap 5 fixes */
+.btn.btn-outline-secondary {
+	background-color: #999;
+	color: #fff;
+}
 body {
 	font-family: 'Open Sans', sans-serif !important;
 }
@@ -132,6 +139,9 @@ body a {
 }
 /*endregion*/
 /*region Global */
+.price-red {
+	color: #B12704;
+}
 .font-weight-bold {
 	font-weight: bold !important;
 }

@@ -44,7 +44,7 @@ $manufacturer = get_query_var('manufacturer');
                 $tab_panes .= '<div class="d-grid gap-3">';
                 $tab_panes .= '<a href="' . get_sub_field('stripe_payment_link') . '" class="btn fw-bold cta-btn-primary shadow-sm">';
                 $tab_panes .= '<i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i> Add ' . get_sub_field('configuration_label')[0] . ' to Cart</a>';
-                $tab_panes .= '<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#customModal" data-product="Dell PowerEdge R730">Configure to Order</button>';
+                $tab_panes .= '<button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="modal" data-bs-target="#customModal" data-product="Dell PowerEdge R730">Configure to Order</button>';
                 $tab_panes .= '<p class="text-center"><small class="fst-italic text-secondary">Don\'t see what you need? We can custom-configure to order.</small></p>';
                 $tab_panes .= '</div></div></div>';
                 // Accordion: Open
