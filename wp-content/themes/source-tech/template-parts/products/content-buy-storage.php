@@ -5,15 +5,16 @@
         <h4 class="fw-800 mb-1">HPE NVMe 3.2TB 2.5-inch SSD</h4>
         <p class="lead text-secondary mb-0">NVMe x4 Lanes MU | MLC PCI Express 3.0</p>
 
-        <div class="row align-items-center my-3">
-            <div class="col">
-                <h3 class="d-inline-block price-red mb-3">$<?php echo get_field('price') ?></h3>
-                <span class="text-secondary px-3">|</span>
-                <span class="text-success fw-bold">In-stock: Qty 41</span>
-                <p class="mb-0"><i class="fa-regular fa-check text-success me-1"></i> Genuine HP serial number and SSD firmware</p>
-                <p class="mb-0"><i class="fa-regular fa-check text-success me-1"></i> Genuine HP Certified NVMe SCN SSD</p>
-            </div>
-        </div>
+        <?php
+        $price = get_field('price');
+        $callout = 'In-stock: Qty 41';
+        $features = array(
+            'Genuine HP serial number and SSD firmware',
+            'Genuine HP Certified NVMe SCN SSD'
+        );
+
+        echo return_price($price, $callout, $features);
+        ?>
 
         <div class="row justify-content-between mb-3">
             <div class="col text-center mt-4">
@@ -42,7 +43,7 @@
                     $cat = [];
                     while ( have_rows('details') ) : the_row();
                         if (end($cat) !== get_sub_field('category')) {
-                            $d .= '<h5 class="fw-800">' . get_sub_field('category') . '</h5>';
+                            $d .= '<h5 class="fw-800">' . get_sub_field('category') . ':</h5>';
                         }
                         $d .= '<p class="mb-0">';
                         $d .= '<span class="fw-bold">' . get_sub_field('attribute') . ': </span>';
@@ -58,11 +59,22 @@
                 </div>
             </div>
 
-            <h5 class="fw-800 mt-4">Compatible with:</h5>
-            ✅ BL460c Gen10
-            ✅ DL360 Gen9
-            ✅ DL380 Gen9
-
+            <div>
+                <h5 class="fw-800 mt-4">Compatible with:</h5>
+                <?php 
+                if( have_rows('compatible') ):
+                    $c = '<ul class="list-group list-group-flush flush">';
+                    while ( have_rows('compatible') ) : the_row();
+                        $c .= '<li class="list-group-item py-2">';
+                        $c .= '<a href="' . get_permalink(get_sub_field('server')) . '" >';
+                        $c .= get_the_title(get_sub_field('server')) . '</a>';
+                        $c .= '</li>';
+                    endwhile;
+                    $c .= '</ul>';
+                    echo $c;
+                endif;
+                ?>
+            </div>
 
         <?php } else { ?>
 

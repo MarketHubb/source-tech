@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/helpers.php';
 require_once 'includes/content.php';
+require_once 'includes/buy.php';
 /**
  * Source Tech functions and definitions
  *
