@@ -29,24 +29,19 @@
         }
     });
 
-    // Pass product info to modal
-    $('#quoteModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var product = button.data('product') // Extract info from data-* attributes
-        var firstImage = $('.model-page-featured-image').attr('src');
-        console.log(firstImage);
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#customModal').on('show.bs.modal', function (event) {
         var modal = $(this)
-        modal.find('.modal-product').text(product);
+        var firstImage = $('.model-page-featured-image').attr('src');
         modal.find('#modal-image').attr('src', firstImage);
+        $('.global-alert').css('opacity', '.5');
     });
 
-    $('.modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var firstImage = $('.model-page-featured-image').attr('src');
-        var modal = $(this)
-        modal.find('#modal-image').attr('src', firstImage);
+    $('#customModal').on('hide.bs.modal', function (event) {
+        $('.global-alert').css('opacity', '1');
+    });
+
+    $('.modal-body .cta-chat').on('click', function() {
+       $('#customModal').hide();
     });
 
 

@@ -29,11 +29,22 @@
     });
 
     // Google Analytics Event: Launch Modal Window
-    $('.cta-btn').on('click', function() {
-        let buttonText = $(this).text();
+    $('.modal-cta').on('click', function() {
+        var attr = $(this).attr('href');
+
+        if (typeof attr !== 'undefined' && attr !== false && attr.lowerindexOf('stripe') > -1) {
+            var category = 'Buy Now';
+        } else {
+            var category = 'Launch Modal'
+        }
+        if ($(this).hasClass('cta-btn-primary')) {
+            var label = 'Primary Button';
+        } else {
+            var label = 'Secondary Button';
+        }
         gtag('event', 'Click', {
-            'event_category' : 'Launch Modal',
-            'event_label' : buttonText
+            'event_category' : category,
+            'event_label' : label
         });
     });
     

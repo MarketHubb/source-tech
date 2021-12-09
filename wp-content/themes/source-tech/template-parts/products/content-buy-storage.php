@@ -6,13 +6,12 @@
         <p class="lead text-secondary mb-0">NVMe x4 Lanes MU | MLC PCI Express 3.0</p>
 
         <?php
-        $price = get_field('price');
+        $price =  '$' . get_field('price');
         $callout = 'In-stock: Qty 41';
         $features = array(
             'Genuine HP serial number and SSD firmware',
             'Genuine HP Certified NVMe SCN SSD'
         );
-
         echo return_price($price, $callout, $features);
         ?>
 

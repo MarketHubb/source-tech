@@ -147,7 +147,6 @@
 </div><!-- #page -->
 
 <?php if (is_singular()) {
-    get_template_part('template-parts/modals/content', 'product');
     get_template_part('template-parts/modals/content', 'custom');
 } ?>
 
@@ -165,6 +164,19 @@
         $zoho.salesiq.floatwindow.offlinetitle('Currently Offline');
     }
 </script>
+
+<?php if (is_singular()) { ?>
+    <?php if( have_rows('configurations', get_queried_object_id())) { ?>
+        <script>
+            $zoho.salesiq.ready=function()
+
+        {
+            $zoho.salesiq.floatbutton.coin.hidetooltip();
+        }
+        </script>
+
+    <?php } ?>
+<?php } ?>
 
 </body>
 </html>

@@ -27,26 +27,49 @@ $manufacturer = get_query_var('manufacturer');
                 // Tab Panes: Open
                 $tab_panes .= '<div class="px-3 tab-pane ' . $active . '" id="' . $model_clean . '" role="tabpanel" aria-labelledby="' . $model_clean . '_tab">';
 
-                // Price + Basic Config
-                $tab_panes .= '<h3 class="fw-800 d-inline-block mb-0 mt-4 ms-auto">$' . get_sub_field('price') . '</h3>';
-                $tab_panes .= '<span class="fs-4 px-2"> | </span>';
-                $tab_panes .= '<i class="fa-brands fa-cc-visa px-2 text-body fs-6"></i><i class="fa-brands fa-cc-mastercard px-2 text-body fs-6"></i><i class="fa-brands fa-cc-discover px-2 text-body fs-6"></i>';
-                $tab_panes .= '<i class="fa-brands fa-cc-amex px-2 text-body fs-6"></i><i class="fa-brands fa-cc-apple-pay px-2 text-body fs-6"></i><i class="fa-solid fa-money-check-dollar-pen px-2 text-body fs-6"></i>';
-                $tab_panes .= '<div class="mt-3 mb-4 py-1">';
-                $tab_panes .= '<p class="mb-1"><i class="text-blue fa-light fa-microchip pe-2"></i><strong class="">CPU:</strong></p>' . get_sub_field('processor') . '</p>';
-                $tab_panes .= '<p class="mb-1"><i class="text-blue fa-light fa-hard-drive pe-2"></i><strong class="">Drives:</strong></p>' . get_sub_field('hard_drive') . '</p>';
-                $tab_panes .= '<p class="mb-1"><i class="text-blue fa-light fa-server pe-2"></i><strong class="">Memory:</strong></p>' . get_sub_field('memory') . '</p>';
-                $tab_panes .= '</div>';
+                // Price
+                $price =  '$' . get_sub_field('price');
+                $callout = 'In-stock & ready to ship';
+                $features = ['Factory sealed & tested', 'Free 24-month warranty standard'];
+                $tab_panes .=  return_price($price, $callout, $features);
 
                 // CTA Buttons
                 $tab_panes .= '<div class="row justify-content-between mb-3">';
-                $tab_panes .= '<div class="col text-center">';
+                $tab_panes .= '<div class="col text-center pe-0 pe-md-4 pe-lg-5">';
                 $tab_panes .= '<div class="d-grid gap-3">';
-                $tab_panes .= '<a href="' . get_sub_field('stripe_payment_link') . '" class="btn fw-bold cta-btn-primary shadow-sm">';
-                $tab_panes .= '<i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i> Add ' . get_sub_field('configuration_label')[0] . ' to Cart</a>';
-                $tab_panes .= '<button type="button" class="btn btn-outline-secondary fw-bold" data-bs-toggle="modal" data-bs-target="#customModal" data-product="Dell PowerEdge R730">Configure to Order</button>';
-                $tab_panes .= '<p class="text-center"><small class="fst-italic text-secondary">Don\'t see what you need? We can custom-configure to order.</small></p>';
-                $tab_panes .= '</div></div></div>';
+
+                $primary_btn_text =  '<i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i> Add ' . get_sub_field('configuration_label')[0] . ' to Cart</a>';
+                $primary_btn = array(
+                    'url' => get_sub_field('stripe_payment_link'),
+                    'text' => $primary_btn_text,
+                    'type' => 'primary'
+                );
+
+                $secondary_btn = array(
+                    'text' => 'Custom Configure this Server',
+                    'data' => 'data-bs-toggle="modal" data-bs-target="#customModal" data-product="' . get_the_title() . '"',
+                    'type' => 'secondary'
+                );
+
+                $tab_panes .= return_cta_btn($primary_btn);
+                $tab_panes .= return_cta_btn($secondary_btn);
+                $tab_panes .= '</div>';
+                $tab_panes .= '<p class="text-center mt-2"><small class="fst-italic">Request a quote on a custom-configured ' . get_the_title() . '</small></p>';
+                $tab_panes .= '</div></div>';
+
+                // Config Details
+                $tab_panes .= '<div class="d-grid gap-1 bg-light border rounded p-4">';
+                $tab_panes .= '<h5 class="mb-2">' . get_sub_field('configuration_label')[0] . ' Configuration Details</h5>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2 d-inline-block">CPU:</strong>' . get_sub_field('processor') . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Drives:</strong>' . get_sub_field('hard_drive') . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Memory:</strong>' . get_sub_field('memory') . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Chasis:</strong>' . get_sub_field('chasis')[0] . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Adapter / Network Daughter:</strong>' . get_sub_field('adapter')[0] . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Express Remote:</strong>' . get_sub_field('express_remote')[0] . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Rails:</strong>' . get_sub_field('rails')[0] . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Power Supply:</strong>' . get_sub_field('power_supply')[0] . '</p>';
+                $tab_panes .= '</div>';
+
                 // Accordion: Open
                 $accordion = '<div class="accordion accordion-flush" id="' . $model_clean . '">';
 
@@ -74,22 +97,22 @@ $manufacturer = get_query_var('manufacturer');
                 $accordion .= '</div>';
 
                 // Tab Panes + Accordion
-                $tab_panes .= $accordion;
+//                $tab_panes .= $accordion;
 
                 // Feature Panels (Gray)
-                $tab_panes .= '<div class="row my-4">';
-                $tab_panes .= '<div class="col-md-6">';
-                $tab_panes .= '<div class="h-100 bg-light px-4 py-4 text-center rounded border">';
-                $tab_panes .= '<i class="text-blue fa-lg fa-thin fa-globe d-block mb-2"></i>';
-                $tab_panes .= '<p class="fw-bold mb-2">International Delivery</p>';
-                $tab_panes .= '<p class="mb-0">Ground & expedited options</p>';
-                $tab_panes .= '</div></div>';
-                $tab_panes .= '<div class="col-md-6">';
-                $tab_panes .= '<div class="h-100 bg-light px-4 py-4 text-center rounded  border">';
-                $tab_panes .= '<i class="text-blue fa-lg fa-thin fa-badge-check"></i>';
-                $tab_panes .= '<p class="fw-bold mb-2">24-Month Warranty</p>';
-                $tab_panes .= '<p class="mb-0">Free & standard on all orders</p>';
-                $tab_panes .= '</div></div></div>';
+//                $tab_panes .= '<div class="row my-4">';
+//                $tab_panes .= '<div class="col-md-6">';
+//                $tab_panes .= '<div class="h-100 bg-light-blue px-4 py-4 text-center rounded border">';
+//                $tab_panes .= '<i class="text-blue fa-lg fa-thin fa-globe d-block mb-2"></i>';
+//                $tab_panes .= '<p class="fw-bold mb-2">International Delivery</p>';
+//                $tab_panes .= '<p class="mb-0">Ground & expedited options</p>';
+//                $tab_panes .= '</div></div>';
+//                $tab_panes .= '<div class="col-md-6">';
+//                $tab_panes .= '<div class="h-100 bg-light-blue px-4 py-4 text-center rounded  border">';
+//                $tab_panes .= '<i class="text-blue fa-lg fa-thin fa-badge-check"></i>';
+//                $tab_panes .= '<p class="fw-bold mb-2">24-Month Warranty</p>';
+//                $tab_panes .= '<p class="mb-0">Free & standard on all orders</p>';
+//                $tab_panes .= '</div></div></div>';
 
                 $tab_panes .= '</div>';
 

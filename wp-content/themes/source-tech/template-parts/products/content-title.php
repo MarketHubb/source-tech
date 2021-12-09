@@ -4,7 +4,7 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
 ?>
 
 
-    <div class="row justify-content-between my-4 pt-3">
+    <div class="row justify-content-between mt-4 mb-5 pt-3">
 
         <div class="col-md-6">
 
@@ -37,12 +37,13 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
                     <?php } ?>
 
                     <?php if (is_singular('servers') || is_singular('networking')) { ?>
-                        <p class="icon-subtitle lead d-inline-block"><i class="fa-light fa-server me-1 text-blue"></i> Refurbished Servers</p>
-                        <p class="icon-subtitle lead d-inline-block ms-3"><i class="fa-solid fa-check me-1 text-blue"></i> In-stock & ready to ship</p>                    <?php } ?>
+                        <?php //echo get_field('post_servers_description'); ?>
+<!--                        <p class="icon-subtitle lead d-inline-block text-secondary"><i class="fa-solid fa-check me-1 text-success"></i> In-stock & ready to ship</p>                                    -->
+                    <?php } ?>
 
                 <?php } else { ?>
-                    <p class="lead d-inline-block"><i class="fa-light fa-server me-1 text-blue"></i> Refurbished Servers</p>
-                    <p class="lead d-inline-block ms-3"><i class="fa-solid fa-check me-1 text-blue"></i> In-stock & ready to ship</p>
+<!--                    <p class="lead d-inline-block"><i class="fa-light fa-server me-1 text-blue"></i> Refurbished Servers</p>-->
+<!--                    <p class="lead d-inline-block"><i class="fa-solid fa-check me-1 text-success"></i> In-stock & ready to ship</p>-->
                 <?php }  ?>
 
             </div>
