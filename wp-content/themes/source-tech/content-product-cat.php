@@ -34,11 +34,8 @@ $heading = return_server_category_heading(get_queried_object()->name);
 
             <?php
 
-//            var_dump(get_queried_object());
-
             if (get_queried_object()->term_id === 150) {
                 $hpe = order_hpe_rack_servers(get_queried_object()->term_id, get_queried_object()->taxonomy);
-                var_dump($hpe);
             }
 
 
