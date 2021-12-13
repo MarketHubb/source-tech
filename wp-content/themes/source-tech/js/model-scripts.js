@@ -1,6 +1,9 @@
 /* jQuery (Footer) */
 (function($) {
 
+    // Define modal window
+    const productModal = new bootstrap.Modal(document.getElementById('customModal'));
+
     // Image thumbnail gallery
     $('#model-page-image-container .image-thumb-container .thumb-images img').on('click', function(){
         $('#model-page-image-container .image-thumb-container .thumb-images').each(function(){
@@ -29,7 +32,9 @@
         }
     });
 
-    $('#customModal').on('show.bs.modal', function (event) {
+
+        // $('#customModal').on('show.bs.modal', function (event) {
+        $('#customModal').on('show.bs.modal', function (event) {
         var modal = $(this)
         var firstImage = $('.model-page-featured-image').attr('src');
         modal.find('#modal-image').attr('src', firstImage);
@@ -40,8 +45,9 @@
         $('.global-alert').css('opacity', '1');
     });
 
-    $('.modal-body .cta-chat').on('click', function() {
-       $('#customModal').hide();
+    $('.modal-body .cta-chat').on('click', function(event) {
+        console.log(event);
+        productModal.hide();
     });
 
 
