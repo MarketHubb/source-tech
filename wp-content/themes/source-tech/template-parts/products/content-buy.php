@@ -63,7 +63,7 @@ $manufacturer = get_query_var('manufacturer');
                 $tab_panes .= '<p class="mb-0"><strong class="me-2 d-inline-block">CPU:</strong>' . get_sub_field('processor') . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Drives:</strong>' . get_sub_field('hard_drive') . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Memory:</strong>' . get_sub_field('memory') . '</p>';
-                $tab_panes .= '<p class="mb-0"><strong class="me-2">Chasis:</strong>' . get_sub_field('chasis')[0] . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Chassis:</strong>' . get_sub_field('chasis')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Network Daughter Card:</strong>' . get_sub_field('adapter')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Remote Access:</strong>' . get_sub_field('express_remote')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Rails:</strong>' . get_sub_field('rails')[0] . '</p>';
