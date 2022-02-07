@@ -53,10 +53,10 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
                 $post_type_for_acf = get_query_var('post_type_for_acf');
                 $images_repeater_field = 'post_'. $post_type_for_acf . '_images';
                 $images_sub_field = 'post_'. $post_type_for_acf . '_images_image';
-
                 if (have_rows($images_repeater_field)):
                     $i = 1;
-                    $images = '<div class="row image-thumb-container">';
+//                    $images = '<div class="row row-cols-3 image-thumb-container">';
+                    $images = '<ul class="list-group list-group-horizontal flush no-border image-thumb-container">';
                     while (have_rows($images_repeater_field)) : the_row();
                         if ($i === 1) {
                             $image_class = ' active';
@@ -64,18 +64,19 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
                         } else {
                             $image_class = ' ';
                         }
-                        $images .= '<div class="col-4 col-sm-4 col-md-4 thumb-images' . $image_class . '">';
+//                        $images .= '<div class="thumb-images' . $image_class . '">';
+                        $images .= '<li class="list-group-item flex-fill no-border ' . $image_class . '">';
                         $images .= '<img src="' . get_sub_field($images_sub_field) . '" class="img-thumbnail rounded" />';
-                        $images .= '</div>';
+                        $images .= '</li>';
 
                         $i++;
                     endwhile;
-                    $images .= '</div>';
+                    $images .= '</ul>';
                 endif;
 
                 echo $load_image;
                 echo $images;
                 ?>
-            </div>
 
+        </div>
     </div>

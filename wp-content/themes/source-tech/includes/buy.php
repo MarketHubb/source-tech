@@ -1,4 +1,23 @@
 <?php
+function return_foxycart_links($post_id, $options, $price, $model)
+{
+    $image = get_repeater_field_row('post_servers_images', 1, 'post_servers_images_image', $post_id);
+    $link  = '<form action="https://source-tech.foxycart.com/cart" method="post" accept-charset="utf-8">';
+    $link .= '<input type="hidden" name="name" value="' . get_the_title($post_id) . '" />';
+    $link .= '<input type="hidden" name="price" value="' . $price . '" />';
+    $link .= '<input type="hidden" name="image" value="' . $image . '" />';
+
+    foreach ($options as $key => $val) {
+        if ($key !== 'Price') {
+            $link .= '<input type="hidden" name="' . strtolower(str_replace(' ', '_', $key)) . '" value="' . $val . '" />';
+        }
+    }
+
+    $link .= '<input type="submit" value="Add ' . $model . ' to Cart" class="submit" />';
+    $link .= '</form>';
+
+    return $link;
+}
 function return_price($price, $callout, $features=array())
 {
     $p  = '<div class="row my-3">';

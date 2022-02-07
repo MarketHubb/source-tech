@@ -51,8 +51,26 @@ $manufacturer = get_query_var('manufacturer');
                     'type' => 'secondary'
                 );
 
+                $foxycart_options = array(
+                    'CPU' => get_sub_field('processor'),
+                    'Drives' => get_sub_field('hard_drive'),
+                    'Memory' => get_sub_field('memory'),
+                    'Chassis' => get_sub_field('chasis')[0],
+                    'Raid Controller' => get_sub_field('raid_controller')[0],
+                    'Network Daughter Card' =>  get_sub_field('adapter')[0],
+                    'Remote Access' => get_sub_field('express_remote')[0],
+                    'Rails' => get_sub_field('rails')[0],
+                    'Power Supply' => get_sub_field('power_supply')[0]
+                );
+
+                $inputs = '';
+
+
+                $tab_panes .= return_foxycart_links($post->ID, $foxycart_options, get_sub_field('price'), get_sub_field('configuration_label')[0]);
+
                 $tab_panes .= return_cta_btn($primary_btn);
                 $tab_panes .= return_cta_btn($secondary_btn);
+
                 $tab_panes .= '</div>';
                 $tab_panes .= '<p class="text-center mt-2"><small class="fst-italic">Request a quote on a custom-configured ' . get_the_title() . '</small></p>';
                 $tab_panes .= '</div></div>';
@@ -64,6 +82,7 @@ $manufacturer = get_query_var('manufacturer');
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Drives:</strong>' . get_sub_field('hard_drive') . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Memory:</strong>' . get_sub_field('memory') . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Chassis:</strong>' . get_sub_field('chasis')[0] . '</p>';
+                $tab_panes .= '<p class="mb-0"><strong class="me-2">Raid Controller:</strong>' . get_sub_field('raid_controller')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Network Daughter Card:</strong>' . get_sub_field('adapter')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Remote Access:</strong>' . get_sub_field('express_remote')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Rails:</strong>' . get_sub_field('rails')[0] . '</p>';
