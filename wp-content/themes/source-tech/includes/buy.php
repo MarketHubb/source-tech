@@ -5,14 +5,17 @@ function return_foxycart_links($post_id, $options, $price, $model)
     $image = get_repeater_field_row('post_servers_images', 1, 'post_servers_images_image', $post_id);
     $link  = '<form action="https://source-tech.foxycart.com/cart" method="post" accept-charset="utf-8" class="foxy-form">';
 
+    $link .= '<input type="hidden" name="' . get_verification('code', $code, $code)  .'" value="' . $code . '" />';
     $link .= '<input type="hidden" name="' . get_verification('name', get_the_title($post_id), $code)  .'" value="' . get_the_title($post_id) . '" />';
     $link .= '<input type="hidden" name="' . get_verification('price', $price, $code) . '"  value="' . $price . '" />';
     $link .= '<input type="hidden" name="' . get_verification('image', $image, $code) . '" value="' . $image . '" />';
 
     foreach ($options as $key => $val) {
         if ($key !== 'Price') {
+            $attr_key = str_replace(" ", "_", $key);
+            $attr_val = str_replace('"', '', $val);
 //            $link .= '<input type="hidden" name="' . strtolower(str_replace(' ', '_', $key)) . '" value="' . $val . '" />';
-            $link .= '<input type="hidden" name="' . get_verification($key, $val, $code) . '" value="' . $val . '" />';
+            $link .= '<input type="hidden" name="' . get_verification($attr_key, $attr_val, $code) . '" value="' . $attr_val . '" />';
         }
     }
     $link .= '<span class="foxy-submit shadow-sm rounded d-block w-100"><i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i>';
