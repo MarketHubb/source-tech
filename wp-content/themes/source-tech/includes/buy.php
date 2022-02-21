@@ -12,8 +12,8 @@ function return_foxycart_links($post_id, $options, $price, $model)
 
     foreach ($options as $key => $val) {
         if ($key !== 'Price') {
-            $attr_key = str_replace(" ", "_", $key);
-            $attr_val = str_replace('"', '', $val);
+            $attr_key = trim(str_replace(" ", "_", $key));
+            $attr_val = trim(str_replace('"', '', $val));
 //            $link .= '<input type="hidden" name="' . strtolower(str_replace(' ', '_', $key)) . '" value="' . $val . '" />';
             $link .= '<input type="hidden" name="' . get_verification($attr_key, $attr_val, $code) . '" value="' . $attr_val . '" />';
         }
