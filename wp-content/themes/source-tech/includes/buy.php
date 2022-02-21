@@ -1,19 +1,23 @@
 <?php
 function return_foxycart_links($post_id, $options, $price, $model)
 {
+    $code = trim(str_replace(' ', '-', get_the_ID($post_id) . '-' . $model));
     $image = get_repeater_field_row('post_servers_images', 1, 'post_servers_images_image', $post_id);
-    $link  = '<form action="https://source-tech.foxycart.com/cart" method="post" accept-charset="utf-8">';
-    $link .= '<input type="hidden" name="name" value="' . get_the_title($post_id) . '" />';
-    $link .= '<input type="hidden" name="price" value="' . $price . '" />';
-    $link .= '<input type="hidden" name="image" value="' . $image . '" />';
+    $link  = '<form action="https://source-tech.foxycart.com/cart" method="post" accept-charset="utf-8" class="foxy-form">';
+
+    $link .= '<input type="hidden" name="' . get_verification('name', get_the_title($post_id), $code)  .'" value="' . get_the_title($post_id) . '" />';
+    $link .= '<input type="hidden" name="' . get_verification('price', $price, $code) . '"  value="' . $price . '" />';
+    $link .= '<input type="hidden" name="' . get_verification('image', $image, $code) . '" value="' . $image . '" />';
 
     foreach ($options as $key => $val) {
         if ($key !== 'Price') {
-            $link .= '<input type="hidden" name="' . strtolower(str_replace(' ', '_', $key)) . '" value="' . $val . '" />';
+//            $link .= '<input type="hidden" name="' . strtolower(str_replace(' ', '_', $key)) . '" value="' . $val . '" />';
+            $link .= '<input type="hidden" name="' . get_verification($key, $val, $code) . '" value="' . $val . '" />';
         }
     }
-
-    $link .= '<input type="submit" value="Add ' . $model . ' to Cart" class="submit" />';
+    $link .= '<span class="foxy-submit shadow-sm rounded d-block w-100"><i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i>';
+    $link .= '<input type="submit" value="Add ' . $model . ' to Cart" class="submit bg-transparent text-white no-border px-0 fw-600 py-3 fs-6" />';
+    $link .= '</span>';
     $link .= '</form>';
 
     return $link;

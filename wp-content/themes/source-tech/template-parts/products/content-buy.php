@@ -30,7 +30,7 @@ $manufacturer = get_query_var('manufacturer');
                 // Price
                 $price =  '$' . get_sub_field('price');
                 $callout = 'In-stock & ready to ship';
-                $features = ['Factory sealed & tested', 'Free 24-month warranty standard'];
+                $features = ['Tested & professionally packed', 'Free 24-month warranty standard'];
                 $tab_panes .=  return_price($price, $callout, $features);
 
                 // CTA Buttons
@@ -68,7 +68,7 @@ $manufacturer = get_query_var('manufacturer');
 
                 $tab_panes .= return_foxycart_links($post->ID, $foxycart_options, get_sub_field('price'), get_sub_field('configuration_label')[0]);
 
-                $tab_panes .= return_cta_btn($primary_btn);
+//                $tab_panes .= return_cta_btn($primary_btn);
                 $tab_panes .= return_cta_btn($secondary_btn);
 
                 $tab_panes .= '</div>';

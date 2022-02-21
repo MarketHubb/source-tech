@@ -62,11 +62,11 @@ body a {
 .cta-btn.shadow:hover {
 	box-shadow: none !important;
 }
- .cta-btn-primary, .btn.cta-btn-primary {
+ .cta-btn-primary, .btn.cta-btn-primary, form.foxy-form span.foxy-submit {
 	color: #fff;
 	background-color: #EA672B;
 }
- .cta-btn-primary:hover, .btn.cta-btn-primary:hover {
+ .cta-btn-primary:hover, .btn.cta-btn-primary:hover, form.foxy-form span.foxy-submit:hover {
 	cursor: pointer;
 	background-color: rgba(195, 71, 15, .95);
  	color: #fff;
@@ -222,7 +222,10 @@ ul.flush li:last-of-type {
 	padding: 3rem 0;
 }
 .no-border {
-	border: none;
+	border: none !important;
+}
+.project::marker {
+	content: none;
 }
 .lh-1 {
 	line-height: 1;
@@ -991,9 +994,30 @@ body .gform_wrapper h2.gsection_title {
 		font-size: 1.75em !important;
 	}
 }
-
 /*** Small Devices, Tablets  ***/
 @media only screen and (max-width : 768px) {
+	#masthead {
+		margin-top: 0;
+		margin-bottom: -4rem;
+	}
+	.site-header .bottom-row {
+		display: inline-block;
+	}
+	.main-navigation .menu-toggle {
+		float: right;
+		position: relative;
+		bottom: 4rem;
+	}
+	#site-navigation:not(.toggled) {
+		background-color: transparent;
+	}
+	.main-navigation li {
+		text-align: left;
+	}
+	.custom-logo-link > img {
+		max-width: 160px;
+		margin-top: 1.75rem;
+	}
 	.modal-features-container {
 		margin-top: 2em;
 	}

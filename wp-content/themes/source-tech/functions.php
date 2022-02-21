@@ -2,6 +2,7 @@
 require_once 'includes/helpers.php';
 require_once 'includes/content.php';
 require_once 'includes/buy.php';
+require_once 'includes/foxycart.php';
 /**
  * Source Tech functions and definitions
  *
