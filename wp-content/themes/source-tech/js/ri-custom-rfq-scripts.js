@@ -1,5 +1,22 @@
 /* jQuery (Footer) */
 (function($) {
+    $('li.project ul li p').each(function() {
+        var task = $(this);
+        $(this).addClass('d-inline');
+        var assignees = ["Chris", "Emily"];
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        $.each(assignees, function (index, value) {
+            let taskClean = task.text().split(value)[0];
+            task.text(taskClean);
+        });
+        $.each(months, function (index, value) {
+            let taskClean = task.text().split(value)[0];
+            task.text(taskClean);
+        });
+        $('<span><label class="check-container"><input type="checkbox" checked=""><span class="checkmark"></span></label></span>').insertBefore(task);
+    });
+
+
     
     function fade_in_form_selection() {
         $('#rfq-selection-container').fadeIn();

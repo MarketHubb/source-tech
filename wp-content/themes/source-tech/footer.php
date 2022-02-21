@@ -116,7 +116,7 @@
         </div>
     </div>
 
-    <div class="bg-grey-dark">
+    <div class="bg-grey-dark d-none d-md-block">
         <div class="container-fluid">
             <div class="wrapper">
                 <div class="row">
@@ -177,6 +177,11 @@
 
     <?php } ?>
 <?php } ?>
+
+<!-- FOXYCART -->
+<script data-cfasync="false" src="https://cdn.foxycart.com/source-tech/loader.js" async defer></script>
+<!-- /FOXYCART -->
+
 
 </body>
 </html>
