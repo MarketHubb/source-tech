@@ -5,11 +5,11 @@
     const productModal = new bootstrap.Modal(document.getElementById('customModal'));
 
     // Image thumbnail gallery
-    $('#model-page-image-container .image-thumb-container .thumb-images img').on('click', function(){
-        $('#model-page-image-container .image-thumb-container .thumb-images').each(function(){
+    $('#model-page-image-container .image-thumb-container .list-group-item img').on('click', function(){
+        $('#model-page-image-container .image-thumb-container .list-group-item').each(function(){
             $(this).removeClass('active');
         })
-        $(this).closest('.thumb-images').addClass('active');
+        $(this).closest('.list-group-item').addClass('active');
         let selectedFeatureSrc = $(this).attr('src');
         $('.model-page-featured-image').attr('src', selectedFeatureSrc);
     });

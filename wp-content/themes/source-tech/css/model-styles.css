@@ -231,11 +231,14 @@
 .image-thumb-container .thumb-images img {
 	padding: 10px;
 }
-.image-thumb-container .thumb-images img:hover {
+.image-thumb-container .list-group-item img {
+	border: 2px solid #ddd;
+}
+.image-thumb-container .list-group-item img:hover {
 	cursor: pointer;
 	border: 2px solid #0087c7;
 }
-.image-thumb-container .thumb-images.active img {
+.image-thumb-container .list-group-item.active img {
 	border: 2px solid #0087c7;
 }
 /* How it Works */

@@ -65,7 +65,7 @@ $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the
                             $image_class = ' ';
                         }
 //                        $images .= '<div class="thumb-images' . $image_class . '">';
-                        $images .= '<li class="list-group-item flex-fill no-border ' . $image_class . '">';
+                        $images .= '<li class="list-group-item mx-1 bg-transparent flex-fill no-border ' . $image_class . '">';
                         $images .= '<img src="' . get_sub_field($images_sub_field) . '" class="img-thumbnail rounded" />';
                         $images .= '</li>';
 
