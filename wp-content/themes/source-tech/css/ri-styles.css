@@ -530,11 +530,10 @@ ul.flush li:last-of-type {
 	margin: .75em auto 1em auto;
 	border-radius: 4px;
 }
-
+#zsiq_maintitle {
+	font-weight: 700;
+}
 #zsiq_maintitle, #zsiq_byline {
-    color: #222;
-    font-size: 14px;
-	font-weight: 600;
 	letter-spacing: -.01rem;
     -webkit-font-smoothing: antialiased;
 	-webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.1);
