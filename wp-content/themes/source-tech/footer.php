@@ -153,28 +153,29 @@
 <?php wp_footer(); ?>
 
 <!-- Zoho Live Chat widget -->
-<script type="text/javascript">
-    var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"00c1181641a8e8a370b3731ece5fb9e8aaf8fb161310d62c4552975ade569d50", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
-</script>
+<!--<script type="text/javascript">-->
+<!--    var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"00c1181641a8e8a370b3731ece5fb9e8aaf8fb161310d62c4552975ade569d50", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");-->
+<!--</script>-->
+
+<script type="text/javascript" id="zsiqchat">var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "00c1181641a8e8a370b3731ece5fb9e8aaf8fb161310d62c4552975ade569d50", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);</script>
 
 <script>
-    $zoho.salesiq.ready=function(embedinfo)
-    {
-        $zoho.salesiq.floatwindow.onlinetitle('Live Support: David');
-        $zoho.salesiq.floatwindow.offlinetitle('Currently Offline');
-    }
+    // $zoho.salesiq.ready=function(embedinfo)
+    // {
+    //     $zoho.salesiq.floatwindow.onlinetitle('Live Support: David');
+    //     $zoho.salesiq.floatwindow.offlinetitle('Currently Offline');
+    // }
 </script>
 
 <?php if (is_singular()) { ?>
     <?php if( have_rows('configurations', get_queried_object_id())) { ?>
-        <script>
-            $zoho.salesiq.ready=function()
-
-        {
-            $zoho.salesiq.floatbutton.coin.hidetooltip();
-        }
-        </script>
-
+<!--        <script>-->
+<!--            $zoho.salesiq.ready=function()-->
+<!---->
+<!--        {-->
+<!--            $zoho.salesiq.floatbutton.coin.hidetooltip();-->
+<!--        }-->
+<!--        </script>-->
     <?php } ?>
 <?php } ?>
 
