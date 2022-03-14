@@ -106,25 +106,7 @@ if (isset($_GET['ga']) && $_GET['ga'] == 30) {
                     <p class="site-description"><?php echo $source_tech_description; /* WPCS: xss ok. */ ?></p>
                 <?php endif; ?>
             </div><!-- .site-branding -->
-            <div class="item" id="middle-column">
-                <a href="https://www.source-tech.net/contact">Give Feedback on our Website</a><span class="icon icon-angle-right"></span>
-            </div>
-            <div class="item" id="right-column">
-                <?php get_search_form(); ?>
-                <a href="https://www.source-tech.net/cart/" class="button cart"><span class="icon icon-basket"></span>Cart</a>
-            </div>
         </div>
-
-
-        <nav id="site-navigation" class="main-navigation">
-            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'source-tech' ); ?></button>
-            <?php
-            wp_nav_menu( array(
-                'theme_location' => 'menu-1',
-                'menu_id'        => 'primary-menu',
-            ) );
-            ?>
-        </nav><!-- #site-navigation -->
     </header><!-- #masthead -->
 
     <!-- Begin Foxycart Div -->
