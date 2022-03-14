@@ -61,10 +61,10 @@
             margin-top: 4.5rem;
         }
         #fc-logo {
-            display: none;
+            display: none !important;
         }
         .fc-svg-icon--lock {
-            top: 3.5rem;
+            top: 3.5rem !important;
         }
         .fc-cart__items  .fc-container__row {
             display: flex;
@@ -122,7 +122,7 @@ if (isset($_GET['ga']) && $_GET['ga'] == 30) {
 
 <div class="bg-orange global-alert fixed shadow-sm d-none d-lg-block">
     <p class="text-center text-white"><?php echo $alert_copy; ?>
-        <span class="alert-cta cta-chat" onclick='$zoho.salesiq.floatwindow.visible("show");'><i class="fas fa-comments-alt text-white"></i> Live Chat</span><span class="alert-cta"><a href="mailto:info@source-tech.net" class="cta-email"><i class="fas fa-envelope"></i> info@source-tech.net</a></span><span class="alert-cta"><a href="tel:800-932-0657"><i class="fas fa-phone"></i> 800-932-0657</a></span>
+        <span class="alert-cta cta-chat" onclick='$zoho.salesiq.floatwindow.visible("show");'> Live Chat</span><span class="alert-cta"><a href="mailto:info@source-tech.net" class="cta-email"> info@source-tech.net</a></span><span class="alert-cta"><a href="tel:800-932-0657"> 800-932-0657</a></span>
     </p>
 </div>
 
