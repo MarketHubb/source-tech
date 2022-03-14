@@ -10,4 +10,4 @@ get_header('foxycart'); ?>
 {% embed 'checkout.inc.twig' %}
 {% endembed %}
 
-<?php get_footer(); ?>
+<?php get_footer('foxycart'); ?>
