@@ -81,6 +81,17 @@
 <script data-cfasync="false" src="https://cdn.foxycart.com/source-tech/loader.js" async defer></script>
 <!-- /FOXYCART -->
 
+<script>
+
+    $zoho.salesiq.ready=function()
+
+    {
+        $zoho.salesiq.floatwindow.onlinetitle('Need help?')
+    }
+
+
+</script>
+
 <!-- FC footer script insertion -->{% include template_from_string(fc_footer_content) %}<!-- /FC footer scripts -->
 </body>
 </html>
