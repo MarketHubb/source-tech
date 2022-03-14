@@ -186,6 +186,9 @@ function source_tech_scripts() {
 //    wp_register_script( 'bootstrap-scripts', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true );
 	wp_register_script( 'model-scripts', get_template_directory_uri() . '/js/model-scripts.js', array('bootstrap-scripts'), '', true );
 
+    if (is_page([3323, 3295])) {
+        wp_enqueue_script( 'foxycart-checkout', get_template_directory_uri() . '/css/foxycart-checkout.css' );
+    }
 	if (is_singular( 'product' )) {
 		wp_enqueue_script( 'ri_custom_product_scripts' );
 	}

@@ -1,0 +1,42 @@
+#masthead {
+    margin-top: 4.5rem;
+}
+#fc-logo {
+    display: none;
+}
+.fc-svg-icon--lock {
+    top: 3.5rem;
+}
+.fc-cart__items  .fc-container__row {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.fc-cart__items  .fc-container__row .fc-cart__item__details-and-image,
+.fc-cart__items  .fc-container__row .fc-cart__item__details-and-image .fc-cart__item__image,
+.fc-cart__items  .fc-container__row .fc-cart__item__totals {
+    width: 100% !important;
+}
+.fc-cart__items  .fc-container__row .fc-cart__item__details-and-image span {
+    margin-bottom: 1rem !important;
+}
+.fc-cart__items  .fc-container__row .fc-cart__item__totals {
+    text-align: center !important;
+}
+.fc-cart__items  .fc-container__row .fc-cart__item__totals .fc-cart__item__total > p {
+    font-size: 1.5rem !important;
+}
+.fc-cart__item__options .fc-cart__item__option {
+    padding-bottom: 5px;
+}
+#fc .fc-cart__item__name {
+    text-align: center;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+}
+.fc-cart__item__option__name {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.fc-cart__item__option--code, .fc-cart__item__option--weight {
+    display: none;
+}
