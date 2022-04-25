@@ -5,7 +5,7 @@
             <div class="modal-header d-flex justify-content-between align-items-center px-3 px-md-4 no-border bg-light-grey">
                 <img src="<?php echo get_home_url() . '/wp-content/uploads/2020/05/SourceTech-Systems.svg' ?>" class="modal-logo" alt="Source Tech" itemprop="logo">
                 <p class="d-inline-block mb-0 pb-0 text-blue-dark letter-wide-max fs-5">
-                    <a href="tel:+18775644314" class="cta-phone cta-copy fw-800 letter-wide text-blue">877-564-4314</a>
+                    <a href="tel:+8009320657" class="cta-phone cta-copy fw-800 letter-wide text-blue">800-932-0657</a>
                 </p>
             </div>
 
@@ -28,7 +28,7 @@
                     <!-- Contact Options -->
                     <div class="row justify-content-center my-4">
                         <div class="col-md-12 col-lg-4 mb-3">
-                            <div class="d-flex flex-column shadow text-center h-100 px-3 pt-4 py-5 bg-light border rounded">
+                            <div class="d-flex flex-column shadow-sm text-center h-100 px-3 pt-4 py-5  border rounded">
                                 <h4 class="border-bottom pb-2 fw-800 letter-wide mb-0 me-4"><i class="fa-light fa-messages text-blue me-2"></i> Chat</h4>
                                 <p class="text-dark letter-tight fs-5 mb-4 pb-2">
                                     <strong class="letter-tight fw-600 d-inline-block my-3 text-dark fst-italic">Agents online now</strong> <br>
@@ -43,21 +43,21 @@
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-4 mb-3">
-                            <div class="d-flex flex-column shadow text-center h-100 px-3 pt-4 py-5 bg-light border rounded">
+                            <div class="d-flex flex-column shadow-sm text-center h-100 px-3 pt-4 py-5  border rounded">
                                 <h4 class="border-bottom pb-2 fw-800 letter-wide mb-0 me-4"> <i class="fa-light fa-phone text-blue me-2"></i> Phone</h4>
                                 <p class="text-dark letter-tight fs-5 mb-4 pb-2">
                                     <strong class="letter-tight fw-600 d-inline-block my-3 text-dark fst-italic">8:00am - 6:00pm CST</strong> <br>
                                     Quotes, configuration support & technical assistance
                                 </p>
                                 <div class="mt-auto">
-                                    <a href="tel:+18775644314" class="cta-phone modal-cta fw-bold fs-5 letter-wide bg-blue text-white shadow-sm border-pill border-blue px-4 py-1">
-                                        877-564-4314
+                                    <a href="tel:+8009320657" class="cta-phone modal-cta fw-bold fs-5 letter-wide bg-blue text-white shadow-sm border-pill border-blue px-4 py-1">
+                                        800-932-0657
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-4 mb-3">
-                            <div class="d-flex flex-column shadow text-center h-100 px-3 pt-4 py-5 bg-light border rounded">
+                            <div class="d-flex flex-column shadow-sm text-center h-100 px-3 pt-4 py-5  border rounded">
                                 <h4 class="border-bottom pb-2 fw-800 letter-wide mb-0 me-4"><i class="fa-light fa-envelope text-blue me-2"></i> Email</h4>
                                 <p class="text-dark letter-tight fs-5 mb-4 pb-2">
                                     <strong class="letter-tight fw-600 d-inline-block my-3 text-dark fst-italic">Responses in 2 hours</strong> <br>
