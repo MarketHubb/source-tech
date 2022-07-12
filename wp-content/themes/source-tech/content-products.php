@@ -25,40 +25,37 @@ set_query_var('part_number', $part_number);
 
 <div class="custom-page-content" id="custom-model-page-template">
 
-    <div class="container">
+    <?php get_template_part('template-parts/products/content', 'title'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'title'); ?>
+    <?php get_template_part('template-parts/products/content', 'overview'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'overview'); ?>
+    <?php get_template_part('template-parts/products/content', 'quote'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'cta'); ?>
+    <?php get_template_part('template-parts/products/content', 'specs'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'specs'); ?>
+    <?php
+    if(!have_rows('configurations')) {
+        if (have_rows('post_servers_pre_configured')):
+            get_template_part('template-parts/products/content', 'configured');
+        endif;
+    }
+    ?>
 
-            <?php
-            if(!have_rows('configurations')) {
-                if (have_rows('post_servers_pre_configured')):
-                    get_template_part('template-parts/products/content', 'configured');
-                endif;
-            }
-            ?>
+    <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'testimonial'); ?>
+    <?php get_template_part('template-parts/products/content', 'warranty'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'warranty'); ?>
+    <?php get_template_part('template-parts/products/content', 'easy123'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'easy123'); ?>
+    <?php get_template_part('template-parts/products/content', 'faq'); ?>
 
-            <?php get_template_part('template-parts/products/content', 'faq'); ?>
+    <?php
+    $terms = get_the_terms($post_id, 'generation');
+    if ($terms) {
+        get_template_part('template-parts/products/content', 'related');
+     }
+    ?>
 
-            <?php
-            $terms = get_the_terms($post_id, 'generation');
-            if ($terms) {
-                get_template_part('template-parts/products/content', 'related');
-             }
-            ?>
-
-    </div> <!-- End .container-->
 
         <?php //get_template_part('template-parts/products/tab-content'); ?>
 

@@ -5,8 +5,8 @@
     const productModal = new bootstrap.Modal(document.getElementById('customModal'));
 
     // Image thumbnail gallery
-    $('#model-page-image-container .image-thumb-container .list-group-item img').on('click', function(){
-        $('#model-page-image-container .image-thumb-container .list-group-item').each(function(){
+    $('.image-thumb-container .list-group-item img').on('click', function(){
+        $('.image-thumb-container .list-group-item').each(function(){
             $(this).removeClass('active');
         })
         $(this).closest('.list-group-item').addClass('active');

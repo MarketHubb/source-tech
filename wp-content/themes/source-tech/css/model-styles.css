@@ -222,11 +222,8 @@
 	top: 1rem;
 }
 /* Images */
-.image-thumb-container {
-	margin-top: 1em;
-}
-.model-page-featured-image {
-	margin-bottom: 1em;
+.image-thumb-container li:not(:last-child) {
+	padding-bottom: .75rem;
 }
 .image-thumb-container .thumb-images img {
 	padding: 10px;

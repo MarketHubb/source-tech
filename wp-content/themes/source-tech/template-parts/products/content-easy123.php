@@ -7,7 +7,8 @@
         $how .= '<div class="container">';
         $how .= '<div class="row justify-content-center">';
         $how .= '<div class="col-md-9 text-center mb-4 mt-1">';
-        $how .= '<h2 class="text-white">Getting the lowest price on a ' .  get_the_title(). ' has never been easier</h2>';
+        $how .= '<h2 class="text-white">Ordering Made Simple</h2>';
+        $how .= '<p class="text-white">More contact options, same-day quotes and insanely fast turn-around times.</p>';
         $how .= '</div></div>';
         $how .= '<div class="row row-eq-height mb-2">';
 
@@ -17,7 +18,7 @@
             $description_field = 'global_' . $post_type_for_acf . '_how_it_works_description';
             $description = replace_product_variable_in_string(get_sub_field($description_field, 'option'), $post->ID);
 
-            $how .= '<div class="col col-md-4 col-lg-4 text-center">';
+            $how .= '<div class="col col-md-4 mt-3 mt-md-0 text-center">';
             $how .= '<div class="h-100 panel shadow blue-top bg-white">';
             $how .= '<i class="' . get_sub_field($icon_field, 'option') . ' fa-2x text-blue"></i>';
             $how .= '<p class="lead font-weight-bold">' . get_row_index() . '. ' . get_sub_field($heading_field, 'option') . '</p>';

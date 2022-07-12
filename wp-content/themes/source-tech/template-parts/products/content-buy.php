@@ -3,11 +3,10 @@ $manufacturer = get_query_var('manufacturer');
 ?>
 <div class="row">
     <div class="col">
-<!--        <h1 class="fw-800 letter-tight mb-5">--><?php //echo get_the_title(); ?><!--</h1>-->
-        
-        <?php 
-        if( have_rows('configurations') ):
-            $tabs = '<ul class="nav nav-pills nav-fill flush" id="product_tabs" role="tabList">';
+
+        <?php
+          if( have_rows('configurations') ):
+            $tabs = '<ul class="nav nav-pills  nav-fill ms-0" id="product_tabs" role="tabList">';
             $tab_panes = '<div class="tab-content">';
             while ( have_rows('configurations') ) : the_row();
                 // Vars
@@ -18,8 +17,8 @@ $manufacturer = get_query_var('manufacturer');
                 $collapsed = get_row_index() === 1 ? '' : '';
 
                 // Tabs
-                $tabs .= '<li class="nav-item" role="presentation">';
-                $tabs .= '<button class="nav-link ' . $active . '" id="' . $model_clean . '_tab" data-bs-toggle="tab" data-bs-target="#' . $model_clean . '"';
+                $tabs .= '<li class="nav-item mx-1" role="presentation">';
+                $tabs .= '<button class="py-1 py-md-2 px-1 px-md-2 nav-link ' . $active . '" id="' . $model_clean . '_tab" data-bs-toggle="tab" data-bs-target="#' . $model_clean . '"';
                 $tabs .= 'type="button" role="tab" aria-controls="' . $model_clean . '" aria-selected="' . $aria_selected . '">';
                 $tabs .= get_sub_field('configuration_label')[0];
                 $tabs .= '</button></li>';
@@ -30,7 +29,8 @@ $manufacturer = get_query_var('manufacturer');
                 // Price
                 $price =  '$' . get_sub_field('price');
                 $callout = 'In-stock & ready to ship';
-                $features = ['Tested & professionally packed', 'Free 24-month warranty standard'];
+                $feature_3 = 'Genuine ' . $manufacturer[0] . ' & Intel hardware';
+                $features = ['Tested & professionally packed', 'Free 2-year warranty', $feature_3];
                 $tab_panes .=  return_price($price, $callout, $features);
 
                 // CTA Buttons
@@ -78,8 +78,46 @@ $manufacturer = get_query_var('manufacturer');
                 // Config Details
                 $tab_panes .= '<div class="d-grid gap-1 bg-light border rounded p-4">';
                 $tab_panes .= '<h5 class="mb-2">' . get_sub_field('configuration_label')[0] . ' Configuration Details</h5>';
+
+
+
                 $tab_panes .= '<p class="mb-0"><strong class="me-2 d-inline-block">CPU:</strong>' . get_sub_field('processor') . '</p>';
-                $tab_panes .= '<p class="mb-0"><strong class="me-2">Drives:</strong>' . get_sub_field('hard_drive') . '</p>';
+
+                if (get_the_ID() === 1602) {
+                    $tab_panes .= '<p class="mb-0"><strong class="me-2">Drives:</strong>';
+                    
+                    if( have_rows('drives', 'option') ):
+                        $d = '<select name="drives" class="form-select config-options w-inherit d-inline-block">';
+                        while ( have_rows('drives', 'option') ) : the_row();
+                            $active_class = get_row_index() === 1 ? 'active' : '';
+                            $max_units = get_sub_field('max_units', 'option');
+                            $base_option_name = strtolower(str_replace('"','',str_replace(" ", "_", get_sub_field('base_drive', 'option'))));
+
+                            // Base
+                            $d .= '<option name="' . $base_option_name . '" data-max="' . $max_units . '"';
+                            $d .= ' data-price="' . get_sub_field('unit_price', 'option') . '">';
+                            $d .= get_sub_field('base_drive', 'option') . ' ($' . get_sub_field('unit_price', 'option') . '/unit)';
+                            $d .= '</option>';
+
+                            // Options
+                            if( have_rows('options', 'option') ):
+                                while ( have_rows('options', 'option') ) : the_row();
+                                    $option_name = strtolower(str_replace('"','',str_replace(" ", "_", get_sub_field('description', 'option'))));
+                                    $d .= '<option name="' . $option_name . '" data-max="' . $max_units . '"';
+                                    $d .= ' data-price="' . get_sub_field('option_unit_price', 'option') . '">';
+                                    $d .= get_sub_field('description', 'option') . ' ($' . get_sub_field('option_unit_price', 'option') . '/unit)';
+                                    $d .= '</option>';
+                                endwhile;
+                            endif;
+                            
+                        endwhile;
+                            $d .= '</select>';
+                    endif;
+                    
+                    $tab_panes .= $d;
+                } else {
+                    $tab_panes .= '<p class="mb-0"><strong class="me-2">Drives:</strong>' . get_sub_field('hard_drive') . '</p>';
+                }
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Memory:</strong>' . get_sub_field('memory') . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Chassis:</strong>' . get_sub_field('chasis')[0] . '</p>';
                 $tab_panes .= '<p class="mb-0"><strong class="me-2">Raid Controller:</strong>' . get_sub_field('raid_controller')[0] . '</p>';

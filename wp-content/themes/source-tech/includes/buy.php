@@ -34,15 +34,15 @@ function return_price($price, $callout, $features=array())
 
     if ($callout) {
         $p .= '<span class="text-secondary px-3">|</span>';
-        $p .= '<span class="text-success fw-bold">' .  $callout . '</span>';
+        $p .= '<span class="text-success fw-600">' .  $callout . '</span>';
     }
     $p .= '</div>';
 
     if ($features && !empty($features)) {
         $p .= '<div class="d-grid gap-1 mb-2">';
         foreach ($features as $feature) {
-            $p .= '<p class="mb-0 fst-italic text-secondary"><i class="fa-solid fa-check text-success me-2"></i>';
-            $p .= $feature;
+            $p .= '<p class="mb-0 text-secondary"><i class="fa-solid fa-circle-check text-success me-2"></i>';
+            $p .= '<small>' . $feature . '</small>';
             $p .= '</p>';
         }
         $p .= '</div>';

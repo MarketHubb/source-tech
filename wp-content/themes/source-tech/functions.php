@@ -2,8 +2,12 @@
 require_once 'includes/helpers.php';
 require_once 'includes/content.php';
 require_once 'includes/buy.php';
+require_once 'includes/components.php';
 require_once 'includes/foxycart.php';
+
 /**
+ * something
+ *
  * Source Tech functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
@@ -230,7 +234,7 @@ function source_tech_scripts() {
         wp_enqueue_script('bootstrap-scripts', get_stylesheet_directory_uri() . '/bootstrap5/js/bootstrap.bundle.min.js', [], '5.1.0', true);
 		wp_enqueue_style('font-awesome-pro');
 		wp_enqueue_style('ri_web_fonts_roboto');
-//		wp_enqueue_style('boostrap-styles');
+        wp_enqueue_style( 'ri-nav-styles', get_stylesheet_directory_uri() . '/css/ri-nav.css' );
 	}
 	if (is_home()) {
         wp_enqueue_style( 'ri-blog-list-styles', get_stylesheet_directory_uri() . '/css/ri-blog-list.css' );
@@ -527,6 +531,75 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
+
+add_action('acf/init', 'my_acf_op_init');
+function my_acf_op_init() {
+
+    // Check function exists.
+    if( function_exists('acf_add_options_page') ) {
+
+        // Parent.
+        $parent = acf_add_options_page(array(
+            'page_title'  => __('Configurations'),
+            'menu_title'  => __('Configurations'),
+            'redirect'    => false,
+        ));
+
+        // Add sub page.
+        $child = acf_add_options_page(array(
+            'page_title'  => __('CPU'),
+            'menu_title'  => __('CPU'),
+            'parent_slug' => $parent['menu_slug'],
+        ));
+        $child = acf_add_options_page(array(
+            'page_title'  => __('Drives'),
+            'menu_title'  => __('Drives'),
+            'parent_slug' => $parent['menu_slug'],
+        ));
+    }
+}
+
+function ri_load_servers_for_config_exclude( $field ) {
+    $field['choices'] = array();
+
+    $server_args = array(
+        'post_type' => 'servers',
+        'posts_per_page' => -1
+    );
+
+    $servers_posts = get_posts($server_args);
+
+    if ($servers_posts) {
+        foreach ($servers_posts as $server) {
+            $field['choices'][ $server->ID ] = get_the_title($server->ID);
+        }
+    }
+    return $field;
+}
+add_filter('acf/load_field/key=field_62bb95cb6aca3', 'ri_load_servers_for_config_exclude');
+
+function ri_config_populate_server_cats($field) 
+{
+	$field['choices'] = array();
+
+    $args = [
+       'taxonomy' => 'product_cat',
+       'orderby' => 'name', 
+       'empty' => 0,
+       'child_of' => 138
+
+    ];
+   
+   	$cats = get_categories($args);
+    $field['choices'][ "all" ] = "All";      
+
+    foreach ($cats as $cat) {
+		$field['choices'][ $cat->name ] = $cat->name;        
+    }
+
+    return $field;
+}
+add_filter('acf/load_field/key=field_62729f934527f', 'ri_config_populate_server_cats');
 
 function ri_load_server_spec_labels( $field ) {
     $field['choices'] = array();

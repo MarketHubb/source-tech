@@ -19,9 +19,6 @@ body {
 body a {
 	text-decoration: none;
 }
-.nav-pills .nav-link {
-	width: 95% !important;
-}
 .nav-link.active {
 	background-color: #0087c7 !important;
 }
@@ -539,6 +536,9 @@ ul.flush li:last-of-type {
 	-webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.1);
 	padding-bottom: 1px;
 }
+.w-inherit {
+	width: inherit !important;
+}
 
 /* Design Guidelines - Headings */
 h1.page-title, p.sub-title, h2.sub-heading {
@@ -995,9 +995,9 @@ body .gform_wrapper h2.gsection_title {
 }
 /*** Small Devices, Tablets  ***/
 @media only screen and (max-width : 768px) {
+
 	#masthead {
 		margin-top: 0;
-		margin-bottom: -4rem;
 	}
 	.site-header .bottom-row {
 		display: inline-block;
@@ -1006,9 +1006,7 @@ body .gform_wrapper h2.gsection_title {
 		float: right;
 		position: relative;
 		bottom: 4rem;
-	}
-	#site-navigation:not(.toggled) {
-		background-color: transparent;
+		margin-bottom: -4rem;
 	}
 	.main-navigation li {
 		text-align: left;

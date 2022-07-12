@@ -69,7 +69,6 @@ function remove_character_from_end_of_string($string, $character)
 
 //endregion
 
-//region WordPress
 function get_repeater_field_row($repeater_field, $row_index, $sub_field, $post_id)
 {
     $rows = get_field($repeater_field, $post_id);
@@ -82,6 +81,7 @@ function get_repeater_field_row($repeater_field, $row_index, $sub_field, $post_i
 
     return $repeater_field;
 }
+//region WordPress
 
 function get_first_category($post_id)
 {
