@@ -21,13 +21,19 @@ $title_explode = explode_content(" ", get_the_title());
 $part_number = get_server_part_number($title_explode);
 set_query_var('part_number', $part_number);
 
+// Custom Config
+if (get_field('use')) {
+    $config_options =  return_formatted_component_options(get_the_ID());
+    set_query_var('config_options', $config_options);
+}
+
 ?>
 
 <div class="custom-page-content" id="custom-model-page-template">
 
-    <?php get_template_part('template-parts/products/content', 'title'); ?>
+    <?php get_template_part('template-parts/products/content', 'left'); ?>
 
-    <?php get_template_part('template-parts/products/content', 'overview'); ?>
+    <?php get_template_part('template-parts/products/content', 'right'); ?>
 
     <?php get_template_part('template-parts/products/content', 'quote'); ?>
 

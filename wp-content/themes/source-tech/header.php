@@ -71,7 +71,7 @@
 
 
 
-    <div class="bg-orange global-alert fixed shadow-sm d-none d-lg-block">
+    <div class="bg-orange global-alert fixed shadow-sm d-none">
         <p class="text-center text-white"><?php echo $alert_copy; ?>
             <span class="alert-cta cta-chat" onclick='$zoho.salesiq.floatwindow.visible("show");'><i class="fas fa-comments-alt text-white"></i> Live Chat</span><span class="alert-cta"><a href="mailto:info@source-tech.net" class="cta-email"><i class="fas fa-envelope"></i> info@source-tech.net</a></span><span class="alert-cta"><a href="tel:800-932-0657"><i class="fas fa-phone"></i> 800-932-0657</a></span>
         </p>
@@ -82,7 +82,7 @@
 
 		<header id="masthead" class="site-header" data-buttonvariant="">
 			<div class="row bottom-row">
-				<div class="item site-branding">
+				<div class="item site-branding ps-0">
                     <a href="<?php echo get_home_url(); ?>" class="custom-logo-link" rel="home" itemprop="url">
                         <img width="299" height="65" src="<?php echo get_home_url() . '/wp-content/uploads/2020/05/SourceTech-Systems.svg' ?>" class="custom-logo" alt="Source Tech" itemprop="logo">
                     </a>

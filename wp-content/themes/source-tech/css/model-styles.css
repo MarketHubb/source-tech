@@ -1,3 +1,76 @@
+/* Right Panel */
+#pre-config {
+	display: none;
+}
+.order-type .order-tab {
+	opacity: .4;
+}
+.order-type .order-tab.active,
+.order-type .order-tab:hover
+{
+	cursor: pointer;
+	opacity: .7;
+}
+.order-type .order-tab .tab-icon {
+	width: 40px;
+}
+.order-type .order-tab.active p {
+	color: #0087c7;
+}
+.order-type .order-tab .tab-icon {
+	filter: drop-shadow(0px 6px 6px grey);
+}
+.order-type .order-tab.active .tab-icon {
+	filter: invert(34%) sepia(84%) saturate(2354%) hue-rotate(176deg) brightness(92%) contrast(100%);
+}
+
+/* Custom Config */
+.summary-icon {
+	min-width: 14px;
+	max-width: 14px;
+	display: inline;
+	opacity: .8;
+}
+
+.product-summary select.form-select {
+	width: initial;
+}
+.option-selected-icons {
+	top: 2.5rem;
+	margin-top: -1.8rem;
+	position: relative;
+	left: 1.5rem;
+	display: none;
+}
+.option-selected .option-selected-icons {
+	display: inherit;
+}
+.option-selected select {
+	outline: none;
+	border-color: rgb(25, 135, 84);
+}
+.component-icon, .component-list-icon {
+	min-width: 20px;
+	max-width: 20px;
+	display: inline;
+	opacity: .5;
+}
+.configure-chat-icon {
+	min-width: 30px;
+	max-width: 30px;
+	display: inline;
+	position: relative;
+	bottom: 3px;
+	margin-bottom: -3px;
+}
+.custom-config-tabs .nav-link {
+	color: #999 !important;
+}
+.custom-config-tabs .nav-link.active {
+	font-weight: bold;
+	color: #007bff !important;
+}
+/* End Custom Config */
 .query_cta_container {
 	position: relative;
 	padding: 1rem  1.5rem;
@@ -229,7 +302,7 @@
 	padding: 10px;
 }
 .image-thumb-container .list-group-item img {
-	border: 2px solid #ddd;
+	border: 2px solid #fff;
 }
 .image-thumb-container .list-group-item img:hover {
 	cursor: pointer;

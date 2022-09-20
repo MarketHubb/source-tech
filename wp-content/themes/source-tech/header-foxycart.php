@@ -131,7 +131,7 @@ if (isset($_GET['ga']) && $_GET['ga'] == 30) {
 
     <header id="masthead" class="site-header" data-buttonvariant="">
         <div class="row bottom-row">
-            <div class="item site-branding">
+            <div class="item site-branding ps-0">
                 <a href="<?php echo get_home_url(); ?>" class="custom-logo-link" rel="home" itemprop="url">
                     <img width="299" height="65" src="<?php echo get_home_url() . '/wp-content/uploads/2020/05/SourceTech-Systems.svg' ?>" class="custom-logo" alt="Source Tech" itemprop="logo">
                 </a>

@@ -558,6 +558,24 @@ function my_acf_op_init() {
         ));
     }
 }
+function ri_load_servers_for_config_include( $field ) {
+    $field['choices'] = array();
+
+    $server_args = array(
+        'post_type' => 'servers',
+        'posts_per_page' => -1
+    );
+
+    $servers_posts = get_posts($server_args);
+
+    if ($servers_posts) {
+        foreach ($servers_posts as $server) {
+            $field['choices'][$server->ID] = get_the_title($server->ID);
+        }
+    }
+    return $field;
+}
+add_filter('acf/load_field/key=field_62dddf3b6de55', 'ri_load_servers_for_config_include');
 
 function ri_load_servers_for_config_exclude( $field ) {
     $field['choices'] = array();
@@ -571,7 +589,7 @@ function ri_load_servers_for_config_exclude( $field ) {
 
     if ($servers_posts) {
         foreach ($servers_posts as $server) {
-            $field['choices'][ $server->ID ] = get_the_title($server->ID);
+            $field['choices'][$server->ID] = get_the_title($server->ID);
         }
     }
     return $field;

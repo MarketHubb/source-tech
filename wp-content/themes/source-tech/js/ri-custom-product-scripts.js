@@ -25,7 +25,6 @@
     
     $('.summary a.button.request-quote').each(function() {
         var href = $(this).attr('href');
-
         if (href) {
             href += (href.match(/\?/) ? '&' : '?') + productImageQueryString + headlineLeadIn;
             $(this).attr('href', href);

@@ -1,3 +1,9 @@
+.product-summary table tr th:not(:first-of-type) {
+	text-align: right;
+}
+table.table tbody tr th {
+	font-weight: normal;
+}
 .storage-details h5:not(:first-of-type) {
 	margin-top: 2rem;
 }
@@ -19,7 +25,7 @@ body {
 body a {
 	text-decoration: none;
 }
-.nav-link.active {
+ul:not(.custom-config-tabs) .nav-link.active {
 	background-color: #0087c7 !important;
 }
 .nav-pills .nav-link:not(.active) {
@@ -278,12 +284,8 @@ ul.flush li:last-of-type {
 	color: #fff;
 }
 .container-fluid .wrapper {
-	max-width: 1440px;
 	margin-left: auto;
 	margin-right: auto;
-}
-.container {
-	max-width: 1280px !important;
 }
 .bg-cover {
     background-position: center;
@@ -420,6 +422,9 @@ ul.flush li:last-of-type {
 	text-decoration: underline;
 }
 /* Layout: Colors */
+.text-body {
+	color: #333 !important;
+}
 .text-grey {
 	color: #555;
 }
@@ -684,7 +689,7 @@ h2.sub-heading, h3.sub-heading {
 	color: #333;
 }
 #masthead {
-	margin-top: 3.5rem;
+	margin-top: 1.5rem;
 }
 .global-alert {
 	width: 100%;
@@ -960,6 +965,13 @@ body .gform_wrapper h2.gsection_title {
 *** Media Queries ***
 *****************************************/
 @media all and (max-width: 1600px) {
+	.main-navigation .menu-main-nav-container,
+	.site-header .bottom-row,
+	.container-fluid > .wrapper
+	{
+		max-width: 90% !important;
+	}
+
 	#homepage-banner-container h1 {
 		font-size: 2.5em !important;
 	}
@@ -1115,10 +1127,8 @@ body .gform_wrapper h2.gsection_title {
 		display: initial;
 	}
 	.site-branding a img {
-		max-width: 250px;
-		bottom: .9em;
+		max-width: 200px;
 		position: relative;
-		height: 124%;
 	}
 	form.search-form {
 		min-width: 225px;
