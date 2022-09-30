@@ -4,6 +4,12 @@ $query_params = get_query_var('query_params');
 
     <!-- Right Panel -->
     <div class="col-md-5">
+
+        <nav class="nav">
+            <a class="nav-link active" aria-current="page" href="#">Build Your Own</a>
+            <a class="nav-link" href="#">Browse Pre-configured</a>
+            <a class="nav-link" href="#">Product Specs</a>
+        </nav>
         
             <?php if (get_field('use') && get_field('pre_configured')) { ?>
 

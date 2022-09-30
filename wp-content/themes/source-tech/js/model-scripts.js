@@ -125,110 +125,6 @@
         }
     }
 
-    function autoSelectSecondCPU(select, option, container) {
-        $(document).find('#CPU2').val(option.val()).change();
-        let optionValNoPrice = option.text().substring(0, option.text().indexOf('+'));
-
-        updateSummaryPanel("CPU",optionValNoPrice, container, option.attr('data-price'));
-
-
-    }
-
-
-    function duplicateCPURow(component) {
-        let componentName = component.attr('data-type');
-        let selectedOption = component.find('select option:selected').clone();
-        let socket2Container = component.clone();
-        let socket2Select = socket2Container.find('select');
-        let socket2Options = socket2Container.find('select option');
-        let option1 = '<option value="default" data-price="0">-- Select CPU Socket 2  --</option>';
-        let option2 = '<option value="none" data-price="0">None +$0</option>';
-
-
-        socket2Container.find('label').attr('for', 'CPU2');
-        socket2Select.attr('id', 'CPU2');
-        socket2Select.empty();
-        socket2Select.append(option1 + option2);
-        socket2Select.append(selectedOption);
-        socket2Container.attr('data-row', 2);
-        socket2Container.find('.component-name').text('CPU (socket 2)');
-        socket2Container.insertAfter(component);
-
-        socket2Container.find('select option').each(function(){
-           if ($(this).attr("id")) {
-               let newID = $(this).attr("id") + '_2';
-               let newVal = $(this).val() + '_2';
-               $(this)
-                   .attr("id", newID)
-                   .val(newVal)
-                   .prop("selected", true);
-
-               autoSelectSecondCPU(socket2Container.find('select'), $(this), socket2Container)
-
-           }
-            // socket2Container.find('select').val(val2).change();
-        });
-
-
-
-
-    }
-
-    function updateCPUComponent(optionContainer) {
-        let type = optionContainer.data('type');
-        let allComponentTypes = $('.form-container .row[data-type="' + type + '"]');
-
-        if (optionContainer.data('row') === 1) {
-            duplicateCPURow(optionContainer);
-        }
-
-        if (optionContainer.data('row') === 1 && allComponentTypes.length > 1) {
-            allComponentTypes.each(function () {
-                if (parseInt($(this).data('row')) > 1) {
-                    $(this).remove();
-                }
-            });
-        }
-    }
-
-    function memoryQtySelection() {
-        let memory = $(document).find($('.form-container .row[data-type="Memory"]'));
-        let max = parseInt(memory.attr('data-max'));
-        let step = parseInt(memory.attr('data-step'));
-        $('.qty-inputs').remove();
-
-        let qtySelect = '<span class="input-group-text qty-inputs">Qty: </span><select class="form-select qty-inputs" id="memory_qty">';
-
-        for (var i = step; i <= max; i += 2) {
-            qtySelect += '<option data-price="0" value="' + i + '">';
-            qtySelect += i + '</option>';
-        }
-
-        qtySelect += '</select>';
-
-        $('#Memory').addClass("w-50");
-        $(qtySelect).insertBefore($('#Memory'));
-    }
-
-    function updateMemoryMaxQty(option, row) {
-        let qtyMax;
-
-        if (row === 1) {
-            qtyMax = 12;
-        }
-
-        if (row === 2) {
-            if (option === 'none' || option === 'default') {
-                qtyMax = 12;
-            } else {
-                qtyMax = 24;
-            }
-        }
-
-        memoryComponent.attr('data-max', qtyMax);
-        memoryQtySelection();
-    }
-
     function showHideOrderTabs(active) {
         $('.order-type .order-tab').each(function() {
             $(this).removeClass('active');
@@ -279,13 +175,7 @@
         // 2. Define current config options
         let optionContainer = $(this).closest('.row');
         let component = optionContainer.data('type');
-        // let component = optionContainer.find('select').attr('id');
         let option = optionContainer.find('.option-select option:selected');
-
-        // 3. Use case: CPU
-        if (component === 'CPU') {
-            updateCPUComponent(optionContainer);
-        }
 
         if ($(this).val() === 'default') {
             optionContainer.removeClass('option-selected');

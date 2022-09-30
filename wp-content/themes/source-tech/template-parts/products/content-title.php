@@ -1,6 +1,10 @@
 <?php $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the_title(); ?>
 
-<h1 class="mt-4 mb-4 fw-800 letter-tight lh-1"><?php echo $title; ?></h1>
+<h1 class="mt-4 mb-3 fw-800 letter-tight lh-1"><?php echo $title; ?></h1>
+
+<?php if (get_field('post_servers_description')) { ?>
+    <p class=""><?php the_field('post_servers_description'); ?></p>
+<?php } ?>
 
 <div class="mb-3 product-subtitle">
 

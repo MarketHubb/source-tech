@@ -1,17 +1,19 @@
 <?php
 function get_server_attributes($id)
 {
-    $attributes = get_field('product_fields', $id);
+    $terms = get_formatted_product_terms($id);
+    $server_attributes = [];
 
-    if ($attributes) {
+    if ($terms) {
 
         $server_attributes = array(
             'id' => $id,
-            'oem' => $attributes['oem'],
-            'model' => $attributes['model'],
-            'type' => $attributes['type'],
-            'form' => $attributes['form_factor'],
+            'oem' => $terms['Manufacturer'],
+            'model' => $terms['Product Line'],
+            'type' => $terms['Type'],
+            'form' => $terms['Form Factor']
         );
+
     }
 
     return $server_attributes;
