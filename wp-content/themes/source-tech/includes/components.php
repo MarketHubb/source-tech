@@ -289,9 +289,9 @@ function return_formatted_component_options_float_labels($post_id) {
             $component_clean = str_replace(' ', '_', trim($key));
             $form .= '<div class="d-flex flex-row justify-content-end align-items-end config-option-container config-container ' . $component_clean . '" ';
 
-            if ($val['maximum'] && $val['step_size']) {
-                $form .= 'data-max="' . $val['maximum'] . '" data-step="' . $val['step_size'] . '" ';
-            }
+//            if ($val['maximum'] && $val['step_size']) {
+//                $form .= 'data-max="' . $val['maximum'] . '" data-step="' . $val['step_size'] . '" ';
+//            }
 
             $form .= 'data-row="1" data-type="' . $component_clean . '">';
 
