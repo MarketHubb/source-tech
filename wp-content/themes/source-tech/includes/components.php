@@ -36,7 +36,7 @@ function get_chassis_options_for_server($post_id) {
 
     if (get_field('enable_custom', $post_id) && $chassis_rows > 0) {
         $chassis = [];
-        $chassis['icon'] = get_home_url() . '/wp-content/uploads/2022/08/Chassis.svg';
+        $chassis['icon'] = get_home_url() . '/wp-content/uploads/2022/10/Server-Chassis.svg';
         $chassis['optional'] = false;
 
         if( have_rows('chassis', $post_id) ):
@@ -168,47 +168,84 @@ function return_formatted_component_summary($post_id) {
     return $li;
 }
 
+function return_summary_component_list($post_id) {
+    $components = get_all_server_component_options($post_id);
+    $li = '';
+
+    foreach ($components as $key => $val) {
+        if ($val['options']) {
+            $component_clean = trim(str_replace(' ', '_', trim($key)));
+            $li .= '<tr class="d-none px-3" id="' . $component_clean . '">';
+            $li .= '<th scope="row" class="ps-3">';
+            $li .= '<p class="summary-name fw-bold small anti mb-0">' . $key . '</p>';
+            $li .= '</th>';
+            $li .= '<td class="align-middle">';
+            $li .= '<p class="mb-0 summary-price"></p>';
+            $li .= '</th></tr>';
+        }
+
+    }
+
+    return $li;
+}
+
 function return_formatted_component_options($post_id) {
     $components = get_all_server_component_options($post_id);
 
     $form = '<div class="form-container panel pt-0">';
-    $form .= '<div class="alert alert-primary py-2 mb-5 text-center" role="alert">';
-    $form .= '<img src="' . get_home_url() . '/wp-content/uploads/2022/07/Chat.svg" class="configure-chat-icon"/>';
-    $form .= '<p class="d-inline-block ms-3 mb-0 text-body"><span class="fw-bold">Need help with your order?</span> Our server support team is online</p>';
-    $form .= '</div>';
+//    $form .= '<div class="alert alert-primary py-2 mb-5 text-center" role="alert">';
+//    $form .= '<img src="' . get_home_url() . '/wp-content/uploads/2022/07/Chat.svg" class="configure-chat-icon"/>';
+//    $form .= '<p class="d-inline-block ms-3 mb-0 text-body"><span class="fw-bold">Need help with your order?</span> Our server support team is online</p>';
+//    $form .= '</div>';
 
     foreach ($components as $key => $val) {
+
         if ($val['options']) {
+
             $component_clean = str_replace(' ', '_', trim($key));
-            $form .= '<div class="row mb-3 config-container ' . $component_clean . '" ';
+            $form .= '<div class="d-flex flex-row justify-content-end align-items-end config-option-container config-container ' . $component_clean . '" ';
 
             if ($val['maximum'] && $val['step_size']) {
                 $form .= 'data-max="' . $val['maximum'] . '" data-step="' . $val['step_size'] . '" ';
             }
 
             $form .= 'data-row="1" data-type="' . $component_clean . '">';
-            $form .= '<label for="' . $component_clean . '" class="col-md-5 form-label fw-bold">';
 
-            if (!empty($val['icon'])) {
-                $form .= '<img src="' . $val['icon'] . '" class="component-icon me-3"/>';
-            }
-
-            $form .= '<span class="component-name">' . $key . '</span></label>';
-
-            $form .= '<div class="col-md-7">';
-            $form .= '<i class="fa-solid fa-circle-check float-end option-selected-icons text-success"></i>';
-
-            $form .= '<div class="input-group mb-3">';
-            $form .= '<select id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
-
-
-            $form .= '<option value="default">-- Select ' . $key . ' --</option>';
+            // Icon
+            $form .= '<div class="me-md-4">';
+            $form .= '<img src="' . $val['icon'] . '" class="mb-2 component-icon"/>';
+            $form .= '</div>';
+            // Label + Input (label hidden by default)
+            $form .= '<div class="flex-grow-1">';
+            $form .= '<p class="small ms-3 lh-1 py-1 px-2 mb-0 fw-bold bg-transparent rounded config-input-label"><i class="fa-sharp fa-solid fa-check pe-2"></i>' . $key . '</p>';
+            $form .= '<div class="input-group mb-0">';
+            $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
+            $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
 
             $i = 1;
-            foreach ($val['options'] as $option) {
+            $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
+
+            // Ouput "No {component} for non-mandatory components
+            if ($val['optional']) {
+                $no_option = [
+                    'name' => 'No ' . $key,
+                    'price' => 0
+                ];
+
+                array_unshift($options_ordered, $no_option);
+            }
+
+            foreach ($options_ordered as $option) {
+
+                $no_position = strpos($option['name'], 'No ');
+                if ($no_position === false) {
+                    $option['name'] = str_replace(trim($key), '', $option['name']);
+                }
+
                 $option_clean = str_replace('"', ' Inch', trim($option['name']));
                 $option_clean_no_spaces = str_replace(' ', '_', trim($option_clean));
                 $form .= '<option id="' . $component_clean . '_' . $i . '" ';
+                $form .= 'class="text-end" ';
                 $form .= 'data-name="' . $option_clean_no_spaces . '" ';
                 $form .= 'data-row="' . $i . '" ';
                 $form .= 'data-price="' . $option['price'] . '" ';
@@ -218,12 +255,96 @@ function return_formatted_component_options($post_id) {
                 }
 
                 $form .= 'value="' . $option_clean_no_spaces . '">';
-                $form .= trim($option['name']) . '  +$' . $option['price'] . '</option>';
+                $form .= $option['name'] . '   $' . $option['price'] . '</option>';
 
                 $i++;
             }
 
             $form .= '</select>';
+
+            $form .= '</div></div></div>';
+        }
+
+    }
+
+    $form .= '</div>';
+
+    return $form;
+
+}
+
+function return_formatted_component_options_float_labels($post_id) {
+    $components = get_all_server_component_options($post_id);
+
+    $form = '<div class="form-container panel pt-0">';
+//    $form .= '<div class="alert alert-primary py-2 mb-5 text-center" role="alert">';
+//    $form .= '<img src="' . get_home_url() . '/wp-content/uploads/2022/07/Chat.svg" class="configure-chat-icon"/>';
+//    $form .= '<p class="d-inline-block ms-3 mb-0 text-body"><span class="fw-bold">Need help with your order?</span> Our server support team is online</p>';
+//    $form .= '</div>';
+
+    foreach ($components as $key => $val) {
+
+        if ($val['options']) {
+
+            $component_clean = str_replace(' ', '_', trim($key));
+            $form .= '<div class="d-flex flex-row justify-content-end align-items-end config-option-container config-container ' . $component_clean . '" ';
+
+            if ($val['maximum'] && $val['step_size']) {
+                $form .= 'data-max="' . $val['maximum'] . '" data-step="' . $val['step_size'] . '" ';
+            }
+
+            $form .= 'data-row="1" data-type="' . $component_clean . '">';
+
+            // Icon
+            $form .= '<div class="me-md-4">';
+            $form .= '<img src="' . $val['icon'] . '" class="mb-2 component-icon"/>';
+            $form .= '</div>';
+            // Label + Input (label hidden by default)
+            $form .= '<div class="flex-grow-1 mb-3">';
+//            $form .= '<p class="small ms-3 lh-1 py-1 px-2 mb-0 fw-bold bg-transparent rounded config-input-label"><i class="fa-sharp fa-solid fa-check pe-2"></i>' . $key . '</p>';
+            $form .= '<div class="form-floating">';
+            $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
+            $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
+
+            $i = 1;
+            $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
+
+            // Ouput "No {component} for non-mandatory components
+            if ($val['optional']) {
+                $no_option = [
+                    'name' => 'No ' . $key,
+                    'price' => 0
+                ];
+
+                array_unshift($options_ordered, $no_option);
+            }
+
+            foreach ($options_ordered as $option) {
+
+                $no_position = strpos($option['name'], 'No ');
+                if ($no_position === false) {
+                    $option['name'] = str_replace(trim($key), '', $option['name']);
+                }
+
+                $option_clean = str_replace('"', ' Inch', trim($option['name']));
+                $option_clean_no_spaces = str_replace(' ', '_', trim($option_clean));
+                $form .= '<option id="' . $component_clean . '_' . $i . '" ';
+                $form .= 'class="text-end" ';
+                $form .= 'data-name="' . $option_clean_no_spaces . '" ';
+                $form .= 'data-row="' . $i . '" ';
+                $form .= 'data-price="' . $option['price'] . '" ';
+
+                if ($key === 'Memory') {
+                    $form .= 'data-minsocket="' . $option['min_sockets'] . '" ';
+                }
+
+                $form .= 'value="' . $option_clean_no_spaces . '">';
+                $form .= $option['name'] . '   $' . $option['price'] . '</option>';
+
+                $i++;
+            }
+            $form .= '</select>';
+            $form .= '<label for="' . $component_clean . '">' . $key . '</label>';
 
             $form .= '</div></div></div>';
         }

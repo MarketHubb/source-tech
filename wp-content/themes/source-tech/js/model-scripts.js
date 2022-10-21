@@ -39,92 +39,6 @@
         });
     }
 
-    function update_summary_qty(adjustedQty) {
-        let total = $('#total-price');
-        let qty = $('#total-qty');
-
-        qty
-            .text(adjustedQty).fadeIn()
-            .attr('data-quantity', parseInt(adjustedQty));
-
-        let adjustedPrice = parseInt(total.data('configured')) * parseInt(adjustedQty);
-
-        total
-            .text('$' + parseFloat(adjustedPrice).toFixed(2))
-            .attr('data-total', adjustedPrice);
-    }
-
-    function update_summary_price(adjustedPrice) {
-        let total = $('#total-price');
-        let qty = $('#total-qty');
-        let priceAsConfigured = parseInt(adjustedPrice) + parseInt(total.data('base'));
-
-        total
-            .attr('data-configured', priceAsConfigured)
-            .text('$' + parseFloat(priceAsConfigured * qty.data('quantity')).toFixed(2));
-    }
-
-    function get_price_adjustment() {
-        let price = $('#total-price');
-        let priceAdjustment = 0;
-
-        $('.form-container .row select option:selected').each(function () {
-            if ($(this).val() !== 'default') {
-                priceAdjustment += parseInt($(this).data('price'));
-            }
-        });
-        update_summary_price(priceAdjustment);
-    }
-
-    function updateSummaryPanel(component, val, optionContainer, priceAdjustment) {
-        let row = optionContainer.data('row');
-        let additionalPrice = optionContainer.find('select option:selected').data('price');
-
-        let summaryComponent = $(document).find('#' + 'summary_' + component);
-        let summaryItems = $(document).find('#summary-config .summary-list');
-
-        if (summaryComponent.length && row === 1) {
-
-            summaryItems.each(function () {
-
-                // We found a matching component
-                if ($(this).data('type') === component) {
-
-                    // User changed input to a valid selection
-                    if (val !== 'default') {
-
-                        // Special: Update CPU label
-                        $(this).find('.summary-option > p').text(val);
-                        $(this).find('.summary-price').text('($' + priceAdjustment + ')');
-                        $(this).removeClass('d-none');
-
-                    }
-
-                }
-
-            });
-
-        } else {
-
-            //We did not find a matching component
-            if (component === 'CPU') {
-
-                let summarySocket = $('#summary_CPU');
-                let summarySocket2 = summarySocket.clone();
-
-                summarySocket2
-                    .attr('data-type', 'CPU2')
-                    .attr('id', 'summary_CPU2');
-                summarySocket2.find('.summary-name').text('CPU - Socket 2');
-                summarySocket2.find('.summary-option > p').text(val);
-                summarySocket2.find('.summary-price').text('($' + priceAdjustment + ')');
-                summarySocket2.insertAfter(summarySocket);
-
-            }
-
-        }
-    }
-
     function showHideOrderTabs(active) {
         $('.order-type .order-tab').each(function() {
             $(this).removeClass('active');
@@ -148,53 +62,177 @@
         active.addClass('active');
     }
 
+    // Create empty option value elements in summary table
+    const emptyOptionVal = '<p class="summary-value small mb-0"></p>';
+    $('#summary-table tbody tr p.summary-name').each(function() {
+        $(this).after(emptyOptionVal);
+    });
 
     // Globals
     const preConfigTab = $('.order-type [data-type="pre-config"]');
     const customConfigTab = $('.order-type [data-type="custom-config"]');
     const memoryComponent = $('.form-container .row[data-type="Memory"]');
+    const price = getComponentSelectionObject();
 
     // Event: Order-type tabs
     $(document).on('click', ('.order-type .order-tab'), function() {
         showHideOrderTabs($(this));
     });
 
-    // Event: Change product quantity (summary)
-    $(document).on('change', '#qty-select', function() {
-        let qtySelect = $(this).val();
-        update_summary_qty(qtySelect);
+    function getNumberFromPriceString(priceString) {
+        return parseInt(priceString.substring(priceString.indexOf('$') + 1).trim())
+    }
+
+    function isSelectionDefault(selectionText) {
+        return selectionText.indexOf('Select') === -1;
+    }
+
+    function getSelectedOptionAttributes(inputContainer) {
+        let option = inputContainer.find('select option:selected');
+        let optionText = inputContainer.find('select option:selected').text();
+        let validated = isSelectionDefault(optionText);
+        return {
+            component: inputContainer.data('type'),
+            validated: validated,
+            optionValue: option.val(),
+            optionText: optionText,
+            optionName: optionText.substring(0, optionText.indexOf('$')).trim(),
+            optionPrice: optionText.indexOf("$") !== -1 ? parseInt(optionText.substring(optionText.indexOf('$') + 1).trim()) : 0
+        };
+    }
+
+    function getSelectionTotalPrice(componentsObject) {
+        let keys = Object.keys(componentsObject);
+        let total = 0;
+        keys.forEach((key, index) => {
+            total += componentsObject[key]['optionPrice'];
+        });
+
+        return total;
+    }
+
+    function validateSelections(componentsObject) {
+        if (componentsObject !== null) {
+            const keys = Object.keys(componentsObject);
+            let validated = false;
+            keys.forEach((key, index) => {
+                if (validated) {
+                    return
+                }
+                if (!componentsObject[key]['validated']) {
+                    validated = true;
+                }
+            });
+            if (validated) {
+                $('#custom-add').attr('disabled', false);
+            } else {
+                alert("Please select all options before proceeding");
+            }
+
+        }
+    }
+
+    function updatePriceWithQty() {
+        let total = getSelectionTotalPrice(price());
+        let qty = $('select#qty option:selected').val();
+        let totalWithQty = qty * total;
+        $('#total-price').text('$' + totalWithQty);
+    }
+
+    function getComponentSelectionObject() {
+        let componentsObject = {};
+
+        $('.form-container .config-container').each(function(index) {
+            componentsObject[index] = getSelectedOptionAttributes($(this));
+        });
+
+         return function (selectionObject = null) {
+            if (selectionObject !== null) {
+                let total = 0;
+                const keys = Object.keys(componentsObject);
+                keys.forEach((key, index) => {
+                    if (componentsObject[key]['component'] === selectionObject['component']) {
+                        componentsObject[key] = selectionObject;
+                    }
+                    total += componentsObject[key]['optionPrice'];
+                });
+
+                updatePriceWithQty(total);
+                console.log(componentsObject);
+            }
+
+            return componentsObject;
+         }
+    }
+
+    // Event: Add to cart
+    $('#custom-add').on('click', function() {
+        console.log('test');
+        validateSelections(price());
     });
 
-    // (1) Event: Select config options
+    // Event: Quantity change
+    $('select#qty').on('change', function() {
+        updatePriceWithQty();
+    });
+
+    // Event: Component option change
     $(document).on('change', '.form-container .option-select', function() {
 
-        // 1. Make sure the custom summary is in view
+        // 1. Force order summary into view
         if (preConfigTab.hasClass('active')) {
             customConfigTab.trigger("click");
         }
-        // 2. Define current config options
-        let optionContainer = $(this).closest('.row');
-        let component = optionContainer.data('type');
-        let option = optionContainer.find('.option-select option:selected');
 
-        if ($(this).val() === 'default') {
-            optionContainer.removeClass('option-selected');
+        // 2. Define selected options
+        let inputContainer = $(this).closest('.config-container');
+        let selection = getSelectedOptionAttributes(inputContainer);
+
+        // 3. Update selection object
+        price(selection);
+
+        // 4. Toggle selection validation classes (MOVE - create isDefault() function)
+        if (selection.validated) {
+            inputContainer.addClass('option-selected');
         } else {
-            optionContainer.addClass('option-selected');
+            inputContainer.removeClass('option-selected');
         }
 
-        let optionValNoPrice = option.text().substring(0, option.text().indexOf('+'));
 
-        if (optionValNoPrice.length === 0) {
-            optionValNoPrice = option.text();
-        }
+        // 5. Update summary table (MOVE)
+        $('#summary-table tbody tr').each(function() {
+            if ($(this).attr('id') === selection.component) {
+                if (selection.optionValue !== 'default') {
+                    $(this).removeClass('d-none');
+                    selection.optionValue = selection.optionValue.replace(/\_/g, " ");
+                    $(this).find('.summary-value').text(selection.optionValue);
+                    let priceTd = $(this).closest('tr').find('td');
+                    priceTd.html('<p class="summary-price mb-0 small text-end">$' + selection.optionPrice + '</p>');
+                } else {
+                    $(this).addClass('d-none');
+                }
+            }
+        });
 
-        // 4. Get adjusted price
-        get_price_adjustment();
+    });
 
+    // EVENT: Order type container tabs
+    $('#order-links .nav-link').on('click', function() {
 
-        // 5. Update summary panel
-        updateSummaryPanel(component,optionValNoPrice, optionContainer, option.attr('data-price'));
+        $('#order-links .nav-link').each(function() {
+           $(this).removeClass('active');
+        });
+
+        $(this).addClass('active');
+        let target = $(this).data('type');
+
+        $('.order-type').each(function() {
+           $(this).hide();
+          if ($(this).attr('id') === target) {
+              $(this).fadeIn();
+          }
+       });
+
     });
     //endregion
 

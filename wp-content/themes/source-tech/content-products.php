@@ -31,9 +31,21 @@ if (get_field('use')) {
 
 <div class="custom-page-content" id="custom-model-page-template">
 
-    <?php get_template_part('template-parts/products/content', 'left'); ?>
+    <div class="bg-light-grey">
 
-    <?php get_template_part('template-parts/products/content', 'right'); ?>
+        <div class="container">
+
+            <div class="row justify-content-between align-items-start mt-4 mb-5 pt-3">
+
+                <?php get_template_part('template-parts/products/content', 'left'); ?>
+
+                <?php get_template_part('template-parts/products/content', 'right'); ?>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <?php get_template_part('template-parts/products/content', 'quote'); ?>
 

@@ -7,7 +7,7 @@ if ($tags) {
             if ($value == 'HP') {
                 $value = 'HPE';
             }
-            $tag_items .= '<span class="badge rounded-pill bg-light border border-1 text-dark model-page-tags me-2">' . $value . '</span>';
+            $tag_items .= '<span class="badge rounded-pill border border-1 px-2 brand-light text-dark me-2">' . $value . '</span>';
         }
     } ?>
 
