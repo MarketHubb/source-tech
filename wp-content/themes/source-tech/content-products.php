@@ -35,7 +35,7 @@ if (get_field('use')) {
 
         <div class="container">
 
-            <div class="row justify-content-between align-items-start mt-4 mb-5 pt-3">
+            <div class="row justify-content-between align-items-start mt-4 mb-5 pb-4 pt-3">
 
                 <?php get_template_part('template-parts/products/content', 'left'); ?>
 
