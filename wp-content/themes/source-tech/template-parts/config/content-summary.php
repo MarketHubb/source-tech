@@ -20,7 +20,17 @@
             <div id="summary-collapseOne" class="accordion-collapse collapse" aria-labelledby="summary-headingOne" data-bs-parent="#accordionSummary">
                 <div class="accordion-body px-0">
                     <div class="order-type-container" id="custom-config">
-                        <table class="table table-light" id="summary-table">
+                        <table class="table table-light p-5" id="summary-table">
+                            <thead>
+                            <tr class="">
+                                <td class="ps-3">
+                                    <p class="small fw-bold mb-1 text-secondary anti">Option</p>
+                                </td>
+                                <td>
+                                    <p class="small fw-bold mb-1 text-secondary anti text-end">Total (Per unit)</p>
+                                </td>
+                            </tr>
+                            </thead>
                             <tbody class="py-3">
                                  <?php echo return_summary_component_list($post->ID); ?>
                             </tbody>

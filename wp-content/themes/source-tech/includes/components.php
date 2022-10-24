@@ -76,11 +76,13 @@ function get_all_server_component_options($post_id) {
 
         while ($query->have_posts()) : $query->the_post();
             $name = get_the_title();
+            $quantity = get_field('default_quantity') ?: 1;
             $components[$name] = array(
                 'icon' => get_field('icon'),
                 'optional' => get_field('optional'),
                 'step_size' => get_field('step_size'),
-                'maximum' => get_field('maximum')
+                'maximum' => get_field('maximum'),
+                'default_qty' => $quantity
             );
 
             if( have_rows('options') ):
@@ -110,10 +112,6 @@ function get_all_server_component_options($post_id) {
         endwhile;
 
     endif; wp_reset_postdata();
-
-//    if ($chassis_options) {
-//        $components['Chassis'][] = get_chassis_options_for_server($post_id);
-//    }
 
     return $components;
 }
@@ -275,33 +273,23 @@ function return_formatted_component_options($post_id) {
 
 function return_formatted_component_options_float_labels($post_id) {
     $components = get_all_server_component_options($post_id);
-
-    $form = '<div class="form-container panel pt-0">';
-//    $form .= '<div class="alert alert-primary py-2 mb-5 text-center" role="alert">';
-//    $form .= '<img src="' . get_home_url() . '/wp-content/uploads/2022/07/Chat.svg" class="configure-chat-icon"/>';
-//    $form .= '<p class="d-inline-block ms-3 mb-0 text-body"><span class="fw-bold">Need help with your order?</span> Our server support team is online</p>';
-//    $form .= '</div>';
-
+    $form = '<div class="form-container  pt-0">';
     foreach ($components as $key => $val) {
 
         if ($val['options']) {
 
             $component_clean = str_replace(' ', '_', trim($key));
-            $form .= '<div class="d-flex flex-row justify-content-end align-items-center config-option-container config-container ' . $component_clean . '" ';
+            $form .= '<div class="row d-flex flex-row justify-content-end align-items-center mb-3 config-option-container config-container ' . $component_clean . '" ';
 
-//            if ($val['maximum'] && $val['step_size']) {
-//                $form .= 'data-max="' . $val['maximum'] . '" data-step="' . $val['step_size'] . '" ';
-//            }
-
-            $form .= 'data-row="1" data-type="' . $component_clean . '">';
+            $form .= 'data-row="1" data-type="' . $component_clean . '" ';
+            $form .= 'data-quantity="' . $val['default_qty'] . '">';
 
             // Icon
-            $form .= '<div class="me-md-4">';
+            $form .= '<div class="col-1">';
             $form .= '<img src="' . $val['icon'] . '" class="mb-2 component-icon"/>';
             $form .= '</div>';
             // Label + Input (label hidden by default)
-            $form .= '<div class="flex-grow-1 mb-3">';
-//            $form .= '<p class="small ms-3 lh-1 py-1 px-2 mb-0 fw-bold bg-transparent rounded config-input-label"><i class="fa-sharp fa-solid fa-check pe-2"></i>' . $key . '</p>';
+            $form .= '<div class="flex-grow-1 col-9">';
             $form .= '<div class="form-floating">';
             $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
             $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
@@ -309,13 +297,11 @@ function return_formatted_component_options_float_labels($post_id) {
             $i = 1;
             $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
 
-            // Ouput "No {component} for non-mandatory components
             if ($val['optional']) {
                 $no_option = [
                     'name' => 'No ' . $key,
                     'price' => 0
                 ];
-
                 array_unshift($options_ordered, $no_option);
             }
 
@@ -344,9 +330,25 @@ function return_formatted_component_options_float_labels($post_id) {
                 $i++;
             }
             $form .= '</select>';
-            $form .= '<label for="' . $component_clean . '">' . $key . '</label>';
 
-            $form .= '</div></div></div>';
+            $label_text = $val['default_qty'] > 1 ? $key . ' (' . $val['default_qty'] . 'x)' : $key;
+            $form .= '<label for="' . $component_clean . '">' . $label_text . '</label>';
+
+            $form .= '</div></div>';
+            $form .= '<div class="col-2">';
+
+            if ($val['maximum'] > 1) {
+                $form .= '<select class="form-select option-qty">';
+                for ($i = 1; $i < 7; $i++) {
+                    $form .= '<option value="' . $i . '">' . $i . '</option>';
+                }
+                $form .= '</select>';
+                $form .= '<div class="text-center ">';
+                $form .= '<i class="fa-regular fa-circle-plus add-option"></i>';
+                $form .= '</div>';
+            }
+
+            $form .= '</div></div>';
         }
 
     }

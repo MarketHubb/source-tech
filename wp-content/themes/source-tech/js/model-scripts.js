@@ -64,20 +64,32 @@
 
     // Create empty option value elements in summary table
     const emptyOptionVal = '<p class="summary-value small mb-0"></p>';
-    $('#summary-table tbody tr p.summary-name').each(function() {
-        $(this).after(emptyOptionVal);
+    const emptyOptionPrice = '<p class="summary-price-total mb-0 small fw-bold text-end"></p>';
+    const emptyOptionPriceUnit = '<p class="summary-price-unit mb-0 small text-end"></p>';
+    $('#summary-table tbody tr').each(function() {
+        $(this).find('p.summary-name').after(emptyOptionVal);
+        $(this).find('td')
+            .html(emptyOptionPrice + emptyOptionPriceUnit);
     });
 
-    // Globals
+    //region Globals
     const preConfigTab = $('.order-type [data-type="pre-config"]');
     const customConfigTab = $('.order-type [data-type="custom-config"]');
-    const memoryComponent = $('.form-container .row[data-type="Memory"]');
+    const configContainer = $('.form-container');
     const price = getComponentSelectionObject();
+    //endregion
 
-    // Event: Order-type tabs
-    $(document).on('click', ('.order-type .order-tab'), function() {
-        showHideOrderTabs($(this));
-    });
+    //region Functions: Helpers
+    function numberFromMoneyString(string, fallback = 0) {
+        return string.indexOf("$") !== -1 ? parseInt(string.substring(string.indexOf('$') + 1).trim()) : fallback;
+    }
+
+    function removeEverythingFromString(needle, haystack, after = true) {
+        let string = haystack.indexOf(needle);
+        haystack = haystack.substring(0, string !== -1 ? string : haystack.length);
+
+        return haystack;
+    }
 
     function getNumberFromPriceString(priceString) {
         return parseInt(priceString.substring(priceString.indexOf('$') + 1).trim())
@@ -86,28 +98,37 @@
     function isSelectionDefault(selectionText) {
         return selectionText.indexOf('Select') === -1;
     }
+    //endregion
 
+    //region Functions: Application logic
     function getSelectedOptionAttributes(inputContainer) {
-        let option = inputContainer.find('select option:selected');
-        let optionText = inputContainer.find('select option:selected').text();
+        let component = inputContainer.data('type');
+        let option = inputContainer.find('select.option-select option:selected');
+        let optionText = inputContainer.find('select.option-select option:selected').text();
+        let quantity = inputContainer.attr('data-quantity') ? inputContainer.attr('data-quantity') : 1;
         let validated = isSelectionDefault(optionText);
+        let duplicate = inputContainer.attr('data-row') > 1;
+        let count = parseInt(inputContainer.attr('data-row'));
+        let id = (count > 1) ? component + '_' + count : component;
         return {
-            component: inputContainer.data('type'),
+            component: component,
+            id: id,
+            count: count,
+            quantity: parseInt(quantity),
             validated: validated,
+            duplicate: duplicate,
             optionValue: option.val(),
             optionText: optionText,
             optionName: optionText.substring(0, optionText.indexOf('$')).trim(),
-            optionPrice: optionText.indexOf("$") !== -1 ? parseInt(optionText.substring(optionText.indexOf('$') + 1).trim()) : 0
+            optionPrice: numberFromMoneyString(optionText)
         };
     }
 
-    function getSelectionTotalPrice(componentsObject) {
-        let keys = Object.keys(componentsObject);
-        let total = 0;
-        keys.forEach((key, index) => {
-            total += componentsObject[key]['optionPrice'];
+    function getSelectionTotalPrice(componentsArray) {
+        var total = 0;
+        componentsArray.forEach(function(el, index) {
+            total +=  (el.optionPrice * el.quantity);
         });
-
         return total;
     }
 
@@ -132,8 +153,8 @@
         }
     }
 
-    function updatePriceWithQty() {
-        let total = getSelectionTotalPrice(price());
+    function updatePriceWithQty(selectionArray) {
+        let total = getSelectionTotalPrice(selectionArray);
         let qty = $('select#qty option:selected').val();
         let totalWithQty = qty * total;
         $('#total-price').text('$' + totalWithQty);
@@ -141,29 +162,94 @@
 
     function getComponentSelectionObject() {
         let componentsObject = {};
+        let componentsArray = [];
 
         $('.form-container .config-container').each(function(index) {
             componentsObject[index] = getSelectedOptionAttributes($(this));
+            componentsArray.push(getSelectedOptionAttributes($(this)));
         });
 
          return function (selectionObject = null) {
-            if (selectionObject !== null) {
-                let total = 0;
-                const keys = Object.keys(componentsObject);
-                keys.forEach((key, index) => {
-                    if (componentsObject[key]['component'] === selectionObject['component']) {
-                        componentsObject[key] = selectionObject;
-                    }
-                    total += componentsObject[key]['optionPrice'];
-                });
+             if (selectionObject !== null) {
+                 var objectIDs = [];
+                 componentsArray.forEach(function(el, index) {
+                     objectIDs.push(el.component + '_' + el.count);
+                 });
 
-                updatePriceWithQty(total);
-                console.log(componentsObject);
-            }
+                 let currentSelectionID = selectionObject.component + '_' + selectionObject.count;
 
-            return componentsObject;
+                 // Add new (duplicate)
+                 if (selectionObject.duplicate) {
+                     if ($.inArray(currentSelectionID, objectIDs) === -1) {
+                         componentsArray.push(selectionObject);
+                         updateSummaryTable(selectionObject);
+                     }
+                 // Update existing
+                 } else {
+                     componentsArray.forEach(function(el, index) {
+                         if (el.component === selectionObject.component) {
+                             componentsArray[index] = selectionObject;
+                             updateSummaryTable(selectionObject);
+                         }
+                     });
+                 }
+             }
+            updatePriceWithQty(componentsArray)
+            console.log(componentsArray);
+            return componentsArray;
          }
     }
+
+    function returnSummaryTableRow(selection) {
+        let selectionText = '(' + selection.quantity + 'x) ' + selection.optionName;
+    }
+
+    function updateSummaryTable(selection) {
+        let targetTableRow = $('#summary-table tbody tr#' + selection.id)
+
+        // Update existing
+        if (targetTableRow) {
+            if (!selection.validated) {
+                targetTableRow.addClass('d-none');
+            } else {
+                let component = selection.component;
+                let selectionText = '(' + selection.quantity + 'x) ' + selection.optionName;
+                let unitPrice = selection.optionPrice;
+                let totalPrice = selection.optionPrice * selection.quantity;
+                targetTableRow.removeClass('d-none');
+                targetTableRow.find('.summary-value').text(selectionText);
+                targetTableRow.find('.summary-price-total').text('$' + totalPrice);
+                targetTableRow.find('.summary-price-unit').text('$' + unitPrice);
+            }
+        // Adding new
+        } else {
+
+        }
+        // let sourceTr = $('#summary-table tbody tr#' + selection.component);
+        // let optionSelection = '(' + selection.quantity + 'x) ' + selection.optionName;
+        //
+        // if (selection.validated && selection.duplicate) {
+        //     let cloneTr = sourceTr.clone('true');
+        //     cloneTr
+        //         .attr('id', selection.component + '_' + selection.count)
+        //         .insertAfter(sourceTr);
+        // } else if (selection.validated && !selection.duplicate) {
+        //     sourceTr.removeClass('d-none');
+        //     sourceTr.find('.summary-value').text('(' + selection.quantity + 'x) ' + selection.optionName);
+        //     let priceTd = sourceTr.closest('tr').find('td');
+        //     priceTd.html('<p class="summary-price mb-0 small text-end">$' + selection.optionPrice + '</p>');
+        // }
+        //
+        // if (!selection.validated) {
+        //     sourceTr.addClass('d-none');
+        // }
+    }
+    //endregion
+
+    // Event: Order-type tabs
+    $(document).on('click', ('.order-type .order-tab'), function() {
+        showHideOrderTabs($(this));
+    });
 
     // Event: Add to cart
     $('#custom-add').on('click', function() {
@@ -171,14 +257,55 @@
         validateSelections(price());
     });
 
-    // Event: Quantity change
-    $('select#qty').on('change', function() {
-        updatePriceWithQty();
+    // Event: Duplicate option (add + icon)
+    configContainer.on('click', '.add-option', function(event) {
+        let cloneContainer = $(this).closest('.config-container').clone("true");
+        let componentType = removeEverythingFromString('_', cloneContainer.attr('data-type'));
+        let rowCount = parseInt($(this).closest('.config-container').attr('data-row')) + 1;
+
+        // Move to external
+        let defaultOptionText = cloneContainer.find('select.option-select option:first-of-type').text();
+        if (defaultOptionText.indexOf('Additional') === -1) {
+            var newDefaultOptionText = defaultOptionText.replace("Select ", "Select Additional ");
+        }
+
+        // Move to external
+        let cloneSelect = cloneContainer.find('select.option-select');
+        cloneSelect.attr('id', componentType + '_' + rowCount);
+        cloneSelect.find('option').each(function() {
+            let newOptionID = $(this).attr('id') + '_' + rowCount;
+            $(this).attr('id', newOptionID);
+        });
+        cloneContainer.find('select.option-select option:first-of-type').text(newDefaultOptionText);
+
+        cloneContainer
+            .removeClass('option-selected')
+            .attr('data-row', rowCount)
+            .attr('data-type', componentType + '_' + rowCount)
+            .insertAfter($(this).closest('.config-container'))
+            .find('select').addClass('blinking');
+
+        let selectionObject = getSelectedOptionAttributes(cloneContainer);
+        price(selectionObject);
+    });
+
+    // Event: Summary quantity change
+    configContainer.on('change', 'select#qty', function() {
+        //updatePriceWithQty();
+    });
+
+    // Event Option quantity change
+    configContainer.on('change', 'select.option-qty', function() {
+        let optionQty = $(this).find('option:selected').val();
+        let container = $(this).closest('.config-container');
+        container.attr('data-quantity', optionQty);
+
+        let selection = getSelectedOptionAttributes(container);
+        price(selection);
     });
 
     // Event: Component option change
     $(document).on('change', '.form-container .option-select', function() {
-
         // 1. Force order summary into view
         if (preConfigTab.hasClass('active')) {
             customConfigTab.trigger("click");
@@ -191,6 +318,9 @@
         // 3. Update selection object
         price(selection);
 
+        // Update summary price
+        //updatePriceWithQty();
+
         // 4. Toggle selection validation classes (MOVE - create isDefault() function)
         if (selection.validated) {
             inputContainer.addClass('option-selected');
@@ -198,22 +328,8 @@
             inputContainer.removeClass('option-selected');
         }
 
-
         // 5. Update summary table (MOVE)
-        $('#summary-table tbody tr').each(function() {
-            if ($(this).attr('id') === selection.component) {
-                if (selection.optionValue !== 'default') {
-                    $(this).removeClass('d-none');
-                    selection.optionValue = selection.optionValue.replace(/\_/g, " ");
-                    $(this).find('.summary-value').text(selection.optionValue);
-                    let priceTd = $(this).closest('tr').find('td');
-                    priceTd.html('<p class="summary-price mb-0 small text-end">$' + selection.optionPrice + '</p>');
-                } else {
-                    $(this).addClass('d-none');
-                }
-            }
-        });
-
+       // updateSummaryTable(selection);
     });
 
     // EVENT: Order type container tabs

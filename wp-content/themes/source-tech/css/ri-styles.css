@@ -41,6 +41,16 @@ ul:not(.custom-config-tabs) .nav-link.active {
 	font-weight: 600 !important;
 }
 /*endregion*/
+.blinking {
+	animation-name: blinking;
+	animation-duration: 2.5s;
+	animation-iteration-count: 1;
+}
+@keyframes blinking {
+	50% {
+		outline: solid #0087c7 3px;
+	}
+}
 .cta-btn {
 	display: inline-block;
 	font-weight: 600;
@@ -201,6 +211,7 @@ ul.flush li:last-of-type {
 }
 .border-blue {
 	border-color: #0087c7 !important;
+	transition: border-width 0.6s linear;
 }
 .border-pill.border-blue:hover {
 	color: #fff;

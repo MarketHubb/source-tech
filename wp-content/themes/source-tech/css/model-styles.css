@@ -126,6 +126,9 @@
 	color: #0087c7;
 	background-color: #fff !important;
 }
+.config-option-container .form-select.option-qty {
+	padding: 0.25rem 2.25rem 0.3rem 0.75rem;
+}
 .config-option-container.option-selected img {
 	filter: invert(27%) sepia(93%) saturate(2276%) hue-rotate(180deg) brightness(99%) contrast(103%);
 	opacity: 1;
