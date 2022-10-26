@@ -44,6 +44,7 @@ function get_chassis_options_for_server($post_id) {
                 $chassis['options'][] = array(
                   'name' => get_sub_field('name', $post_id),
                   'price' => get_sub_field('price', $post_id),
+                  'default_qty' => 1,
                   'max_drives' => get_sub_field('max_drives', $post_id)
                 );
             endwhile;
@@ -74,7 +75,8 @@ function get_all_server_component_options($post_id) {
 
         while ($query->have_posts()) : $query->the_post();
             $name = get_the_title();
-            $quantity = get_field('default_quantity') ?: 1;
+            $default = get_field('default_quantity');
+            $quantity = is_numeric($default) && $default > 1 ? $default : 1;
             $components[$name] = array(
                 'icon' => get_field('icon'),
                 'optional' => get_field('optional'),
