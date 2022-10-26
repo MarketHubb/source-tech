@@ -38,13 +38,13 @@ function get_chassis_options_for_server($post_id) {
         $chassis = [];
         $chassis['icon'] = get_home_url() . '/wp-content/uploads/2022/10/Server-Chassis.svg';
         $chassis['optional'] = false;
+        $chassis['default_qty'] = 1;
 
         if( have_rows('chassis', $post_id) ):
                 while ( have_rows('chassis', $post_id) ) : the_row();
                 $chassis['options'][] = array(
                   'name' => get_sub_field('name', $post_id),
                   'price' => get_sub_field('price', $post_id),
-                  'default_qty' => 1,
                   'max_drives' => get_sub_field('max_drives', $post_id)
                 );
             endwhile;
@@ -336,7 +336,7 @@ function return_formatted_component_options_float_labels($post_id) {
             $form .= '</div></div>';
             $form .= '<div class="col-2">';
 
-            if ($val['maximum'] > 1) {
+            if (isset($val['maximum']) && $val['maximum'] > 1) {
                 $form .= '<select class="form-select option-qty">';
                 for ($i = 1; $i < 7; $i++) {
                     $form .= '<option value="' . $i . '">' . $i . '</option>';
