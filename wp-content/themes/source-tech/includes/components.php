@@ -40,15 +40,13 @@ function get_chassis_options_for_server($post_id) {
         $chassis['optional'] = false;
 
         if( have_rows('chassis', $post_id) ):
-
-            while ( have_rows('chassis', $post_id) ) : the_row();
+                while ( have_rows('chassis', $post_id) ) : the_row();
                 $chassis['options'][] = array(
                   'name' => get_sub_field('name', $post_id),
-                  'price' => get_sub_field('price', $post_id)
+                  'price' => get_sub_field('price', $post_id),
+                  'max_drives' => get_sub_field('max_drives', $post_id)
                 );
-
             endwhile;
-
         endif;
     }
 
@@ -96,8 +94,7 @@ function get_all_server_component_options($post_id) {
                             'include' => get_sub_field('include_for'),
                             'oems' => get_sub_field('oems'),
                             'types' => get_sub_field('types'),
-                            'excluded' => get_sub_field('excluded_products'),
-                            'min_sockets' => get_sub_field('min_sockets')
+                            'excluded' => get_sub_field('excluded_products')
                         );
 
                         if (check_option_for_this_server($post_id, $options_array)) {
@@ -173,7 +170,7 @@ function return_summary_component_list($post_id) {
     foreach ($components as $key => $val) {
         if ($val['options']) {
             $component_clean = trim(str_replace(' ', '_', trim($key)));
-            $li .= '<tr class="d-none px-3" id="' . $component_clean . '">';
+            $li .= '<tr class="d-none px-3 ' . $component_clean . '" id="' . $component_clean . '" data-type="' . $component_clean . '">';
             $li .= '<th scope="row" class="ps-3">';
             $li .= '<p class="summary-name fw-bold small anti mb-0">' . $key . '</p>';
             $li .= '</th>';
@@ -320,8 +317,8 @@ function return_formatted_component_options_float_labels($post_id) {
                 $form .= 'data-row="' . $i . '" ';
                 $form .= 'data-price="' . $option['price'] . '" ';
 
-                if ($key === 'Memory') {
-                    $form .= 'data-minsocket="' . $option['min_sockets'] . '" ';
+                if ($component_clean === 'Chassis') {
+                    $form .= 'data-drives="' . $option['max_drives'] . '" ';
                 }
 
                 $form .= 'value="' . $option_clean_no_spaces . '">';

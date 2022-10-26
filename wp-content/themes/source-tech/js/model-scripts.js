@@ -170,59 +170,81 @@
         });
 
          return function (selectionObject = null) {
+             console.log(selectionObject);
              if (selectionObject !== null) {
                  var objectIDs = [];
                  componentsArray.forEach(function(el, index) {
-                     objectIDs.push(el.component + '_' + el.count);
+                     objectIDs.push(el.id);
                  });
 
-                 let currentSelectionID = selectionObject.component + '_' + selectionObject.count;
-
-                 // Add new (duplicate)
-                 if (selectionObject.duplicate) {
-                     if ($.inArray(currentSelectionID, objectIDs) === -1) {
-                         componentsArray.push(selectionObject);
-                         updateSummaryTable(selectionObject);
-                     }
-                 // Update existing
-                 } else {
+                 // If found, update
+                 if ($.inArray(selectionObject.id, objectIDs) !== -1) {
                      componentsArray.forEach(function(el, index) {
-                         if (el.component === selectionObject.component) {
+                         if (el.id === selectionObject.id) {
                              componentsArray[index] = selectionObject;
                              updateSummaryTable(selectionObject);
                          }
                      });
+                }
+                 else {
+                    componentsArray.push(selectionObject);
                  }
+
              }
+
+                 // Add new (duplicate)
+                 // if (selectionObject.duplicate) {
+                 //     if ($.inArray(selectionObject.id, objectIDs) === -1) {
+                 //         componentsArray.push(selectionObject);
+                 //     } else {
+                 //         componentsArray.forEach(function(el, index) {
+                 //             if (el.id === selectionObject.id) {
+                 //                 componentsArray[index] = selectionObject;
+                 //                 updateSummaryTable(selectionObject);
+                 //             }
+                 //        });
+                 //
+                 //     }
             updatePriceWithQty(componentsArray)
             console.log(componentsArray);
             return componentsArray;
          }
     }
 
-    function returnSummaryTableRow(selection) {
+    function modifySummaryTableRow(selection, targetTableRow, returnRow = false) {
         let selectionText = '(' + selection.quantity + 'x) ' + selection.optionName;
+        let unitPrice = selection.optionPrice;
+        let totalPrice = selection.optionPrice * selection.quantity;
+        targetTableRow.removeClass('d-none');
+        targetTableRow.find('.summary-value').text(selectionText);
+        targetTableRow.find('.summary-price-total').text('$' + totalPrice);
+        targetTableRow.find('.summary-price-unit').text('$' + unitPrice);
+
+        if (returnRow) {
+            return targetTableRow;
+        }
     }
 
     function updateSummaryTable(selection) {
         let targetTableRow = $('#summary-table tbody tr#' + selection.id)
 
         // Update existing
-        if (targetTableRow) {
+        if (targetTableRow.length === 1) {
             if (!selection.validated) {
                 targetTableRow.addClass('d-none');
             } else {
-                let component = selection.component;
-                let selectionText = '(' + selection.quantity + 'x) ' + selection.optionName;
-                let unitPrice = selection.optionPrice;
-                let totalPrice = selection.optionPrice * selection.quantity;
-                targetTableRow.removeClass('d-none');
-                targetTableRow.find('.summary-value').text(selectionText);
-                targetTableRow.find('.summary-price-total').text('$' + totalPrice);
-                targetTableRow.find('.summary-price-unit').text('$' + unitPrice);
+                modifySummaryTableRow(selection, targetTableRow);
             }
         // Adding new
         } else {
+            let cloneSource = $('#summary-table tbody tr.' + selection.component).last();
+            if (cloneSource.length === 1) {
+                let clonedTable = cloneSource.clone(true);
+                //let newTableRow = modifySummaryTableRow(selection, clonedTable, true);
+                clonedTable
+                    .attr('id', selection.component + '_' + selection.count)
+                    .insertAfter(cloneSource);
+            }
 
         }
         // let sourceTr = $('#summary-table tbody tr#' + selection.component);
