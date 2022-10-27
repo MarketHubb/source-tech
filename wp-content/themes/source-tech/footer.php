@@ -148,6 +148,7 @@
 
 <?php if (is_singular()) {
     get_template_part('template-parts/modals/content', 'custom');
+    get_template_part('template-parts/modals/content', 'validation');
 } ?>
 
 <?php wp_footer(); ?>

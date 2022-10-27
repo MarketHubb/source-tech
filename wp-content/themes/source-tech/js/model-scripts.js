@@ -76,8 +76,20 @@
     const preConfigTab = $('.order-type [data-type="pre-config"]');
     const customConfigTab = $('.order-type [data-type="custom-config"]');
     const configContainer = $('.form-container');
+    const summaryContainer = $('#summary-total');
     const price = getComponentSelectionObject();
+    const maxDrives = setMaxDrives();
     //endregion
+
+    function setMaxDrives() {
+        let max;
+        return function updateMaxDrives(inputContainer = null, selection = null) {
+            if (inputContainer && selection.component === 'Chassis') {
+                max = inputContainer.find('select.option-select option:selected').attr('data-drives');
+            }
+            return max;
+        }
+    }
 
     //region Functions: Helpers
     function numberFromMoneyString(string, fallback = 0) {
@@ -133,32 +145,74 @@
         return total;
     }
 
-    function validateSelections(componentsObject) {
-        if (componentsObject !== null) {
-            const keys = Object.keys(componentsObject);
-            let validated = false;
-            keys.forEach((key, index) => {
-                if (validated) {
-                    return
+    function validateSelections(componentsArray) {
+        let unValidatedComponents = [];
+        let drivesQty = 0;
+        const modalBody = $('#validationModal .modal-body');
+
+        if (componentsArray && componentsArray.length) {
+            /*
+            * 1. Check that every component has a valid option select
+            * 2. Determine which components need to be checked for max quantities
+            *
+            */
+            componentsArray.forEach(function(el, index) {
+                if (!el.validated && !unValidatedComponents.includes(el.component)) {
+                    unValidatedComponents.push(el.component);
                 }
-                if (!componentsObject[key]['validated']) {
-                    validated = true;
+                if (el.component === 'Drives') {
+                    drivesQty += parseInt(el.quantity);
                 }
             });
-            if (validated) {
-                $('#custom-add').attr('disabled', false);
-            } else {
-                alert("Please select all options before proceeding");
+
+            if (drivesQty > maxDrives()) {
+                console.log("run");
+                let drivesWarning = modalBody.find('.validate-drives');
+                drivesWarning
+                    .text('Maximum of ' + maxDrives() + ' drives allowed for this chassis')
+                    .removeClass('d-none');
             }
+
+
+
+            // Not valid
+            if (unValidatedComponents.length) {
+                let list = '';
+                unValidatedComponents.forEach(function(el) {
+                    list += '<li class="list-group-item no-border py-0 ps-2">' + el + '</li>';
+                });
+                modalBody.find('.validate-selections').removeClass('d-none');
+                modalBody.find('.unvalidated-list').html(list);
+                var myModal = new bootstrap.Modal(document.getElementById('validationModal'), {
+                    keyboard: false
+                })
+                myModal.show();
+            }
+
+
 
         }
     }
 
-    function updatePriceWithQty(selectionArray) {
-        let total = getSelectionTotalPrice(selectionArray);
-        let qty = $('select#qty option:selected').val();
-        let totalWithQty = qty * total;
-        $('#total-price').text('$' + totalWithQty);
+    function updatePriceWithQty(selectionArray = []) {
+        let selections = selectionArray.length ? selectionArray : price();
+        let unitPrice = getSelectionTotalPrice(selections);
+
+        if (unitPrice > 0) {
+            const unitLabels = summaryContainer.find('.unit-labels');
+            const unitPriceEl = summaryContainer.find('#unit-price');
+            let qty = parseInt($('select#qty option:selected').val())
+
+            if (qty > 1) {
+                unitPriceEl.text('$' + unitPrice);
+                unitLabels.removeClass('d-none');
+            } else {
+                unitLabels.addClass('d-none');
+            }
+
+            let totalWithQty = qty * unitPrice;
+            summaryContainer.find('#total-price').text('$' + totalWithQty);
+        }
     }
 
     function getComponentSelectionObject() {
@@ -268,8 +322,8 @@
     });
 
     // Event: Add to cart
-    $('#custom-add').on('click', function() {
-        console.log('test');
+    $('#custom-add').on('click', function(event) {
+        event.preventDefault();
         validateSelections(price());
     });
 
@@ -331,8 +385,8 @@
     });
 
     // Event: Summary quantity change
-    configContainer.on('change', 'select#qty', function() {
-        //updatePriceWithQty();
+    summaryContainer.on('change', 'select#qty', function() {
+        updatePriceWithQty();
     });
 
     // Event Option quantity change
@@ -355,6 +409,8 @@
         // 2. Define selected options
         let inputContainer = $(this).closest('.config-container');
         let selection = getSelectedOptionAttributes(inputContainer);
+
+        maxDrives(inputContainer, selection);
 
         // 3. Update selection object
         price(selection);
