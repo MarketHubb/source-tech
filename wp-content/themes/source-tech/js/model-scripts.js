@@ -205,7 +205,14 @@
     }
 
     function modifySummaryTableRow(selection, targetTableRow, returnRow = false) {
-        let selectionText = '(' + selection.quantity + 'x) ' + selection.optionName;
+
+        let selectionText = '';
+        if (selection.quantity > 1) {
+            selectionText = '(' + selection.quantity + 'x) ' + selection.optionName;
+        } else {
+            selectionText = selection.optionName;
+        }
+
         let unitPrice = selection.optionPrice;
         let totalPrice = selection.optionPrice * selection.quantity;
         targetTableRow.removeClass('d-none');
@@ -237,6 +244,7 @@
                 let lastComponentRow = $('#summary-table tbody tr.' + selection.component).last();
                 let clonedTable = lastComponentRow.clone(true);
                 clonedTable
+                    .attr('data-quantity', 1)
                     .attr('id', selection.component + '_' + selection.count)
                     .addClass('d-none');
 
@@ -309,6 +317,7 @@
                 .removeClass('option-selected')
                 .attr('data-row', rowCount)
                 .attr('data-type', componentType)
+                .attr('data-quantity', 1)
                 .insertAfter($(this).closest('.config-container'))
                 .find('select').addClass('blinking');
 
