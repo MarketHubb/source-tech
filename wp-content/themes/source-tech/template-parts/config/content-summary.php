@@ -27,7 +27,7 @@
                                     <p class="small fw-bold mb-1 text-secondary anti">Option</p>
                                 </td>
                                 <td>
-                                    <p class="small fw-bold mb-1 text-secondary anti text-end">Total (Per unit)</p>
+                                    <p class="small fw-bold mb-1 text-secondary anti text-end">Total (Unit)</p>
                                 </td>
                             </tr>
                             </thead>

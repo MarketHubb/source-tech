@@ -101,7 +101,7 @@
     //endregion
 
     //region Functions: Application logic
-    function getSelectedOptionAttributes(inputContainer) {
+    function getSelectedOptionAttributes(inputContainer, add = true) {
         let component = inputContainer.data('type');
         let option = inputContainer.find('select.option-select option:selected');
         let optionText = inputContainer.find('select.option-select option:selected').text();
@@ -120,7 +120,8 @@
             optionValue: option.val(),
             optionText: optionText,
             optionName: optionText.substring(0, optionText.indexOf('$')).trim(),
-            optionPrice: numberFromMoneyString(optionText)
+            optionPrice: numberFromMoneyString(optionText),
+            add: add
         };
     }
 
@@ -165,46 +166,38 @@
         let componentsArray = [];
 
         $('.form-container .config-container').each(function(index) {
-            componentsObject[index] = getSelectedOptionAttributes($(this));
             componentsArray.push(getSelectedOptionAttributes($(this)));
         });
 
          return function (selectionObject = null) {
-             console.log(selectionObject);
              if (selectionObject !== null) {
                  var objectIDs = [];
                  componentsArray.forEach(function(el, index) {
                      objectIDs.push(el.id);
                  });
 
-                 // If found, update
+                 // If found update or remove
                  if ($.inArray(selectionObject.id, objectIDs) !== -1) {
                      componentsArray.forEach(function(el, index) {
                          if (el.id === selectionObject.id) {
-                             componentsArray[index] = selectionObject;
-                             updateSummaryTable(selectionObject);
+                             // Update
+                             if (selectionObject.add) {
+                                 componentsArray[index] = selectionObject;
+                             // Remove
+                             } else {
+                                 componentsArray.splice(index, 1);
+                             }
                          }
                      });
                 }
+                // If new, add
                  else {
                     componentsArray.push(selectionObject);
                  }
 
-             }
+                 updateSummaryTable(selectionObject);
 
-                 // Add new (duplicate)
-                 // if (selectionObject.duplicate) {
-                 //     if ($.inArray(selectionObject.id, objectIDs) === -1) {
-                 //         componentsArray.push(selectionObject);
-                 //     } else {
-                 //         componentsArray.forEach(function(el, index) {
-                 //             if (el.id === selectionObject.id) {
-                 //                 componentsArray[index] = selectionObject;
-                 //                 updateSummaryTable(selectionObject);
-                 //             }
-                 //        });
-                 //
-                 //     }
+             }
             updatePriceWithQty(componentsArray)
             console.log(componentsArray);
             return componentsArray;
@@ -228,43 +221,36 @@
     function updateSummaryTable(selection) {
         let targetTableRow = $('#summary-table tbody tr#' + selection.id)
 
-        // Update existing
-        if (targetTableRow.length === 1) {
-            if (!selection.validated) {
-                targetTableRow.addClass('d-none');
-            } else {
-                modifySummaryTableRow(selection, targetTableRow);
-            }
-        // Adding new
+        // Remove
+        if (!selection.add) {
+            targetTableRow.remove();
         } else {
-            let cloneSource = $('#summary-table tbody tr.' + selection.component).last();
-            if (cloneSource.length === 1) {
-                let clonedTable = cloneSource.clone(true);
-                //let newTableRow = modifySummaryTableRow(selection, clonedTable, true);
+            // Update existing
+            if (targetTableRow.length === 1) {
+                if (!selection.validated) {
+                    targetTableRow.addClass('d-none');
+                } else {
+                    modifySummaryTableRow(selection, targetTableRow);
+                }
+            // Adding new
+            } else {
+                let lastComponentRow = $('#summary-table tbody tr.' + selection.component).last();
+                let clonedTable = lastComponentRow.clone(true);
                 clonedTable
                     .attr('id', selection.component + '_' + selection.count)
-                    .insertAfter(cloneSource);
-            }
+                    .addClass('d-none');
 
+                if (selection.validated) {
+                    clonedTable = modifySummaryTableRow(selection, clonedTable, true);
+                    clonedTable
+                        .removeClass('d-none')
+                        .insertAfter(lastComponentRow);
+                }
+
+            }
         }
-        // let sourceTr = $('#summary-table tbody tr#' + selection.component);
-        // let optionSelection = '(' + selection.quantity + 'x) ' + selection.optionName;
-        //
-        // if (selection.validated && selection.duplicate) {
-        //     let cloneTr = sourceTr.clone('true');
-        //     cloneTr
-        //         .attr('id', selection.component + '_' + selection.count)
-        //         .insertAfter(sourceTr);
-        // } else if (selection.validated && !selection.duplicate) {
-        //     sourceTr.removeClass('d-none');
-        //     sourceTr.find('.summary-value').text('(' + selection.quantity + 'x) ' + selection.optionName);
-        //     let priceTd = sourceTr.closest('tr').find('td');
-        //     priceTd.html('<p class="summary-price mb-0 small text-end">$' + selection.optionPrice + '</p>');
-        // }
-        //
-        // if (!selection.validated) {
-        //     sourceTr.addClass('d-none');
-        // }
+
+
     }
     //endregion
 
@@ -279,36 +265,60 @@
         validateSelections(price());
     });
 
-    // Event: Duplicate option (add + icon)
-    configContainer.on('click', '.add-option', function(event) {
-        let cloneContainer = $(this).closest('.config-container').clone("true");
-        let componentType = removeEverythingFromString('_', cloneContainer.attr('data-type'));
-        let rowCount = parseInt($(this).closest('.config-container').attr('data-row')) + 1;
-
-        // Move to external
-        let defaultOptionText = cloneContainer.find('select.option-select option:first-of-type').text();
-        if (defaultOptionText.indexOf('Additional') === -1) {
-            var newDefaultOptionText = defaultOptionText.replace("Select ", "Select Additional ");
-        }
-
-        // Move to external
-        let cloneSelect = cloneContainer.find('select.option-select');
-        cloneSelect.attr('id', componentType + '_' + rowCount);
-        cloneSelect.find('option').each(function() {
-            let newOptionID = $(this).attr('id') + '_' + rowCount;
-            $(this).attr('id', newOptionID);
+    function addRemoveComponents(component) {
+        configContainer.find('.add-remove span').each(function () {
+           $(this).addClass('d-none');
         });
-        cloneContainer.find('select.option-select option:first-of-type').text(newDefaultOptionText);
 
-        cloneContainer
-            .removeClass('option-selected')
-            .attr('data-row', rowCount)
-            .attr('data-type', componentType + '_' + rowCount)
-            .insertAfter($(this).closest('.config-container'))
-            .find('select').addClass('blinking');
+        let components = configContainer.find('.config-container[data-type="' + component + '"]');
 
-        let selectionObject = getSelectedOptionAttributes(cloneContainer);
-        price(selectionObject);
+        if (components.length === 1) {
+            components.find('.add-remove .add-option').removeClass('d-none');
+        } else {
+            components.last().find('.add-remove span').removeClass('d-none');
+        }
+    }
+
+    // Event: Add (+) or remove (-) option container
+    configContainer.on('click', '.add-remove span', function(event) {
+        let componentType = $(this).closest('.config-container').attr('data-type');
+        let sourceContainers = configContainer.find('.config-container[data-type="' + componentType + '"]');
+        let action = !!($(this).hasClass('add-option'));
+
+        if (action) {
+            var cloneContainer = sourceContainers.first().clone("true");
+            let rowCount = sourceContainers.length + 1;
+
+            // Move to external
+            let defaultOptionText = cloneContainer.find('select.option-select option:first-of-type').text();
+            if (defaultOptionText.indexOf('Additional') === -1) {
+                var newDefaultOptionText = defaultOptionText.replace("Select ", "Select Additional ");
+            }
+
+            // Move to external
+            let cloneSelect = cloneContainer.find('select.option-select');
+            cloneSelect.attr('id', componentType + '_' + rowCount);
+            cloneSelect.find('option').each(function() {
+                let newOptionID = $(this).attr('id') + '_' + rowCount;
+                $(this).attr('id', newOptionID);
+            });
+            cloneContainer
+                .find('select.option-select option:first-of-type').text(newDefaultOptionText);
+
+            cloneContainer
+                .removeClass('option-selected')
+                .attr('data-row', rowCount)
+                .attr('data-type', componentType)
+                .insertAfter($(this).closest('.config-container'))
+                .find('select').addClass('blinking');
+
+            price(getSelectedOptionAttributes(cloneContainer, action));
+        } else {
+            price(getSelectedOptionAttributes(sourceContainers.last(), action));
+            sourceContainers.last().remove();
+        }
+        // Show add / remove icons on last component
+        addRemoveComponents(componentType);
     });
 
     // Event: Summary quantity change

@@ -342,8 +342,9 @@ function return_formatted_component_options_float_labels($post_id) {
                     $form .= '<option value="' . $i . '">' . $i . '</option>';
                 }
                 $form .= '</select>';
-                $form .= '<div class="text-center ">';
-                $form .= '<i class="fa-regular fa-circle-plus add-option"></i>';
+                $form .= '<div class="d-flex justify-content-between px-1 add-remove">';
+                $form .= '<span class="small add-option"><i class="fa-solid fa-circle-plus"></i></span>';
+                $form .= '<span class="small remove-option"><i class="fa-solid fa-circle-minus"></i></span>';
                 $form .= '</div>';
             }
 
