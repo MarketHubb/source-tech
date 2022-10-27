@@ -338,7 +338,7 @@ function return_formatted_component_options_float_labels($post_id) {
 
             if (isset($val['maximum']) && $val['maximum'] > 1) {
                 $form .= '<select class="form-select option-qty">';
-                for ($i = 1; $i < 7; $i++) {
+                for ($i = 1; $i < 17; $i++) {
                     $form .= '<option value="' . $i . '">' . $i . '</option>';
                 }
                 $form .= '</select>';
