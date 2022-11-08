@@ -90,11 +90,15 @@
 	padding-top: 1.625rem !important;
 	transition-duration: 1s !important;
 }
+.form-floating>.form-select {
+	height: calc(3.5rem + 6px);
+}
 .form-floating>.form-select~label {
 	opacity: 0 !important;
 }
 .option-selected .form-floating label {
 	opacity: .65 !important;
+	transform: scale(.85) translateY(-0.7rem) translateX(0.15rem) !important;
 	transition-duration: 1s !important;
 }
 .config-option-container .form-select {

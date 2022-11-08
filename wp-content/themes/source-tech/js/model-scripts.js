@@ -1,25 +1,51 @@
 /* jQuery (Footer) */
 (function($) {
 
-    // Define modal window
-    const productModal = new bootstrap.Modal(document.getElementById('customModal'));
+    //region Functions: Helpers
+    function numberFromMoneyString(string, fallback = 0) {
+        return string.indexOf("$") !== -1 ? parseInt(string.substring(string.indexOf('$') + 1).trim()) : fallback;
+    }
 
-    // Image thumbnail gallery
-    $('.image-thumb-container .list-group-item img').on('click', function () {
-        $('.image-thumb-container .list-group-item').each(function () {
-            $(this).removeClass('active');
-        })
-        $(this).closest('.list-group-item').addClass('active');
-        let selectedFeatureSrc = $(this).attr('src');
-        $('.model-page-featured-image').attr('src', selectedFeatureSrc);
+    function removeEverythingFromString(needle, haystack, after = true) {
+        let string = haystack.indexOf(needle);
+        haystack = haystack.substring(0, string !== -1 ? string : haystack.length);
+
+        return haystack;
+    }
+
+    function removeAllOccurrences(string, needle, replace) {
+        return  string.replace(new RegExp(needle, 'g'), replace);
+    }
+
+    function getNumberFromPriceString(priceString) {
+        return parseInt(priceString.substring(priceString.indexOf('$') + 1).trim())
+    }
+
+    function isSelectionDefault(selectionText) {
+        return selectionText.indexOf('Select') === -1;
+    }
+    //endregion
+
+    //region Globals & Instantiation
+    const emptyOptionVal = '<p class="summary-value small mb-0"></p>';
+    const emptyOptionPrice = '<p class="summary-price-total mb-0 small fw-bold text-end"></p>';
+    const emptyOptionPriceUnit = '<p class="summary-price-unit mb-0 small text-end"></p>';
+    $('#summary-table tbody tr').each(function() {
+        $(this).find('p.summary-name').after(emptyOptionVal);
+        $(this).find('td')
+            .html(emptyOptionPrice + emptyOptionPriceUnit);
     });
 
+    const productModal = new bootstrap.Modal(document.getElementById('customModal'));
+    const preConfigTab = $('.order-type [data-type="pre-config"]');
+    const customConfigTab = $('.order-type [data-type="custom-config"]');
+    const configContainer = $('.form-container');
+    const summaryContainer = $('#summary-total');
+    const price = getComponentSelectionObject();
+    const maxDrives = setMaxDrives();
+    //endregion
 
-    //region Custom Config
-
-    // Constants
-
-
+    //region AJAX
     function wp_ajax_nopriv_update_custom_config(post_id, component, option) {
         $.ajax({
             type: "POST",
@@ -38,113 +64,9 @@
             }
         });
     }
-
-    function showHideOrderTabs(active) {
-        $('.order-type .order-tab').each(function() {
-            $(this).removeClass('active');
-        });
-
-        let activeTab = active.data('type');
-
-        if (activeTab === "pre-config") {
-            $('.form-container').hide();
-        } else {
-            $('.form-container').show();
-        }
-
-        $('.order-types .order-type-container').each(function () {
-            $(this).hide();
-            if ($(this).attr('id') === activeTab) {
-                $(this).show();
-            }
-        });
-
-        active.addClass('active');
-    }
-
-    // Create empty option value elements in summary table
-    const emptyOptionVal = '<p class="summary-value small mb-0"></p>';
-    const emptyOptionPrice = '<p class="summary-price-total mb-0 small fw-bold text-end"></p>';
-    const emptyOptionPriceUnit = '<p class="summary-price-unit mb-0 small text-end"></p>';
-    $('#summary-table tbody tr').each(function() {
-        $(this).find('p.summary-name').after(emptyOptionVal);
-        $(this).find('td')
-            .html(emptyOptionPrice + emptyOptionPriceUnit);
-    });
-
-    //region Globals
-    const preConfigTab = $('.order-type [data-type="pre-config"]');
-    const customConfigTab = $('.order-type [data-type="custom-config"]');
-    const configContainer = $('.form-container');
-    const summaryContainer = $('#summary-total');
-    const price = getComponentSelectionObject();
-    const maxDrives = setMaxDrives();
-    //endregion
-
-    function setMaxDrives() {
-        let max;
-        return function updateMaxDrives(inputContainer = null, selection = null) {
-            if (inputContainer && selection.component === 'Chassis') {
-                max = inputContainer.find('select.option-select option:selected').attr('data-drives');
-            }
-            return max;
-        }
-    }
-
-    //region Functions: Helpers
-    function numberFromMoneyString(string, fallback = 0) {
-        return string.indexOf("$") !== -1 ? parseInt(string.substring(string.indexOf('$') + 1).trim()) : fallback;
-    }
-
-    function removeEverythingFromString(needle, haystack, after = true) {
-        let string = haystack.indexOf(needle);
-        haystack = haystack.substring(0, string !== -1 ? string : haystack.length);
-
-        return haystack;
-    }
-
-    function getNumberFromPriceString(priceString) {
-        return parseInt(priceString.substring(priceString.indexOf('$') + 1).trim())
-    }
-
-    function isSelectionDefault(selectionText) {
-        return selectionText.indexOf('Select') === -1;
-    }
     //endregion
 
     //region Functions: Application logic
-    function getSelectedOptionAttributes(inputContainer, add = true) {
-        let component = inputContainer.data('type');
-        let option = inputContainer.find('select.option-select option:selected');
-        let optionText = inputContainer.find('select.option-select option:selected').text();
-        let quantity = inputContainer.attr('data-quantity') ? inputContainer.attr('data-quantity') : 1;
-        let validated = isSelectionDefault(optionText);
-        let duplicate = inputContainer.attr('data-row') > 1;
-        let count = parseInt(inputContainer.attr('data-row'));
-        let id = (count > 1) ? component + '_' + count : component;
-        return {
-            component: component,
-            id: id,
-            count: count,
-            quantity: parseInt(quantity),
-            validated: validated,
-            duplicate: duplicate,
-            optionValue: option.val(),
-            optionText: optionText,
-            optionName: optionText.substring(0, optionText.indexOf('$')).trim(),
-            optionPrice: numberFromMoneyString(optionText),
-            add: add
-        };
-    }
-
-    function getSelectionTotalPrice(componentsArray) {
-        var total = 0;
-        componentsArray.forEach(function(el, index) {
-            total +=  (el.optionPrice * el.quantity);
-        });
-        return total;
-    }
-
     function validateSelections(componentsArray) {
         let unValidatedComponents = [];
         let drivesQty = 0;
@@ -194,6 +116,90 @@
         }
     }
 
+    function getComponentSelectionObject() {
+        let componentsObject = {};
+        let componentsArray = [];
+
+        $('.form-container .config-container').each(function(index) {
+            componentsArray.push(getSelectedOptionAttributes($(this)));
+        });
+
+        return function (selectionObject = null) {
+            if (selectionObject !== null) {
+                var objectIDs = [];
+                componentsArray.forEach(function(el, index) {
+                    objectIDs.push(el.id);
+                });
+
+                // If found update or remove
+                if ($.inArray(selectionObject.id, objectIDs) !== -1) {
+                    componentsArray.forEach(function(el, index) {
+                        if (el.id === selectionObject.id) {
+                            // Update
+                            if (selectionObject.add) {
+                                componentsArray[index] = selectionObject;
+                                // Remove
+                            } else {
+                                componentsArray.splice(index, 1);
+                            }
+                        }
+                    });
+                }
+                // If new, add
+                else {
+                    componentsArray.push(selectionObject);
+                }
+
+                updateSummaryTable(selectionObject);
+
+            }
+            updatePriceWithQty(componentsArray)
+            console.log(componentsArray);
+            return componentsArray;
+        }
+    }
+
+    function getSelectedOptionAttributes(inputContainer, add = true) {
+        let component = inputContainer.data('type');
+        let option = inputContainer.find('select.option-select option:selected');
+        let optionText = inputContainer.find('select.option-select option:selected').text();
+        let optionPrice = numberFromMoneyString(optionText);
+
+        var quantity;
+
+        if (add && optionText.includes("No") && optionPrice === 0) {
+            quantity = 0;
+        } else {
+            quantity = inputContainer.attr('data-quantity') ? inputContainer.attr('data-quantity') : 1;
+        }
+
+        let validated = isSelectionDefault(optionText);
+        let duplicate = inputContainer.attr('data-row') > 1;
+        let count = parseInt(inputContainer.attr('data-row'));
+        let id = (count > 1) ? component + '_' + count : component;
+        return {
+            component: component,
+            id: id,
+            count: count,
+            quantity: parseInt(quantity),
+            validated: validated,
+            duplicate: duplicate,
+            optionValue: option.val(),
+            optionText: optionText,
+            optionName: optionText.substring(0, optionText.indexOf('$')).trim(),
+            optionPrice: optionPrice,
+            add: add
+        };
+    }
+
+    function getSelectionTotalPrice(componentsArray) {
+        var total = 0;
+        componentsArray.forEach(function(el, index) {
+            total +=  (el.optionPrice * el.quantity);
+        });
+        return total;
+    }
+
     function updatePriceWithQty(selectionArray = []) {
         let selections = selectionArray.length ? selectionArray : price();
         let unitPrice = getSelectionTotalPrice(selections);
@@ -213,49 +219,6 @@
             let totalWithQty = qty * unitPrice;
             summaryContainer.find('#total-price').text('$' + totalWithQty);
         }
-    }
-
-    function getComponentSelectionObject() {
-        let componentsObject = {};
-        let componentsArray = [];
-
-        $('.form-container .config-container').each(function(index) {
-            componentsArray.push(getSelectedOptionAttributes($(this)));
-        });
-
-         return function (selectionObject = null) {
-             if (selectionObject !== null) {
-                 var objectIDs = [];
-                 componentsArray.forEach(function(el, index) {
-                     objectIDs.push(el.id);
-                 });
-
-                 // If found update or remove
-                 if ($.inArray(selectionObject.id, objectIDs) !== -1) {
-                     componentsArray.forEach(function(el, index) {
-                         if (el.id === selectionObject.id) {
-                             // Update
-                             if (selectionObject.add) {
-                                 componentsArray[index] = selectionObject;
-                             // Remove
-                             } else {
-                                 componentsArray.splice(index, 1);
-                             }
-                         }
-                     });
-                }
-                // If new, add
-                 else {
-                    componentsArray.push(selectionObject);
-                 }
-
-                 updateSummaryTable(selectionObject);
-
-             }
-            updatePriceWithQty(componentsArray)
-            console.log(componentsArray);
-            return componentsArray;
-         }
     }
 
     function modifySummaryTableRow(selection, targetTableRow, returnRow = false) {
@@ -314,22 +277,43 @@
 
 
     }
-    //endregion
 
-    // Event: Order-type tabs
-    $(document).on('click', ('.order-type .order-tab'), function() {
-        showHideOrderTabs($(this));
-    });
+    function showHideOrderTabs(active) {
+        $('.order-type .order-tab').each(function() {
+            $(this).removeClass('active');
+        });
 
-    // Event: Add to cart
-    $('#custom-add').on('click', function(event) {
-        event.preventDefault();
-        validateSelections(price());
-    });
+        let activeTab = active.data('type');
+
+        if (activeTab === "pre-config") {
+            $('.form-container').hide();
+        } else {
+            $('.form-container').show();
+        }
+
+        $('.order-types .order-type-container').each(function () {
+            $(this).hide();
+            if ($(this).attr('id') === activeTab) {
+                $(this).show();
+            }
+        });
+
+        active.addClass('active');
+    }
+
+    function setMaxDrives() {
+        let max;
+        return function updateMaxDrives(inputContainer = null, selection = null) {
+            if (inputContainer && selection.component === 'Chassis') {
+                max = inputContainer.find('select.option-select option:selected').attr('data-drives');
+            }
+            return max;
+        }
+    }
 
     function addRemoveComponents(component) {
         configContainer.find('.add-remove span').each(function () {
-           $(this).addClass('d-none');
+            $(this).addClass('d-none');
         });
 
         let components = configContainer.find('.config-container[data-type="' + component + '"]');
@@ -341,7 +325,38 @@
         }
     }
 
-    // Event: Add (+) or remove (-) option container
+    function updateInputLabel(inputContainer, selection) {
+        if (selection.validated) {
+            let countPrefix = selection.quantity >= 1 ? selection.quantity + 'x' : '0';
+            let labelText = countPrefix + ' ' + removeAllOccurrences(selection.component, '_', ' ');
+            let labelTotal = '<span class="fw-600">'
+                + ' - $'
+                + selection.optionPrice * selection.quantity
+                + '</span>';
+
+            let label = inputContainer.find('select.option-select + label');
+            label.text(labelText);
+            label.append(labelTotal);
+
+            inputContainer.addClass('option-selected');
+        }
+    }
+    //endregion
+
+    //region Events
+
+    //  Order-type tabs
+    $(document).on('click', ('.order-type .order-tab'), function() {
+        showHideOrderTabs($(this));
+    });
+
+    // Add to cart
+    $('#custom-add').on('click', function(event) {
+        event.preventDefault();
+        validateSelections(price());
+    });
+
+    //  Add / remove component container
     configContainer.on('click', '.add-remove span', function(event) {
         let componentType = $(this).closest('.config-container').attr('data-type');
         let sourceContainers = configContainer.find('.config-container[data-type="' + componentType + '"]');
@@ -384,22 +399,24 @@
         addRemoveComponents(componentType);
     });
 
-    // Event: Summary quantity change
+    //  Quantity change (server)
     summaryContainer.on('change', 'select#qty', function() {
         updatePriceWithQty();
     });
 
-    // Event Option quantity change
+    // Quantity change (component)
     configContainer.on('change', 'select.option-qty', function() {
         let optionQty = $(this).find('option:selected').val();
-        let container = $(this).closest('.config-container');
-        container.attr('data-quantity', optionQty);
+        let inputContainer = $(this).closest('.config-container');
+        inputContainer.attr('data-quantity', optionQty);
 
-        let selection = getSelectedOptionAttributes(container);
+        let selection = getSelectedOptionAttributes(inputContainer);
         price(selection);
+
+        updateInputLabel(inputContainer, selection)
     });
 
-    // Event: Component option change
+    // Select option change (component)
     $(document).on('change', '.form-container .option-select', function() {
         // 1. Force order summary into view
         if (preConfigTab.hasClass('active')) {
@@ -415,21 +432,15 @@
         // 3. Update selection object
         price(selection);
 
-        // Update summary price
-        //updatePriceWithQty();
-
         // 4. Toggle selection validation classes (MOVE - create isDefault() function)
         if (selection.validated) {
-            inputContainer.addClass('option-selected');
+            updateInputLabel(inputContainer, selection);
         } else {
             inputContainer.removeClass('option-selected');
         }
-
-        // 5. Update summary table (MOVE)
-       // updateSummaryTable(selection);
     });
 
-    // EVENT: Order type container tabs
+    // Order type container tabs
     $('#order-links .nav-link').on('click', function() {
 
         $('#order-links .nav-link').each(function() {
@@ -447,7 +458,18 @@
        });
 
     });
+
+    // Image thumbnail gallery
+    $('.image-thumb-container .list-group-item img').on('click', function () {
+        $('.image-thumb-container .list-group-item').each(function () {
+            $(this).removeClass('active');
+        })
+        $(this).closest('.list-group-item').addClass('active');
+        let selectedFeatureSrc = $(this).attr('src');
+        $('.model-page-featured-image').attr('src', selectedFeatureSrc);
+    });
     //endregion
+
 
 	// URL query parameters
     $.extend({
