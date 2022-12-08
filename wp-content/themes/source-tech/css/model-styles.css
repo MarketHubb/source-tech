@@ -87,7 +87,8 @@
 }
 .option-selected .form-floating>.form-select {
 	padding-top: 1.5rem !important;
-	transition-duration: 1s !important;
+	transform: scale(1); /* you need a scale here to allow it to transition in both directions */
+	transition: 0.7s all ease;
 }
 .form-floating>.form-select {
 	height: calc(3.5rem + 6px);
@@ -125,8 +126,9 @@ label[for="qty"], #qty {
 .config-option-container .form-select {
 	padding: 0.6rem 2.25rem 0.5rem 0.75rem;
 	font-size: .95rem;
-	opacity: .7;
-	border-color: #a8b3bd;
+	border: none;
+	outline: 1px solid #dbe6f0;
+	background-color: #fff;
 }
 .add-remove {
 	color: #586674;
@@ -145,8 +147,9 @@ label[for="qty"], #qty {
 	box-shadow: none;
 }
 .config-option-container.option-selected select {
-	outline: none;
-	border-color: #374049 !important;
+	outline: 1px solid #0087c7;
+	background-color: #f8fafc;
+	color: #17191c;
 }
 .config-input-label {
 	position: relative;
@@ -195,7 +198,7 @@ label[for="qty"], #qty {
 	color: #0087c7 !important;
 }
 .form-container .row label {
-	-webkit-font-smoothing: antialiased;
+	color: #004E72;
 }
 .component-name {
 	color: #6b6b6b;

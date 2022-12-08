@@ -290,7 +290,7 @@ function return_formatted_component_options_float_labels($post_id) {
 
             // Icon
             $form .= '<div class="col-1">';
-            $form .= '<img src="' . $val['icon'] . '" class="mb-2 component-icon"/>';
+            $form .= '<img src="' . $val['icon'] . '" class="component-icon"/>';
             $form .= '</div>';
             // Label + Input (label hidden by default)
             $form .= '<div class="flex-grow-1 col-9">';

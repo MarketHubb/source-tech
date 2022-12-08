@@ -77,10 +77,20 @@
 
     //region Functions: Application logic
     function validateSelections(componentsArray) {
+
         let unValidatedComponents = [];
         let drivesQty = 0;
         let pciQty = 0;
         const modalBody = $('#validationModal .modal-body');
+        let drivesWarning = modalBody.find('.validate-drives');
+        let pciWarning = modalBody.find('.validate-pci');
+
+        drivesWarning
+            .empty()
+            .addClass('d-none');
+        pciWarning
+            .empty()
+            .addClass('d-none');
 
         if (componentsArray && componentsArray.length) {
             /*
@@ -102,7 +112,6 @@
 
             // Max Drives test
             if (drivesQty > maxDrives()) {
-                let drivesWarning = modalBody.find('.validate-drives');
                 drivesWarning
                     .text('Maximum of ' + maxDrives() + ' drives allowed for this chassis')
                     .removeClass('d-none');
@@ -112,7 +121,6 @@
             if (formFactor.length === 2) {
                 let maxPCI = formFactor === "2U" ? 6 : 3;
                 if (pciQty > maxPCI) {
-                    let pciWarning = modalBody.find('.validate-pci');
                     pciWarning
                         .text('Maximum of ' + maxPCI + ' PCIe Adapters allowed for this server')
                         .removeClass('d-none');

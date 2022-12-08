@@ -7,3 +7,7 @@
     </a>
 </nav>
 
+<div class="pb-4 order-container">
+    <?php get_template_part('template-parts/products/content', 'customconfigured'); ?>
+    <?php get_template_part('template-parts/products/content', 'preconfigured'); ?>
+</div>
