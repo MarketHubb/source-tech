@@ -281,6 +281,11 @@ function return_formatted_component_options_float_labels($post_id) {
             $form .= '<div class="row d-flex flex-row justify-content-end align-items-center mb-3 config-option-container config-container ' . $component_clean . '" ';
 
             $form .= 'data-row="1" data-type="' . $component_clean . '" ';
+
+            if ($component_clean === "Chassis") {
+                $form .= 'data-drives=""';
+            }
+
             $form .= 'data-quantity="' . $val['default_qty'] . '">';
 
             // Icon

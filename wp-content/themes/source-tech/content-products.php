@@ -29,7 +29,7 @@ if (get_field('use')) {
 
 ?>
 
-<div class="custom-page-content" id="custom-model-page-template">
+<div class="custom-page-content" id="custom-model-page-template" data-id="<?php echo get_the_ID(); ?>">
 
     <div class="bg-light-grey">
 

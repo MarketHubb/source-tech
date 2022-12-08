@@ -1,4 +1,4 @@
-<div class="d-flex flex-row justify-content-between border-1 border-bottom pb-3 mb-4">
+<div class="d-flex flex-row justify-content-between border-1 border-bottom pb-2 mb-4">
     <div>
         <h5 class="fw-bold mb-0 d-inline-block">Total:</h5>
         <br>

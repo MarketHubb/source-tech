@@ -1,5 +1,31 @@
 /* jQuery (Footer) */
+// import document from "../../../plugins/divi-builder/includes/builder/scripts/stores/document";
+
 (function($) {
+
+    function wp_ajax_nopriv_verify_custom_config(post_id, server_id, selections = [], server_quantity)
+    {
+        $.ajax({
+            type:"POST",
+            url: "/wp-admin/admin-ajax.php",
+            data: {
+                action: "verify_custom_config",
+                post_id: post_id,
+                server_id: Date.now(),
+                selections: selections,
+                server_quantity: server_quantity
+            },
+            // dataType: "JSON",
+            success:function(data){
+                $('#foxy-form').html(data);
+                $('body #foxy-form > form').submit();
+            },
+            complete:function(data){
+                // data.insertAfter($('#custom-add'));
+                console.log("complete", data)
+            }
+        });
+    }
 
     //region Functions: Helpers
     function numberFromMoneyString(string, fallback = 0) {
@@ -27,6 +53,8 @@
     //endregion
 
     //region Globals & Instantiation
+    const post_id = $('#custom-model-page-template').data('id');
+    const formFactor = $('h1').data('form');
     const emptyOptionVal = '<p class="summary-value small mb-0"></p>';
     const emptyOptionPrice = '<p class="summary-price-total mb-0 small fw-bold text-end"></p>';
     const emptyOptionPriceUnit = '<p class="summary-price-unit mb-0 small text-end"></p>';
@@ -43,33 +71,15 @@
     const summaryContainer = $('#summary-total');
     const price = getComponentSelectionObject();
     const maxDrives = setMaxDrives();
-    //endregion
-
-    //region AJAX
-    function wp_ajax_nopriv_update_custom_config(post_id, component, option) {
-        $.ajax({
-            type: "POST",
-            url: "/wp-admin/admin-ajax.php",
-            data: {
-                action: "update_custom_config",
-                post_id: post_id,
-                component: component,
-                option: option,
-            },
-            success: function (data) {
-
-            },
-            complete: function () {
-
-            }
-        });
-    }
+    const countTotal = $('#count-total');
+    const countSelected = $('#count-selected');
     //endregion
 
     //region Functions: Application logic
     function validateSelections(componentsArray) {
         let unValidatedComponents = [];
         let drivesQty = 0;
+        let pciQty = 0;
         const modalBody = $('#validationModal .modal-body');
 
         if (componentsArray && componentsArray.length) {
@@ -85,23 +95,38 @@
                 if (el.component === 'Drives') {
                     drivesQty += parseInt(el.quantity);
                 }
+                if (el.component === 'PCIe_Adapters') {
+                    pciQty += parseInt(el.quantity);
+                }
             });
 
+            // Max Drives test
             if (drivesQty > maxDrives()) {
-                console.log("run");
                 let drivesWarning = modalBody.find('.validate-drives');
                 drivesWarning
                     .text('Maximum of ' + maxDrives() + ' drives allowed for this chassis')
                     .removeClass('d-none');
             }
 
+            // Max PCI test
+            if (formFactor.length === 2) {
+                let maxPCI = formFactor === "2U" ? 6 : 3;
+                if (pciQty > maxPCI) {
+                    let pciWarning = modalBody.find('.validate-pci');
+                    pciWarning
+                        .text('Maximum of ' + maxPCI + ' PCIe Adapters allowed for this server')
+                        .removeClass('d-none');
+
+                }
+            }
 
 
             // Not valid
             if (unValidatedComponents.length) {
                 let list = '';
                 unValidatedComponents.forEach(function(el) {
-                    list += '<li class="list-group-item no-border py-0 ps-2">' + el + '</li>';
+                    el = el.replace(/_/gi, ' ');
+                    list += '<li class="list-group-item bg-transparent py-1 ps-3"><p class="fw-normal mb-1">' + el + '</p></li>';
                 });
                 modalBody.find('.validate-selections').removeClass('d-none');
                 modalBody.find('.unvalidated-list').html(list);
@@ -110,7 +135,6 @@
                 })
                 myModal.show();
             }
-
 
 
         }
@@ -311,32 +335,19 @@
         }
     }
 
-    function addRemoveComponents(component) {
-        configContainer.find('.add-remove span').each(function () {
-            $(this).addClass('d-none');
-        });
-
-        let components = configContainer.find('.config-container[data-type="' + component + '"]');
-
-        if (components.length === 1) {
-            components.find('.add-remove .add-option').removeClass('d-none');
-        } else {
-            components.last().find('.add-remove span').removeClass('d-none');
-        }
-    }
-
     function updateInputLabel(inputContainer, selection) {
         if (selection.validated) {
             let countPrefix = selection.quantity >= 1 ? selection.quantity + 'x' : '0';
-            let labelText = countPrefix + ' ' + removeAllOccurrences(selection.component, '_', ' ');
+            let component = removeAllOccurrences(selection.component, '_', ' ');
+            let labelText = countPrefix + ' ' + component;
             let labelTotal = '<span class="fw-600">'
                 + ' - $'
                 + selection.optionPrice * selection.quantity
                 + '</span>';
 
             let label = inputContainer.find('select.option-select + label');
-            label.text(labelText);
-            label.append(labelTotal);
+            label.text(component);
+            // label.append(labelTotal);
 
             inputContainer.addClass('option-selected');
         }
@@ -354,6 +365,8 @@
     $('#custom-add').on('click', function(event) {
         event.preventDefault();
         validateSelections(price());
+        let qty = parseInt($('select#qty option:selected').val())
+        wp_ajax_nopriv_verify_custom_config(post_id, Date.now(), price(), qty);
     });
 
     //  Add / remove component container
@@ -362,6 +375,7 @@
         let sourceContainers = configContainer.find('.config-container[data-type="' + componentType + '"]');
         let action = !!($(this).hasClass('add-option'));
 
+        // + plus
         if (action) {
             var cloneContainer = sourceContainers.first().clone("true");
             let rowCount = sourceContainers.length + 1;
@@ -390,13 +404,19 @@
                 .insertAfter($(this).closest('.config-container'))
                 .find('select').addClass('blinking');
 
-            price(getSelectedOptionAttributes(cloneContainer, action));
-        } else {
-            price(getSelectedOptionAttributes(sourceContainers.last(), action));
+            // price(getSelectedOptionAttributes(cloneContainer, action));
+
+        // Prevent a minus (-) action when there's only one component container
+        }  else if (sourceContainers.length > 1) {
             sourceContainers.last().remove();
         }
-        // Show add / remove icons on last component
-        addRemoveComponents(componentType);
+
+        // Update selections object
+        let lastContainer = sourceContainers.last();
+
+        if (lastContainer.length === 1) {
+            price(getSelectedOptionAttributes(lastContainer, action));
+        }
     });
 
     //  Quantity change (server)

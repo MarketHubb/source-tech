@@ -4,6 +4,7 @@ require_once 'includes/content.php';
 require_once 'includes/buy.php';
 require_once 'includes/components.php';
 require_once 'includes/foxycart.php';
+require_once 'includes/ajax.php';
 
 /**
  * something

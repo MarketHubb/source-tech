@@ -1,6 +1,6 @@
 <div class="d-flex flex-row justify-content-end">
     <div class="input-group me-3 qty-container">
-        <label class="input-group-text" for="inputGroupSelect01">Qty:</label>
+        <label class="input-group-text" for="qty">Qty:</label>
         <select class="form-select" id="qty">
             <?php for ($i = 1; $i <= 10; $i++) { ?>
                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>

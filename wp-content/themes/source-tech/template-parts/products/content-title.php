@@ -1,6 +1,10 @@
 <?php $title = ($post->post_type == 'servers') ? get_the_title() . ' Server' : get_the_title(); ?>
 
-<h1 class="mt-4 mb-3 fw-800 letter-tight lh-1"><?php echo $title; ?></h1>
+<?php $form_factor = get_post_type($post->ID) === 'servers' ? get_field('post_servers_size', $post->ID) : ""; ?>
+
+<h1 class="mt-4 mb-3 fw-800 letter-tight lh-1" data-form="<?php echo $form_factor; ?>">
+    <?php echo $title; ?>
+</h1>
 
 <?php if (get_field('post_servers_description')) { ?>
     <p class="my-4 pb-2"><?php the_field('post_servers_description'); ?></p>

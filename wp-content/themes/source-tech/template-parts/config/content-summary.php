@@ -2,8 +2,8 @@
         <div class="accordion-item summary-links bg-transparent">
             <div class="d-flex flex-row justify-content-between">
                 <h2 class="accordion-header d-inline-block anti" id="summary-headingOne">
-                    <button class="accordion-button bg-transparent collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#summary-collapseOne" aria-expanded="false" aria-controls="summary-collapseOne">
-                        Order Summary
+                    <button class="accordion-button bg-transparent collapsed p-0 text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#summary-collapseOne" aria-expanded="false" aria-controls="summary-collapseOne">
+                        Order Summary <span class="order-summary-count fw-normal d-none"><span id="count-selected" class="ps-3">0</span> of <span id="count-total"></span></span>
                     </button>
                 </h2>
                 <div class="summary-links">
@@ -12,7 +12,7 @@
                            data-bs-toggle="modal"
                            data-bs-target="#customModal"
                            data-product="<?php echo get_the_title(); ?>">
-                            Need help? <i class="fa-solid fa-circle-info"></i>
+                            Need help? <i class="fa-light fa-circle-info ps-1"></i>
                         </a>
                     </span>
                 </div>

@@ -1,7 +1,10 @@
 <?php
-function return_foxycart_links($post_id, $options, $price, $model)
+function return_foxycart_links($post_id, $options, $price, $model, $code=null, $return_as_link=true, $quantity = 1)
 {
-    $code = trim(str_replace(' ', '-', get_the_ID($post_id) . '-' . $model));
+    if (!$code) {
+        $code = trim(str_replace(' ', '-', get_the_ID($post_id) . '-' . $model));
+    }
+
     $image = get_repeater_field_row('post_servers_images', 1, 'post_servers_images_image', $post_id);
     $link  = '<form action="https://source-tech.foxycart.com/cart" method="post" accept-charset="utf-8" class="foxy-form">';
 
@@ -9,6 +12,7 @@ function return_foxycart_links($post_id, $options, $price, $model)
     $link .= '<input type="hidden" name="' . get_verification('name', get_the_title($post_id), $code)  .'" value="' . get_the_title($post_id) . '" />';
     $link .= '<input type="hidden" name="' . get_verification('price', $price, $code) . '"  value="' . $price . '" />';
     $link .= '<input type="hidden" name="' . get_verification('image', $image, $code) . '" value="' . $image . '" />';
+    $link .= '<input type="hidden" name="' . get_verification('quantity', $quantity, $code) . '" value="' . $quantity . '" />';
 
     foreach ($options as $key => $val) {
         if ($key !== 'Price') {
@@ -18,9 +22,16 @@ function return_foxycart_links($post_id, $options, $price, $model)
             $link .= '<input type="hidden" name="' . get_verification($attr_key, $attr_val, $code) . '" value="' . $attr_val . '" />';
         }
     }
-    $link .= '<span class="foxy-submit shadow-sm rounded d-block w-100"><i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i>';
+    if ($return_as_link) {
+        $link .= '<span class="foxy-submit shadow-sm rounded d-block w-100"><i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i>';
+    }
+
     $link .= '<input type="submit" value="Add ' . $model . ' to Cart" class="submit bg-transparent text-white no-border px-0 fw-600 py-3 fs-6" />';
-    $link .= '</span>';
+
+    if ($return_as_link) {
+        $link .= '</span>';
+    }
+
     $link .= '</form>';
 
     return $link;

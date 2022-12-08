@@ -1,7 +1,7 @@
 <?php
 $manufacturer = get_query_var('manufacturer');
 ?>
-<div class="order-type-container" id="pre-config">
+<div class="order-type-container mt-2 border border-1 border-grey bg-white p-4" id="pre-config">
     <div class="row">
         <div class="col">
 

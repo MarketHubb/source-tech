@@ -32,3 +32,5 @@ $images_sub_field = 'post_'. $post_type_for_acf . '_images_image';
 
     </div>
 </div>
+
+<div id="foxy-form"></div>
