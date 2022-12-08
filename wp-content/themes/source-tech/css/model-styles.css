@@ -41,6 +41,7 @@
 #order-links > .nav-link.active {
 	/*color: #0087C7;*/
 	color: #032930;
+	font-weight: bold;
 }
 #order-links > .nav-link:visited {
 	color: inherit;
@@ -270,7 +271,6 @@ label[for="qty"], #qty {
 	text-align: center;
 	font-size: .9rem;
 	font-weight: 600;
-	font-size: .8rem;
 }
 .model-page-header-cta i {
 	color: #ea662b;
