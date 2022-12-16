@@ -22,10 +22,10 @@ $part_number = get_server_part_number($title_explode);
 set_query_var('part_number', $part_number);
 
 // Custom Config
-if (get_field('use')) {
-    $config_options =  return_formatted_component_options(get_the_ID());
-    set_query_var('config_options', $config_options);
-}
+//if (get_field('use')) {
+//    $config_options =  return_formatted_component_options(get_the_ID());
+//    set_query_var('config_options', $config_options);
+//}
 
 ?>
 

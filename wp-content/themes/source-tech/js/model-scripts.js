@@ -54,16 +54,11 @@
 
     //region Globals & Instantiation
     const post_id = $('#custom-model-page-template').data('id');
+    const serverName = $('#custom-model-page-template h1').text();
     const formFactor = $('h1').data('form');
     const emptyOptionVal = '<p class="summary-value small mb-0"></p>';
     const emptyOptionPrice = '<p class="summary-price-total mb-0 small fw-bold text-end"></p>';
     const emptyOptionPriceUnit = '<p class="summary-price-unit mb-0 small text-end"></p>';
-    $('#summary-table tbody tr').each(function() {
-        $(this).find('p.summary-name').after(emptyOptionVal);
-        $(this).find('td')
-            .html(emptyOptionPrice + emptyOptionPriceUnit);
-    });
-
     const productModal = new bootstrap.Modal(document.getElementById('customModal'));
     const preConfigTab = $('.order-type [data-type="pre-config"]');
     const customConfigTab = $('.order-type [data-type="custom-config"]');
@@ -73,24 +68,42 @@
     const maxDrives = setMaxDrives();
     const countTotal = $('#count-total');
     const countSelected = $('#count-selected');
+
+    // Setup order summary table
+    $('#summary-table tbody tr').each(function() {
+        $(this).find('p.summary-name').after(emptyOptionVal);
+        $(this).find('td')
+            .html(emptyOptionPrice + emptyOptionPriceUnit);
+    });
+    // Modify "No" options for Remote Management
+    let serverManufacturer = serverName.indexOf('Dell') !== -1 ? 'Dell' : 'HPE';
+    // let noRemoteMgmtOption = serverManufacturer === "Dell" ? IDRAC9 - Express
+
+
     //endregion
 
     //region Functions: Application logic
     function validateSelections(componentsArray) {
-
-        let unValidatedComponents = [];
+        var validated = true;
+        let invalidComponents = [];
+        let invalidQty = false;
         let drivesQty = 0;
         let pciQty = 0;
         const modalBody = $('#validationModal .modal-body');
         let drivesWarning = modalBody.find('.validate-drives');
         let pciWarning = modalBody.find('.validate-pci');
+        let selectionsWarning = modalBody.find('.validate-selections');
 
+        // Reset modal if opened already in same session
         drivesWarning
             .empty()
             .addClass('d-none');
         pciWarning
             .empty()
             .addClass('d-none');
+        selectionsWarning
+            .addClass('d-none');
+
 
         if (componentsArray && componentsArray.length) {
             /*
@@ -99,8 +112,8 @@
             *
             */
             componentsArray.forEach(function(el, index) {
-                if (!el.validated && !unValidatedComponents.includes(el.component)) {
-                    unValidatedComponents.push(el.component);
+                if (!el.validated && !invalidComponents.includes(el.component)) {
+                    invalidComponents.push(el.component);
                 }
                 if (el.component === 'Drives') {
                     drivesQty += parseInt(el.quantity);
@@ -115,6 +128,8 @@
                 drivesWarning
                     .text('Maximum of ' + maxDrives() + ' drives allowed for this chassis')
                     .removeClass('d-none');
+                invalidQty = true;
+                validated = false;
             }
 
             // Max PCI test
@@ -124,28 +139,33 @@
                     pciWarning
                         .text('Maximum of ' + maxPCI + ' PCIe Adapters allowed for this server')
                         .removeClass('d-none');
-
+                    invalidQty = true;
+                    validated = false;
                 }
             }
 
-
             // Not valid
-            if (unValidatedComponents.length) {
+            if (invalidComponents.length || invalidQty) {
                 let list = '';
-                unValidatedComponents.forEach(function(el) {
-                    el = el.replace(/_/gi, ' ');
-                    list += '<li class="list-group-item bg-transparent py-1 ps-3"><p class="fw-normal mb-1">' + el + '</p></li>';
-                });
-                modalBody.find('.validate-selections').removeClass('d-none');
-                modalBody.find('.unvalidated-list').html(list);
+                if (invalidComponents.length > 0) {
+                    invalidComponents.forEach(function(el) {
+                        el = el.replace(/_/gi, ' ');
+                        list += '<li class="list-group-item bg-transparent py-1 ps-3"><p class="fw-normal mb-1">' + el + '</p></li>';
+                    });
+                    modalBody.find('.validate-selections').removeClass('d-none');
+                    modalBody.find('.unvalidated-list').html(list);
+                }
+
                 var myModal = new bootstrap.Modal(document.getElementById('validationModal'), {
                     keyboard: false
                 })
                 myModal.show();
+                validated = false;
             }
 
-
         }
+        console.log(invalidComponents);
+        return validated;
     }
 
     function getComponentSelectionObject() {
@@ -372,9 +392,12 @@
     // Add to cart
     $('#custom-add').on('click', function(event) {
         event.preventDefault();
-        validateSelections(price());
+        let validated = validateSelections(price());
+        console.log(validated);
         let qty = parseInt($('select#qty option:selected').val())
-        wp_ajax_nopriv_verify_custom_config(post_id, Date.now(), price(), qty);
+       if (validated) {
+           wp_ajax_nopriv_verify_custom_config(post_id, Date.now(), price(), qty);
+       }
     });
 
     //  Add / remove component container
