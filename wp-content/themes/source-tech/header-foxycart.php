@@ -109,6 +109,37 @@
         .fc-cart__item__option--code, .fc-cart__item__option--weight {
             display: none;
         }
+        ul.fc-cart__item__options li.fc-cart__item__option {
+            color: transparent;
+        }
+        ul.fc-cart__item__options li.fc-cart__item__option span.fc-cart__item__option__name {
+            color: #222;
+            display: block;
+            line-height: 1;
+            margin-bottom: 0 !important;
+            padding-bottom: 0;
+        }
+        ul.fc-cart__item__options li.fc-cart__item__option span.fc-cart__item__option__value {
+            line-height: 1;
+            display: block;
+            margin-bottom: 0 !important;
+            position: relative;
+            bottom: 10px;
+        }
+        /* Header Alert (Red) */
+        div.fc-checkout > div > div.fc-alert.fc-alert--danger {
+            background-color: transparent !important;
+            border: none !important;
+        }
+        div.fc-checkout > div > div.fc-alert.fc-alert--danger > h3 {
+            display: inline-block;
+            background: #dc3144;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid hsl(353deg 71% 33%);
+            font-size: 1.2rem;
+        }
+
     </style>
 
 </head>
