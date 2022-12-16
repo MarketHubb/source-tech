@@ -17,12 +17,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
+    <meta name='robots' content='noindex, nofollow' />
+
+    <!-- This site is optimized with the Yoast SEO plugin v19.12 - https://yoast.com/wordpress/plugins/seo/ -->
+    <title>Checkout | SourceTech Systems</title>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Checkout | SourceTech Systems" />
+    <meta property="og:url" content="https://staging.source-tech.net/checkout-page/" />
+    <meta property="og:site_name" content="Source Tech" />
+    <meta property="article:modified_time" content="2022-03-14T18:15:32+00:00" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     {% for css_file_href in config.css_files %}
     <link href="{{ css_file_href }}" rel="stylesheet" media="all">
     {% endfor %}
-
-    <!-- ahrefs domain verification -->
-    <meta name="ahrefs-site-verification" content="b1123fd872bc8c7860c22eadc8959120a93e9d7d4a3999dd64a3141842640706">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-8718028-1"></script>
@@ -102,34 +111,6 @@
 </head>
 
 <body <?php body_class(); ?>>
-
-<div id="page" class="site">
-    <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'source-tech' ); ?></a>
-
-    <header id="masthead" class="site-header" data-buttonvariant="">
-        <div class="row bottom-row">
-            <div class="item site-branding ps-0">
-                <a href="<?php echo get_home_url(); ?>" class="custom-logo-link" rel="home" itemprop="url">
-                    <img width="299" height="65" src="<?php echo get_home_url() . '/wp-content/uploads/2020/05/SourceTech-Systems.svg' ?>" class="custom-logo" alt="Source Tech" itemprop="logo">
-                </a>
-                <?php
-                if ( is_front_page() && is_home() ) :
-                    ?>
-                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-                <?php
-                else :
-                    ?>
-                    <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-                <?php
-                endif;
-                $source_tech_description = get_bloginfo( 'description', 'display' );
-                if ( $source_tech_description || is_customize_preview() ) :
-                    ?>
-                    <p class="site-description"><?php echo $source_tech_description; /* WPCS: xss ok. */ ?></p>
-                <?php endif; ?>
-            </div><!-- .site-branding -->
-        </div>
-    </header><!-- #masthead -->
 
     <!-- Begin Foxycart Div -->
     <div id="fc" class="site-content">
