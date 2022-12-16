@@ -111,6 +111,7 @@
         }
         ul.fc-cart__item__options li.fc-cart__item__option {
             color: transparent;
+            font-size: .9rem;
         }
         ul.fc-cart__item__options li.fc-cart__item__option span.fc-cart__item__option__name {
             color: #222;
@@ -120,11 +121,11 @@
             padding-bottom: 0;
         }
         ul.fc-cart__item__options li.fc-cart__item__option span.fc-cart__item__option__value {
-            line-height: 1;
+            line-height: 1.4;
             display: block;
-            margin-bottom: 0 !important;
+            margin-bottom: -6px !important;
             position: relative;
-            bottom: 10px;
+            bottom: 15px;
         }
         /* Header Alert (Red) */
         div.fc-checkout > div > div.fc-alert.fc-alert--danger {
