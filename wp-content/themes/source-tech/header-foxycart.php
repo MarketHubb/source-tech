@@ -19,7 +19,6 @@
 
     <meta name='robots' content='noindex, nofollow' />
 
-    <!-- This site is optimized with the Yoast SEO plugin v19.12 - https://yoast.com/wordpress/plugins/seo/ -->
     <title>Checkout | SourceTech Systems</title>
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
@@ -28,6 +27,10 @@
     <meta property="og:site_name" content="Source Tech" />
     <meta property="article:modified_time" content="2022-03-14T18:15:32+00:00" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Bootstrap Styles and Scripts (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
     {% for css_file_href in config.css_files %}
     <link href="{{ css_file_href }}" rel="stylesheet" media="all">
@@ -111,6 +114,14 @@
 </head>
 
 <body <?php body_class(); ?>>
+<nav class="navbar bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="https://source-tech.net/">
+            <img src="https://staging.source-tech.net/wp-content/uploads/2020/05/SourceTech-Systems.svg" alt="Bootstrap" width="175" height="auto">
+        </a>
+    </div>
+</nav>
+
 
     <!-- Begin Foxycart Div -->
     <div id="fc" class="site-content">

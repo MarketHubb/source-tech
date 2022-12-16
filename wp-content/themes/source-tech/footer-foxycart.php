@@ -22,14 +22,14 @@
     <!--        <p>Top Quality Servers, Networking & Storage Equipment at Great Prices.</p>-->
     <!--    </div>-->
 
-    <div class="bg-light-blue pt-5 mt-5">
+    <div class="bg-light pt-5 mt-5">
         <div class="container-fluid">
             <div class="wrapper">
                 <!-- Logo + Mission -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 text-center">
                         <img src="<?php echo get_home_url() . '/wp-content/uploads/2020/05/SourceTech-Systems.svg' ?>"
-                             class="logo-footer inline-block mb-2 pb-1" alt="Source Tech" itemprop="logo">
+                             class="logo-footer inline-block mb-2 pb-1" alt="Source Tech" itemprop="logo" width="175" height="auto">
                         <p class="footer-mission pb-5 mb-2">Our mission is to ensure that visitors & customers receive dedicated, one-on-one support from our team of enterprise IT hardware & maintenance services experts. Whether you're on our site to purchase servers for a large data center or just browsing our inventory, we promise to provide you with personal & professional service via chat, phone or email. It's our goal to make the purchase of enterprise servers, networking equipment & service contracts easy & convenient. In doing so we strive to build long term relationships with all of our customers, which is the reason they continue to come back to us time and again.  </p>
                     </div>
                 </div>
@@ -38,8 +38,8 @@
     </div>
 
 
-    <div class="site-info">
-        &copy;<?php echo date("Y"); ?> Source Tech Systems. All Rights Reserved.
+    <div class="site-info text-center mt-4">
+        <strong>&copy;<?php echo date("Y"); ?> Source Tech Systems. All Rights Reserved.</strong>
     </div><!-- .site-info -->
 </footer><!-- #colophon -->
 </div><!-- #page -->
