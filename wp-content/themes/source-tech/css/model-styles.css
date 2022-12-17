@@ -88,7 +88,7 @@
 .option-selected .form-floating>.form-select {
 	padding-top: 1.75rem !important;
 	transform: scale(1); /* you need a scale here to allow it to transition in both directions */
-	transition: 0.75s all ease;
+	transition: 0.6s all ease;
 }
 .form-floating>.form-select {
 	height: calc(3.5rem + 6px);
@@ -121,7 +121,7 @@ label[for="qty"], #qty {
 .option-selected .form-floating label {
 	opacity: .65 !important;
 	transform: scale(.85) translateY(-0.7rem) translateX(0.15rem) !important;
-	transition-duration: 1s !important;
+	transition-duration: .75s !important;
 }
 .config-option-container .form-select {
 	padding: 0.6rem 2.25rem 0.5rem 0.75rem;

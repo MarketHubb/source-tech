@@ -78,7 +78,7 @@ function return_foxycart_hmac_link($post_id, $server_id, $selections, $server_qt
 
     if (is_array($selections)) {
         foreach ($selections as $selection) {
-            $component = str_replace('_', ' ', trim($selection['component']));
+            $component = str_replace('_', ' ', trim($selection['id']));
             $option_prefix = $selection['quantity'] > 1 ? $selection['quantity'] . 'x ' : '';
             $option = $option_prefix . stripslashes(trim($selection['optionName']));
             $option_name = $component . ' - ' . $option;
@@ -90,6 +90,7 @@ function return_foxycart_hmac_link($post_id, $server_id, $selections, $server_qt
     if (count($options_array) > 1 && $total_price > 0) {
         $product_code = trim($post_id) . '-' . trim($server_id);
         $model_id = trim(get_the_title($post_id));
+        ksort($options_array);
         return return_foxycart_links($post_id, $options_array, $total_price, $model_id, $product_code, false, $server_qty);
     }
 
