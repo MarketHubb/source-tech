@@ -43,7 +43,7 @@ function validate_custom_config_selections($post_id, $selections = array()) {
             $option_name = stripslashes($selection['optionName']);
             $option_price = $selection['optionPrice'];
 
-            if (strpos($option_name, 'No ') !== false) {
+            if (strpos($option_name, 'No ') !== false || $component === "Additional Drives") {
                 $validation[] = [$component => true];
             } elseif ($component === 'Chassis') {
                 $validation[] = validate_chassis($post_id, $component, $option_name, $option_price);

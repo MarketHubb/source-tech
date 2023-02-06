@@ -43,9 +43,10 @@ function get_chassis_options_for_server($post_id) {
         if( have_rows('chassis', $post_id) ):
                 while ( have_rows('chassis', $post_id) ) : the_row();
                 $chassis['options'][] = array(
-                  'name' => get_sub_field('name', $post_id),
-                  'price' => get_sub_field('price', $post_id),
-                  'max_drives' => get_sub_field('max_drives', $post_id)
+                    'name' => get_sub_field('name', $post_id),
+                    'price' => get_sub_field('price', $post_id),
+                    'max_drives' => get_sub_field('max_drives', $post_id),
+                    'form' => get_sub_field('form', $post_id)
                 );
             endwhile;
         endif;
@@ -96,7 +97,8 @@ function get_all_server_component_options($post_id) {
                             'include' => get_sub_field('include_for'),
                             'oems' => get_sub_field('oems'),
                             'types' => get_sub_field('types'),
-                            'excluded' => get_sub_field('excluded_products')
+                            'excluded' => get_sub_field('excluded_products'),
+                            'size' => get_sub_field('form_factor')
                         );
 
                         if (check_option_for_this_server($post_id, $options_array)) {
@@ -171,98 +173,192 @@ function return_summary_component_list($post_id) {
 
     foreach ($components as $key => $val) {
         if ($val['options']) {
-            $component_clean = trim(str_replace(' ', '_', trim($key)));
-            $li .= '<tr class="d-none px-3 ' . $component_clean . '" id="' . $component_clean . '" data-type="' . $component_clean . '">';
-            $li .= '<th scope="row" class="ps-3">';
-            $li .= '<p class="summary-name fw-bold small anti mb-0">' . $key . '</p>';
-            $li .= '</th>';
-            $li .= '<td class="align-middle">';
-            $li .= '<p class="mb-0 summary-price"></p>';
-            $li .= '</th></tr>';
-        }
 
+            // Output Drives twice to account for "Additional Drives"
+            $count = ($key === 'Drives') ? 2 : 1;
+
+            for ($x = 1; $x <= $count; $x++) {
+
+                $key = ($x === 2) ? 'Additional Drives' : $key;
+                $component_clean = trim(str_replace(' ', '_', trim($key)));
+
+                $li .= '<tr class="d-none px-3 ' . $component_clean . '" id="' . $component_clean . '" data-type="' . $component_clean . '">';
+                $li .= '<th scope="row" class="ps-3">';
+                $li .= '<p class="summary-name fw-bold small anti mb-0">' . $key . '</p>';
+                $li .= '</th>';
+                $li .= '<td class="align-middle">';
+                $li .= '<p class="mb-0 summary-price"></p>';
+                $li .= '</th></tr>';
+
+            }
+        }
     }
 
     return $li;
 }
 
+function get_component_options($key,$option,$i) {
+    $component_clean = remove_spaces_from_string($key);
+    $is_option_for_no_component = strpos($option['name'], 'No ');
+
+    // Remove component name from option name. Skip if option is "No {Component Name}"
+    if ($is_option_for_no_component === false) {
+        $option['name'] = str_replace(trim($key), '', $option['name']);
+    }
+
+    $option_remove_double_quote = str_replace('"', ' Inch', trim($option['name']));
+    $option_clean = remove_spaces_from_string($option_remove_double_quote);
+
+    $options = '<option id="' . $component_clean . '_' . $i;
+
+    // Add suffix for second "Drive"
+    if ($component_clean === "Additional_Drives") {
+        $options .= '_' . 2;
+    }
+    $options .= '" ';
+
+    $options .= 'class="text-end" ';
+    $options .= 'data-name="' . $option_clean . '" ';
+    $options .= 'data-row="1" ';
+    $options .= 'data-price="' . $option['price'] . '" ';
+
+    if ($component_clean === 'Chassis') {
+        $options .= 'data-drives="' . $option['max_drives'] . '" ';
+        $options .= 'data-form="' . $option['form'] . '" ';
+    }
+
+    if (strpos($component_clean, "Drives") !== false) {
+        $options .= 'data-size="' . $option['size'] . '" ';
+    }
+
+
+    $options .= 'value="' . $option_clean . '">';
+    $options .= $option['name'] . '   $' . $option['price'] . '</option>';
+
+    return $options;
+}
+
+function get_component_qty_selects($key) {
+    $component_clean = remove_spaces_from_string($key);
+    $qty_select = '<select class="form-select option-qty d-none" data-type="' . $component_clean . '" data-max="8">';
+
+    for ($i = 1; $i < 17; $i++) {
+        $qty_select .= '<option value="' . $i . '">' . $i . '</option>';
+    }
+
+    $qty_select .= '</select>';
+    return $qty_select;
+}
+
+function get_component_input_label($val,$key) {
+    $component_clean = remove_spaces_from_string($key);
+    $label_text = $val['default_qty'] > 1 ? $key . ' (' . $val['default_qty'] . 'x)' : $key;
+
+    return '<label for="' . $component_clean . '">' . $label_text . '</label>';
+}
+
+function get_component_icon($val, $float_label=true) {
+    $div_class = ($float_label) ? 'col-1' : 'me-md-4';
+
+    $icon  = '<div class="' . $div_class . '">';
+    $icon .= '<img src="' . $val['icon'] . '" class="component-icon"/>';
+    $icon .= '</div>';
+
+    return $icon;
+}
+
+function get_text_label($key) {
+//    <i class="fa-sharp fa-solid fa-check pe-2"></i>
+    return  '<p class="ms-3 small lh-1 py-0 px-2 mb-0 fw-500 bg-transparent rounded config-input-label d-inline">' . $key . '</p>';
+}
+
+function add_no_option_for_optional_components($val,$key,$options_ordered) {
+    // Manually add a "No {Component Name}" if component optional. Rearrange array so it outputs first.
+    if ($val['optional'] || $key === "Additional Drives") {
+        $no_option = [
+            'name' => 'No ' . $key,
+            'price' => 0
+        ];
+        array_unshift($options_ordered, $no_option);
+    }
+
+    return $options_ordered;
+}
+
 function return_formatted_component_options($post_id) {
     $components = get_all_server_component_options($post_id);
-
     $form = '<div class="form-container panel pt-0">';
-//    $form .= '<div class="alert alert-primary py-2 mb-5 text-center" role="alert">';
-//    $form .= '<img src="' . get_home_url() . '/wp-content/uploads/2022/07/Chat.svg" class="configure-chat-icon"/>';
-//    $form .= '<p class="d-inline-block ms-3 mb-0 text-body"><span class="fw-bold">Need help with your order?</span> Our server support team is online</p>';
-//    $form .= '</div>';
 
     foreach ($components as $key => $val) {
 
-        if ($val['options']) {
+        // Output Drives twice to account for Operating System Drives
+        $count = ($key === 'Drives') ? 2 : 1;
 
-            $component_clean = str_replace(' ', '_', trim($key));
-            $form .= '<div class="d-flex flex-row justify-content-end align-items-end config-option-container config-container ' . $component_clean . '" ';
+        for ($x = 1; $x <= $count; $x++) {
+            $component_clean = remove_spaces_from_string($key);
 
-            if ($val['maximum'] && $val['step_size']) {
-                $form .= 'data-max="' . $val['maximum'] . '" data-step="' . $val['step_size'] . '" ';
-            }
+            if ($val['options']) {
+                $i = 1;
+                $key = ($x === 2) ? 'Additional Drives' : $key;
+                $component_clean = str_replace(' ', '_', trim($key));
 
-            $form .= 'data-row="1" data-type="' . $component_clean . '">';
+                // Labels
+                $form .= '<div class="row d-flex justify-content-end align-items-center label-container">';
+                $form .= '<div class="col-11">';
+                $form .= get_text_label($key);
+                $form .= '</div></div>';
 
-            // Icon
-            $form .= '<div class="me-md-4">';
-            $form .= '<img src="' . $val['icon'] . '" class="mb-2 component-icon"/>';
-            $form .= '</div>';
-            // Label + Input (label hidden by default)
-            $form .= '<div class="flex-grow-1">';
-            $form .= '<p class="small ms-3 lh-1 py-1 px-2 mb-0 fw-bold bg-transparent rounded config-input-label"><i class="fa-sharp fa-solid fa-check pe-2"></i>' . $key . '</p>';
-            $form .= '<div class="input-group mb-0">';
-            $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
-            $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
 
-            $i = 1;
-            $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
+                $form .= '<div class="row d-flex flex-row justify-content-end align-items-center mb-3 config-option-container config-container ' . $component_clean . '" ';
 
-            // Ouput "No {component} for non-mandatory components
-            if ($val['optional']) {
-                $no_option = [
-                    'name' => 'No ' . $key,
-                    'price' => 0
-                ];
+                $form .= 'data-row="1" data-type="' . $component_clean . '" ';
 
-                array_unshift($options_ordered, $no_option);
-            }
-
-            foreach ($options_ordered as $option) {
-
-                $no_position = strpos($option['name'], 'No ');
-                if ($no_position === false) {
-                    $option['name'] = str_replace(trim($key), '', $option['name']);
+                if ($component_clean === "Chassis") {
+                    $form .= 'data-drives=""';
                 }
 
-                $option_clean = str_replace('"', ' Inch', trim($option['name']));
-                $option_clean_no_spaces = str_replace(' ', '_', trim($option_clean));
-                $form .= '<option id="' . $component_clean . '_' . $i . '" ';
-                $form .= 'class="text-end" ';
-                $form .= 'data-name="' . $option_clean_no_spaces . '" ';
-                $form .= 'data-row="' . $i . '" ';
-                $form .= 'data-price="' . $option['price'] . '" ';
+                $form .= 'data-quantity="' . $val['default_qty'] . '">';
 
-                if ($key === 'Memory') {
-                    $form .= 'data-minsocket="' . $option['min_sockets'] . '" ';
+
+                // Icon
+                $form .= get_component_icon($val);
+
+                // Label + Input (label hidden by default)
+                $form .= '<div class="flex-grow-1 col-9">';
+//                $form .= '<p class="small ms-3 lh-1 py-1 px-2 mb-0 fw-bold bg-transparent rounded config-input-label"><i class="fa-sharp fa-solid fa-check pe-2"></i>' . $key . '</p>';
+                $form .= '<div class="input-group mb-0">';
+                $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
+                $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
+
+                $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
+                // Add option for optional components
+                if ($val['optional'] || $key === "Additional Drives") {
+                    $options_ordered = add_no_option_for_optional_components($val,$key,$options_ordered);
                 }
 
-                $form .= 'value="' . $option_clean_no_spaces . '">';
-                $form .= $option['name'] . '   $' . $option['price'] . '</option>';
+                // Options
+                foreach ($options_ordered as $option) {
+                    $form .= get_component_options($key,$option,$i);
+                    $i++;
+                }
 
-                $i++;
+                $form .= '</select>';
+
+                $form .= '</div></div>';
+
+                // Quantity (Component-level)
+                $form .= '<div class="col-2">';
+
+                if (isset($val['maximum']) && $val['maximum'] > 1) {
+                    $form .= get_component_qty_selects($key);
+                }
+
+                $form .= '</select>';
+                $form .= '</div></div>';
             }
-
-            $form .= '</select>';
-
-            $form .= '</div></div></div>';
         }
-
     }
+
 
     $form .= '</div>';
 
@@ -272,88 +368,70 @@ function return_formatted_component_options($post_id) {
 
 function return_formatted_component_options_float_labels($post_id) {
     $components = get_all_server_component_options($post_id);
-    $form = '<div class="form-container  pt-0">';
+    $form = '<div class="form-container pt-0">';
+
     foreach ($components as $key => $val) {
 
-        if ($val['options']) {
+        // Output Drives twice to account for Operating System Drives
+        $count = ($key === 'Drives') ? 2 : 1;
 
-            $component_clean = str_replace(' ', '_', trim($key));
-            $form .= '<div class="row d-flex flex-row justify-content-end align-items-center mb-3 config-option-container config-container ' . $component_clean . '" ';
+        for ($x = 1; $x <= $count; $x++) {
+            $component_clean = remove_spaces_from_string($key);
 
-            $form .= 'data-row="1" data-type="' . $component_clean . '" ';
+            if ($val['options']) {
+                $i = 1;
+                $key = ($x === 2) ? 'Additional Drives' : $key;
+                $component_clean = str_replace(' ', '_', trim($key));
 
-            if ($component_clean === "Chassis") {
-                $form .= 'data-drives=""';
-            }
+                $form .= '<div class="row d-flex flex-row justify-content-end align-items-center mb-3 config-option-container config-container ' . $component_clean . '" ';
 
-            $form .= 'data-quantity="' . $val['default_qty'] . '">';
+                $form .= 'data-row="1" data-type="' . $component_clean . '" ';
 
-            // Icon
-            $form .= '<div class="col-1">';
-            $form .= '<img src="' . $val['icon'] . '" class="component-icon"/>';
-            $form .= '</div>';
-            // Label + Input (label hidden by default)
-            $form .= '<div class="flex-grow-1 col-9">';
-            $form .= '<div class="form-floating">';
-            $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
-            $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
-
-            $i = 1;
-            $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
-
-            if ($val['optional']) {
-                $no_option = [
-                    'name' => 'No ' . $key,
-                    'price' => 0
-                ];
-                array_unshift($options_ordered, $no_option);
-            }
-
-            foreach ($options_ordered as $option) {
-
-                $no_position = strpos($option['name'], 'No ');
-                if ($no_position === false) {
-                    $option['name'] = str_replace(trim($key), '', $option['name']);
+                if ($component_clean === "Chassis") {
+                    $form .= 'data-drives=""';
                 }
 
-                $option_clean = str_replace('"', ' Inch', trim($option['name']));
-                $option_clean_no_spaces = str_replace(' ', '_', trim($option_clean));
-                $form .= '<option id="' . $component_clean . '_' . $i . '" ';
-                $form .= 'class="text-end" ';
-                $form .= 'data-name="' . $option_clean_no_spaces . '" ';
-                $form .= 'data-row="' . $i . '" ';
-                $form .= 'data-price="' . $option['price'] . '" ';
+                $form .= 'data-quantity="' . $val['default_qty'] . '">';
 
-                if ($component_clean === 'Chassis') {
-                    $form .= 'data-drives="' . $option['max_drives'] . '" ';
+                // Icon
+                $form .= get_component_icon($val);
+
+                // Label + Input (label hidden by default)
+                $form .= '<div class="flex-grow-1 col-9">';
+                $form .= '<div class="form-floating">';
+                $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
+                $form .= '<option class="text-end" value="default">-- Select ' . $key . ' --</option>';
+
+                $options_ordered = array_sort($val['options'], 'price', SORT_ASC);
+
+                // Add option for optional components
+                if ($val['optional'] || $key === "Additional Drives") {
+                    $options_ordered = add_no_option_for_optional_components($val,$key,$options_ordered);
                 }
 
-                $form .= 'value="' . $option_clean_no_spaces . '">';
-                $form .= $option['name'] . '   $' . $option['price'] . '</option>';
-
-                $i++;
-            }
-            $form .= '</select>';
-
-            $label_text = $val['default_qty'] > 1 ? $key . ' (' . $val['default_qty'] . 'x)' : $key;
-            $form .= '<label for="' . $component_clean . '">' . $label_text . '</label>';
-
-            $form .= '</div></div>';
-            $form .= '<div class="col-2">';
-
-            if (isset($val['maximum']) && $val['maximum'] > 1) {
-                $form .= '<select class="form-select option-qty">';
-                for ($i = 1; $i < 17; $i++) {
-                    $form .= '<option value="' . $i . '">' . $i . '</option>';
+                // Options
+                foreach ($options_ordered as $option) {
+                    $form .= get_component_options($key,$option,$i);
+                    $i++;
                 }
+
                 $form .= '</select>';
-                $form .= '<div class="d-flex justify-content-between px-1 add-remove">';
-                $form .= '<span class="small add-option"><i class="fa-solid fa-circle-plus"></i></span>';
-                $form .= '<span class="small remove-option"><i class="fa-solid fa-circle-minus"></i></span>';
-                $form .= '</div>';
+
+                // Input Label
+                $form .= get_component_input_label($val,$key);
+
+                $form .= '</div></div>';
+
+                // Quantity (Component-level)
+                $form .= '<div class="col-2">';
+
+                if (isset($val['maximum']) && $val['maximum'] > 1) {
+                    $form .= get_component_qty_selects($key);
+                }
+
+                $form .= '</div></div>';
             }
 
-            $form .= '</div></div>';
         }
 
     }

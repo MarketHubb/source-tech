@@ -68,6 +68,7 @@
     const maxDrives = setMaxDrives();
     const countTotal = $('#count-total');
     const countSelected = $('#count-selected');
+    const driveQty = $('.form-select.option-qty');
 
     // Setup order summary table
     $('#summary-table tbody tr').each(function() {
@@ -176,6 +177,7 @@
             componentsArray.push(getSelectedOptionAttributes($(this)));
         });
 
+
         return function (selectionObject = null) {
             if (selectionObject !== null) {
                 var objectIDs = [];
@@ -203,8 +205,8 @@
                 }
 
                 updateSummaryTable(selectionObject);
-
             }
+
             updatePriceWithQty(componentsArray)
             console.log(componentsArray);
             return componentsArray;
@@ -219,11 +221,16 @@
 
         var quantity;
 
-        if (add && optionText.includes("No") && optionPrice === 0) {
-            quantity = 0;
+        if (component.includes("Drives")) {
+            quantity = inputContainer.find('select.option-qty').val();
         } else {
-            quantity = inputContainer.attr('data-quantity') ? inputContainer.attr('data-quantity') : 1;
+            if (add && optionText.includes("No") && optionPrice === 0) {
+                quantity = 0;
+            } else {
+                quantity = inputContainer.attr('data-quantity') ? inputContainer.attr('data-quantity') : 1;
+            }
         }
+
 
         let validated = isSelectionDefault(optionText);
         let duplicate = inputContainer.attr('data-row') > 1;
@@ -378,7 +385,14 @@
             // label.append(labelTotal);
 
             inputContainer.addClass('option-selected');
+            inputContainer.prev().addClass('option-selected');
         }
+
+        if (!selection.validated) {
+            inputContainer.removeClass('option-selected');
+            inputContainer.prev().removeClass('option-selected');
+        }
+
     }
     //endregion
 
@@ -467,7 +481,113 @@
         updateInputLabel(inputContainer, selection)
     });
 
-    // Select option change (component)
+    function resetGlobalSelectionObject() {
+        $('.form-container .config-container').each(function(index) {
+            if (!$(this).hasClass('Chassis')) {
+                let select = $(this).find('select.form-select');
+                select.prop('selectedIndex', 0);
+                updateAndValidateSelection($(this));
+            }
+        });
+    }
+
+    function resetSelects(select) {
+        select.find('option:first').prop('selected',true);
+        select.closest('.config-container').removeClass('option-selected');
+    }
+
+    function updateAvailableDrivesQty(currentQtySelect) {
+        let currentlySelectedQty = currentQtySelect.val();
+        let currentlySelectedType = currentQtySelect.attr('data-type');
+        let maxAvailableQty = currentQtySelect.attr('data-max');
+        let remainingAvailableQty = maxAvailableQty - currentlySelectedQty;
+
+        $('.form-select.option-qty').each(function () {
+            if ($(this).attr('data-type') !== currentlySelectedType) {
+                $(this).find('option').each(function() {
+                    $(this).prop("disabled", false);
+
+                    if ($(this).val() > remainingAvailableQty) {
+                        $(this).prop("disabled", true);
+                    }
+                });
+            }
+        });
+    }
+
+    function updateDrivesQty(maxDrives) {
+        let newOptions = '';
+        // Remove existing and replace with new
+        if (maxDrives) {
+            $('.form-select.option-qty').each(function () {
+                $(this).attr('data-max', maxDrives);
+                $(this).find('option').remove();
+
+                for (let i = 0; i <= maxDrives; i++) {
+                    $(this).append($("<option></option>")
+                        .attr("value", i).text(i));
+                }
+            });
+        }
+    }
+
+    function chassis_selection() {
+        let currentChassis = $('select[name="Chassis"] option:selected');
+        let maxDrives = currentChassis.data('drives');
+        let selectedFormFactor = currentChassis.data('form');
+
+        resetGlobalSelectionObject();
+
+        // Show drive qty inputs if Chassis selection made (and isn't default)
+        if (currentChassis.val() !== 'default') {
+            driveQty.removeClass('d-none');
+        } else {
+            driveQty.addClass('d-none');
+        }
+
+        updateDrivesQty(maxDrives);
+
+        // $('select.form-select').each(function () {
+        //     if ($(this).attr('name') !== 'Chassis') {
+        //         resetSelects($(this));
+        //     }
+        // });
+
+        $('select[name*="Drives"] option').each(function() {
+            $(this).prop("disabled", false);
+            console.log($(this).data('size'));
+
+            if ($(this).data('size') !== selectedFormFactor && $(this).data('size')) {
+                $(this).prop("disabled", true);
+            }
+        });
+    }
+
+    function updateAndValidateSelection(inputContainer) {
+        // 1. Get formatted selection
+        let selection = getSelectedOptionAttributes(inputContainer);
+
+        // 2. Check max drives
+        maxDrives(inputContainer, selection);
+
+        // 3. Update selection object
+        price(selection);
+
+        // 4. Toggle selection validation classes (MOVE - create isDefault() function)
+        updateInputLabel(inputContainer, selection);
+        // if (selection.validated) {
+        //     updateInputLabel(inputContainer, selection);
+        // } else {
+        //     inputContainer.removeClass('option-selected');
+        // }
+    }
+
+    // Drive qty chanage
+    $('select.option-qty').on('change', function () {
+        updateAvailableDrivesQty($(this));
+    });
+
+    // Component selection
     $(document).on('change', '.form-container .option-select', function() {
         // 1. Force order summary into view
         if (preConfigTab.hasClass('active')) {
@@ -476,19 +596,15 @@
 
         // 2. Define selected options
         let inputContainer = $(this).closest('.config-container');
-        let selection = getSelectedOptionAttributes(inputContainer);
 
-        maxDrives(inputContainer, selection);
-
-        // 3. Update selection object
-        price(selection);
-
-        // 4. Toggle selection validation classes (MOVE - create isDefault() function)
-        if (selection.validated) {
-            updateInputLabel(inputContainer, selection);
-        } else {
-            inputContainer.removeClass('option-selected');
+        // 2b. Check if component was the chassis
+        if (inputContainer.data('type') === 'Chassis') {
+            chassis_selection();
+            // resetGlobalSelectionObject();
         }
+
+        updateAndValidateSelection(inputContainer);
+
     });
 
     // Order type container tabs

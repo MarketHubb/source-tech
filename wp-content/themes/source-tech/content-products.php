@@ -31,6 +31,10 @@ set_query_var('part_number', $part_number);
 
 <div class="custom-page-content" id="custom-model-page-template" data-id="<?php echo get_the_ID(); ?>">
 
+    <?php //get_template_part('template-parts/product-single/content', 'title'); ?>
+
+    <?php //get_template_part('template-parts/product-single/content', 'order'); ?>
+
     <div class="bg-light-grey">
 
         <div class="container">

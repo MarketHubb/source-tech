@@ -1,3 +1,8 @@
+/* Redesign */
+.single-order {
+	position: relative;
+	bottom: 4rem;
+}
 /* Right Panel */
 .order-type .order-tab {
 	opacity: .4;
@@ -146,22 +151,33 @@ label[for="qty"], #qty {
 .config-option-container.option-selected select
 {
 	outline: 1px solid #0087c7;
-	background-color: #f8fafc;
 	color: #17191c;
 	font-weight: 600;
 	-webkit-font-smoothing: antialiased;
+	box-shadow: none;
 }
-.config-input-label {
+.config-option-container.option-selected select {
+	background-color: #f8fafc;
+}
+
+.label-container {
 	position: relative;
-	top: .5rem;
-	display: inline-block;
+	top: 0.5rem;
+	z-index: 9;
+	margin-top: -1rem !important;
+	color: transparent;
+}
+.label-container p {
 	color: transparent;
 	letter-spacing: .015rem;
 }
-.config-option-container.option-selected .config-input-label {
-	z-index: 999;
-	color: #0087c7;
-	background-color: #fff !important;
+.label-container.option-selected  p {
+	color: #0087c7 !important;
+	font-size: .8rem;
+	padding-bottom: 1px !important;
+	padding-top: 1px !important;
+	font-weight: 600;
+	background-color: #f8fafc !important;
 }
 .config-option-container .form-select.option-qty {
 	padding: 0.25rem 2.25rem 0.3rem 0.75rem;

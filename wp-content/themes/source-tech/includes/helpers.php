@@ -1,5 +1,8 @@
 <?php
 //region Global
+function remove_spaces_from_string($string) {
+    return str_replace(' ', '_', trim($string));
+}
 function array_sort($array, $on, $order=SORT_ASC)
 {
     $new_array = array();
