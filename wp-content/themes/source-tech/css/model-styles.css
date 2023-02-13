@@ -129,8 +129,8 @@ label[for="qty"], #qty {
 	transition-duration: .75s !important;
 }
 .config-option-container .form-select {
-	padding: 0.6rem 2.25rem 0.5rem 0.75rem;
-	font-size: .95rem;
+	/*padding: 0.6rem 2.25rem 0.5rem 0.75rem;*/
+	font-size: .85rem;
 	border: none;
 	outline: 1px solid #dbe6f0;
 	background-color: #fff;
