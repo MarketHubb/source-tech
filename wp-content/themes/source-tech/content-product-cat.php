@@ -1,14 +1,14 @@
 <?php
 $heading = return_server_category_heading(get_queried_object()->name);
 ?>
-<div class="container-fluid <?php echo $heading['manufacturer']; ?>" id="custom-content">
+<div class="container <?php echo $heading['manufacturer']; ?> mb-5" id="custom-content">
     <div class="wrapper">
 
-        <div class="row align-items-center justify-content-center mb-3">
+        <div class="row align-items-center justify-content-center my-4">
             <div class="col-md-11 text-center">
                 <header class="woocommerce-products-header">
                     <?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-                        <h1 class="display-4 mb-1 page-heading"><?php woocommerce_page_title(); ?></h1>
+                        <h1 class="mb-1 page-heading"><?php woocommerce_page_title(); ?></h1>
                         <p class=""><?php echo $heading['description']; ?></p>
                     <?php endif; ?>
 
@@ -28,7 +28,7 @@ $heading = return_server_category_heading(get_queried_object()->name);
     </div>
 </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="wrapper">
             <div class="row">
 

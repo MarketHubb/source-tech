@@ -126,8 +126,8 @@
                             $payment = '';
                             while (have_rows('footer_payment', 'option')) : the_row();
                                 $payment .= '<li class="list-group-item flex-fill no-border text-center bg-transparent">';
-                                $payment .= '<i class="' . get_sub_field('footer_payment_icon', 'option') . ' fa-inverse fa-2x"></i>';
-                                $payment .= '<p class="small thin mb-0 pb-0 text-white">' . get_sub_field('footer_payment_label', 'option') . '</p>';
+                                $payment .= '<i class="d-block ' . get_sub_field('footer_payment_icon', 'option') . ' fa-inverse fa-2x"></i>';
+                                $payment .= '<p class="d-inline-block small thin mb-0 pb-0 text-white">' . get_sub_field('footer_payment_label', 'option') . '</p>';
                                 $payment .= '</li>';
                             endwhile;
                             echo $payment;
