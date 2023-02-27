@@ -129,12 +129,13 @@ label[for="qty"], #qty {
 	transition-duration: .75s !important;
 }
 .config-option-container .form-select {
-	/*padding: 0.6rem 2.25rem 0.5rem 0.75rem;*/
-	font-size: .85rem;
+	font-size: 1rem;
 	border: none;
 	outline: 1px solid #dbe6f0;
 	background-color: #fff;
+	color: #49525b;
 }
+
 .add-remove {
 	color: #586674;
 	position: relative;
@@ -150,16 +151,15 @@ label[for="qty"], #qty {
 .config-option-container .form-select:focus,
 .config-option-container.option-selected select
 {
-	outline: 1px solid #0087c7;
-	color: #17191c;
+	outline: 1px solid #5085B6;
+	color: #0A1117;
 	font-weight: 600;
 	-webkit-font-smoothing: antialiased;
 	box-shadow: none;
 }
 .config-option-container.option-selected select {
-	background-color: #f8fafc;
+	background-color: #fff;
 }
-
 .label-container {
 	position: relative;
 	top: 0.5rem;
@@ -172,30 +172,31 @@ label[for="qty"], #qty {
 	letter-spacing: .015rem;
 }
 .label-container.option-selected  p {
-	color: #0087c7 !important;
+	background-color: #5085B6 !important;
 	font-size: .8rem;
 	padding-bottom: 1px !important;
 	padding-top: 1px !important;
 	font-weight: 600;
-	background-color: #f8fafc !important;
+	color: #fbfcfd !important;
+	box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important
 }
 .config-option-container .form-select.option-qty {
 	padding: .5rem;
 }
 .config-option-container.option-selected img {
-	filter: invert(27%) sepia(93%) saturate(2276%) hue-rotate(180deg) brightness(99%) contrast(103%);
 	opacity: 1;
 }
 .component-icon, .component-list-icon {
 	min-width: 20px;
 	max-width: 20px;
 	display: inline;
-	opacity: .4;
+	opacity: .2;
+	filter: invert(51%) sepia(24%) saturate(914%) hue-rotate(167deg) brightness(92%) contrast(91%);
 }
-#summary-total > .alert {
-	background: #f8fafc !important;
-	border-color: #dbe6f0 !important;
-}
+/*#summary-total > .alert {*/
+/*	background: #f8fafc !important;*/
+/*	border-color: #dbe6f0 !important;*/
+/*}*/
 .summary-icon {
 	min-width: 14px;
 	max-width: 14px;
@@ -540,3 +541,24 @@ label[for="qty"], #qty {
 		text-align: right;
 	}
 }
+/****************************************
+*** MEDIA QUERIES - MAXIMUMS ***
+*****************************************/
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {}
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {}
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+	.img-thumbnail {
+		width: 80px !important;
+		max-width: 100% !important;
+	}
+}
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {}
+
+
+
+
+

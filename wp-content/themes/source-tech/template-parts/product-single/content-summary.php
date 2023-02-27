@@ -1,0 +1,42 @@
+<div class="accordion accordion-flush mt-4" id="accordionSummary">
+    <div class="accordion-item summary-links bg-transparent">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <h2 class="accordion-header d-inline-block anti" id="summary-headingOne">
+                <button class="accordion-button bg-transparent collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#summary-collapseOne" aria-expanded="false" aria-controls="summary-collapseOne">
+                    Order Summary <span class="order-summary-count fw-normal d-none"><span id="count-selected" class="ps-3">0</span> of <span id="count-total"></span></span>
+                </button>
+            </h2>
+            <div class="summary-links">
+                    <span class="">
+                        <a href="" class="fw-normal text-blue-700"
+                           data-bs-toggle="modal"
+                           data-bs-target="#customModal"
+                           data-product="<?php echo get_the_title(); ?>">
+                            Need technical support? <i class="fa-light fa-circle-info ps-1"></i>
+                        </a>
+                    </span>
+            </div>
+        </div>
+        <div id="summary-collapseOne" class="accordion-collapse collapse" aria-labelledby="summary-headingOne" data-bs-parent="#accordionSummary">
+            <div class="accordion-body px-0">
+                <div class="order-type-container" id="custom-config">
+                    <table class="table table-light p-5" id="summary-table">
+                        <thead>
+                        <tr class="">
+                            <td class="ps-3">
+                                <p class="small fw-bold mb-1 text-secondary anti">Option</p>
+                            </td>
+                            <td>
+                                <p class="small fw-bold mb-1 text-secondary anti text-end">Total (Unit)</p>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody class="py-3">
+                        <?php echo return_summary_component_list($post->ID); ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

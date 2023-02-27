@@ -29,27 +29,27 @@ set_query_var('part_number', $part_number);
 
 ?>
 
+<?php get_template_part('template-parts/product-single/content', 'order'); ?>
+
 <div class="custom-page-content" id="custom-model-page-template" data-id="<?php echo get_the_ID(); ?>">
 
-    <?php //get_template_part('template-parts/product-single/content', 'title'); ?>
 
-    <?php //get_template_part('template-parts/product-single/content', 'order'); ?>
 
-    <div class="bg-light-grey">
-
-        <div class="container">
-
-            <div class="row justify-content-between align-items-start mt-4 mb-5 pb-4 pt-3">
-
-                <?php get_template_part('template-parts/products/content', 'left'); ?>
-
-                <?php get_template_part('template-parts/products/content', 'right'); ?>
-
-            </div>
-
-        </div>
-
-    </div>
+<!--    <div class="bg-light-grey">-->
+<!---->
+<!--        <div class="container">-->
+<!---->
+<!--            <div class="row justify-content-between align-items-start mt-4 mb-5 pb-4 pt-3">-->
+<!---->
+<!--                --><?php //get_template_part('template-parts/products/content', 'left'); ?>
+<!---->
+<!--                --><?php //get_template_part('template-parts/products/content', 'right'); ?>
+<!---->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
 
     <?php get_template_part('template-parts/products/content', 'quote'); ?>
 

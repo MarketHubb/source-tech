@@ -7,5 +7,4 @@
         </div>
     </div>
     <?php echo return_formatted_component_options($post->ID); ?>
-    <?php //echo return_formatted_component_options_float_labels($post->ID); ?>
 </div>

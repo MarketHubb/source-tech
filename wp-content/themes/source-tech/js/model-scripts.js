@@ -134,6 +134,7 @@
             }
 
             // Max PCI test
+            console.log(formFactor);
             if (formFactor.length === 2) {
                 let maxPCI = formFactor === "2U" ? 6 : 3;
                 if (pciQty > maxPCI) {
@@ -547,17 +548,9 @@
 
         updateDrivesQty(maxDrives);
 
-        // $('select.form-select').each(function () {
-        //     if ($(this).attr('name') !== 'Chassis') {
-        //         resetSelects($(this));
-        //     }
-        // });
-
         $('select[name*="Drives"] option').each(function() {
             $(this).prop("disabled", false);
-            console.log($(this).data('size'));
-
-            if ($(this).data('size') !== selectedFormFactor && $(this).data('size')) {
+            if (selectedFormFactor === "SFF" && $(this).data('size') !== selectedFormFactor && $(this).data('size')) {
                 $(this).prop("disabled", true);
             }
         });

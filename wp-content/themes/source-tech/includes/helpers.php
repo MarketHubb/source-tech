@@ -1,5 +1,22 @@
 <?php
 //region Global
+function get_formatted_server_title($post_id) {
+    $type = get_post_type($post_id);
+    if ($type === "servers") {
+        $form_factor = get_post_type(get_the_ID()) === 'servers' ? get_field('post_servers_size', get_the_ID()) : "";
+        $form = isset($form_factor) ? $form_factor : '';
+        $type = isset(get_the_terms($post_id,'server_types')[0]) ? get_the_terms($post_id,'server_types')[0]->name : '';
+
+        return trim(get_the_title() . ' ' . $form . ' ' . $type . ' Server');
+    }
+}
+function get_formatted_post_type($post_id) {
+    $type = get_post_type($post_id);
+    switch ($type) {
+        case "servers":
+            return "Server";
+    }
+}
 function remove_spaces_from_string($string) {
     return str_replace(' ', '_', trim($string));
 }
