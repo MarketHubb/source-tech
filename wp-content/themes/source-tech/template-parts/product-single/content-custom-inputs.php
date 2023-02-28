@@ -6,7 +6,7 @@ if (!$custom_config) {
     $subheading = "For the " . get_the_title() . " Server.";
     $link = "Request a quote";
 } else {
-    $heading = "Configure the" . get_the_title() . " to Order";
+    $heading = "Configure the " . get_the_title() . " to Order";
     $subheading = "Too many options, or just need help?";
     $link = "Contact our team";
 }
