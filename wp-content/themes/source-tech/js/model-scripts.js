@@ -271,9 +271,9 @@
 
             if (qty > 1) {
                 unitPriceEl.text('$' + unitPrice);
-                unitLabels.removeClass('d-none');
+                unitLabels.removeClass('invisible');
             } else {
-                unitLabels.addClass('d-none');
+                unitLabels.addClass('visible');
             }
 
             let totalWithQty = qty * unitPrice;

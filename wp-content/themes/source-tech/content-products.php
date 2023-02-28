@@ -21,11 +21,18 @@ $title_explode = explode_content(" ", get_the_title());
 $part_number = get_server_part_number($title_explode);
 set_query_var('part_number', $part_number);
 
-// Custom Config
-//if (get_field('use')) {
-//    $config_options =  return_formatted_component_options(get_the_ID());
-//    set_query_var('config_options', $config_options);
-//}
+// No Config (Only Quote)
+if (!get_field('enable_custom') && !get_field('enabled_pre')) {
+    set_query_var('custom_config', false);
+}
+// Custom and Pre Config
+if (get_field('enable_custom') && get_field('enabled_pre')) {
+    set_query_var('custom_config', true);
+}
+// Only Custom Config
+if (get_field('enable_custom') && !get_field('enabled_pre')) {
+    set_query_var('custom_config', true);
+}
 
 ?>
 

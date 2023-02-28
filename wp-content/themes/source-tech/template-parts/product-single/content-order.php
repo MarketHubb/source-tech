@@ -14,7 +14,7 @@
 
         <!-- Config Inputs + Order Summary + Why SourceTech -->
 
-        <div class="row justify-content-between align-items-start mb-5 pb-4 pt-3">
+        <div class="row justify-content-between align-items-start mb-5 pb-4">
 
             <div class="col-md-5 ps-md-4  sticky-top order-md-2">
                 <?php get_template_part('template-parts/product-single/content', 'order-summary'); ?>
