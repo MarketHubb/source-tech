@@ -20,7 +20,7 @@
         <div id="summary-collapseOne" class="accordion-collapse collapse" aria-labelledby="summary-headingOne" data-bs-parent="#accordionSummary">
             <div class="accordion-body px-0">
                 <div class="order-type-container" id="custom-config">
-                    <table class="table table-light p-5" id="summary-table">
+                    <table class="table p-4 p-lg-5" id="summary-table">
                         <thead>
                         <tr class="">
                             <td class="ps-3">

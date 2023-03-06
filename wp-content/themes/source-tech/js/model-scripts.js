@@ -1,10 +1,8 @@
 /* jQuery (Footer) */
-// import document from "../../../plugins/divi-builder/includes/builder/scripts/stores/document";
 
 (function($) {
 
-    function wp_ajax_nopriv_verify_custom_config(post_id, server_id, selections = [], server_quantity)
-    {
+    function wp_ajax_nopriv_verify_custom_config(post_id, server_id, selections = [], server_quantity) {
         $.ajax({
             type:"POST",
             url: "/wp-admin/admin-ajax.php",
@@ -629,7 +627,6 @@
         $('.model-page-featured-image').attr('src', selectedFeatureSrc);
     });
     //endregion
-
 
 	// URL query parameters
     $.extend({

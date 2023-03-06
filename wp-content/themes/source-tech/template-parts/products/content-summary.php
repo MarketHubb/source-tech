@@ -10,7 +10,7 @@
             <div class="accordion-body">
                 <div class="order-type-container" id="custom-config">
                     <p class="fw-bold ps-2 mb-1">Your configuration:</p>
-                    <table class="table table-light" id="summary-table">
+                    <table class="table" id="summary-table">
                         <tbody>
                             <?php echo return_summary_component_list($post->ID); ?>
                         </tbody>

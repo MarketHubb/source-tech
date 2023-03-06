@@ -133,7 +133,7 @@ ul:not(.custom-config-tabs) .nav-link.active {
 }
 /*region Images */
 .callout-icon {
-	max-height: 40px;
+	max-width: 20px;
 }
 .alternate-heading-image {
 	max-width: 250px;
@@ -304,6 +304,7 @@ ul.flush li:last-of-type {
 }
 .anti {
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 /*endregion*/
 /*region Bootstrap Customizations */

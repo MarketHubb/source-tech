@@ -1,10 +1,11 @@
 <?php $custom_config = get_query_var('custom_config'); ?>
-<div class="card" id="custom-config">
+
+<div class="card shadow-sm" id="custom-config">
     <div id="summary-total">
         <div class="card-header bg-grey-blue py-3">
             <?php get_template_part('template-parts/product-single/content', 'summary-total'); ?>
         </div>
-        <div class="card-body bg-grey-blue-lightest p-1 p-md-4">
+        <div class="card-body bg-grey-blue-lightest p-2 pt-3 p-md-4">
             <?php
             if ($custom_config) {
                 get_template_part('template-parts/product-single/content', 'add-to-cart');

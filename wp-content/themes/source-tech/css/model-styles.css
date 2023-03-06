@@ -3,6 +3,9 @@
 	position: relative;
 	bottom: 4rem;
 }
+.callout-icon {
+	filter: invert(71%) sepia(92%) saturate(1384%) hue-rotate(358deg) brightness(103%) contrast(105%);
+}
 /* Right Panel */
 .order-type .order-tab {
 	opacity: .4;
@@ -151,7 +154,7 @@ label[for="qty"], #qty {
 .config-option-container .form-select:focus,
 .config-option-container.option-selected select
 {
-	outline: 1px solid #5085B6;
+	outline: 1px solid #0088C7;
 	color: #0A1117;
 	font-weight: 600;
 	-webkit-font-smoothing: antialiased;
@@ -172,7 +175,7 @@ label[for="qty"], #qty {
 	letter-spacing: .015rem;
 }
 .label-container.option-selected  p {
-	background-color: #5085B6 !important;
+	background-color: #0088C7 !important;
 	font-size: .8rem;
 	padding-bottom: 1px !important;
 	padding-top: 1px !important;
@@ -191,7 +194,7 @@ label[for="qty"], #qty {
 	max-width: 20px;
 	display: inline;
 	opacity: .2;
-	filter: invert(51%) sepia(24%) saturate(914%) hue-rotate(167deg) brightness(92%) contrast(91%);
+	filter: invert(32%) sepia(77%) saturate(1554%) hue-rotate(173deg) brightness(99%) contrast(101%);
 }
 /*#summary-total > .alert {*/
 /*	background: #f8fafc !important;*/

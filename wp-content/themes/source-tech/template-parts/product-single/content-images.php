@@ -3,7 +3,7 @@ $post_type_for_acf = get_query_var('post_type_for_acf');
 $images_repeater_field = 'post_'. $post_type_for_acf . '_images';
 $images_sub_field = 'post_'. $post_type_for_acf . '_images_image';
 ?>
-<div class="row align-items-center mt-4 mb-5">
+<div class="row align-items-center mt-4 mb-2 mb-md-5">
 
     <div class="col-md-12">
 

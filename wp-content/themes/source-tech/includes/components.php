@@ -259,7 +259,7 @@ function get_component_input_label($val,$key) {
 function get_component_icon($val, $float_label=true) {
     $div_class = ($float_label) ? 'col-1' : 'me-md-4';
 
-    $icon  = '<div class="' . $div_class . '">';
+    $icon  = '<div class="d-none d-md-block ' . $div_class . '">';
     $icon .= '<img src="' . $val['icon'] . '" class="component-icon"/>';
     $icon .= '</div>';
 
@@ -286,7 +286,7 @@ function add_no_option_for_optional_components($val,$key,$options_ordered) {
 
 function return_formatted_component_options($post_id) {
     $components = get_all_server_component_options($post_id);
-    $form = '<div class="form-container panel pt-0 d-none d-md-block" id="full-custom-config">';
+    $form = '<div class="form-container pt-3 pt-md-2 px-2 px-md-4 px-lg-5" id="full-custom-config">';
 
     foreach ($components as $key => $val) {
 
@@ -323,7 +323,7 @@ function return_formatted_component_options($post_id) {
                 $form .= get_component_icon($val);
 
                 // Label + Input (label hidden by default)
-                $form .= '<div class="flex-grow-1 col-9">';
+                $form .= '<div class="flex-grow-1 col-12 col-md-9">';
 //                $form .= '<p class="small ms-3 lh-1 py-1 px-2 mb-0 fw-bold bg-transparent rounded config-input-label"><i class="fa-sharp fa-solid fa-check pe-2"></i>' . $key . '</p>';
                 $form .= '<div class="input-group mb-0">';
                 $form .= '<select name="' . $component_clean . '" id="' . $component_clean . '" class="form-select option-select" aria-label="Default select ">';
@@ -346,7 +346,13 @@ function return_formatted_component_options($post_id) {
                 $form .= '</div></div>';
 
                 // Quantity (Component-level)
-                $form .= '<div class="col-2">';
+                if (isset($val['maximum']) && $val['maximum'] > 1) {
+                    $form .= '<div class="d-block d-md-none col-9 mt-1 mt-md-0">';
+                    $form .= '<p class="small text-secondary text-end mb-0"><em>Select ' . $key . ' quantity</em></p>';
+                    $form .= '</div>';
+                }
+
+                $form .= '<div class="col-3 col-md-2 mt-1 mt-md-0">';
 
                 if (isset($val['maximum']) && $val['maximum'] > 1) {
                     $form .= get_component_qty_selects($key);

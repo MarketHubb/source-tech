@@ -3,8 +3,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <p class="modal-title fw-600" id="validationModalLabel">
-                    <i class="fa-solid fa-triangle-exclamation pe-3"></i>We need to fix a few things</p>
+                <p class="modal-title anti fw-600" id="validationModalLabel">
+                    <i class="fa-solid fa-triangle-exclamation pe-3"></i>Let's fix a few things</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4" style="background-color: #fffbf0;">

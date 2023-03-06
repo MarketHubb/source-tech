@@ -23,13 +23,12 @@ if (!$custom_config) {
         </a>
         </p>
     </div>
-    <div class="card-body bg-grey-blue-lightest p-1 p-md-4 border-blue-light">
+    <div class="card-body bg-grey-blue-lightest p-1 p-md-4 border-blue-light" id="custom-config-inputs">
         <?php
         if (!$custom_config) {
             get_template_part('template-parts/product-single/content', 'specs-table');
         } else {
             echo return_formatted_component_options(get_the_ID());
-//            echo return_mobile_formatted_component_options(get_the_ID());
         }
         ?>
 
