@@ -23,13 +23,13 @@ function return_foxycart_links($post_id, $options, $price, $model, $code=null, $
         }
     }
     if ($return_as_link) {
-        $link .= '<span class="foxy-submit shadow-sm rounded d-block w-100"><i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i>';
+//        $link .= '<span class="foxy-submit shadow-sm rounded d-block w-100"><i class="fa-solid fa-cart-shopping-fast me-2 text-white"></i>';
     }
 
-    $link .= '<input type="submit" value="Add ' . $model . ' to Cart" class="submit bg-transparent text-white no-border px-0 fw-600 py-3 fs-6" />';
+    $link .= '<input type="submit" value="Add ' . $model . ' to Cart" class="btn-new" />';
 
     if ($return_as_link) {
-        $link .= '</span>';
+//        $link .= '</span>';
     }
 
     $link .= '</form>';

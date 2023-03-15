@@ -12,6 +12,7 @@
                 get_template_part('template-parts/product-single/content', 'summary');
             } else {
                 get_template_part('template-parts/product-single/content', 'request-quote');
+
             }
             ?>
         </div>

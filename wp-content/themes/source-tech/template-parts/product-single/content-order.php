@@ -16,13 +16,26 @@
 
         <div class="row justify-content-between align-items-start mb-5 pb-4">
 
-            <div class="col-md-5 ps-md-4 mb-3 mb-md-0 sticky-top order-md-2">
-                <?php get_template_part('template-parts/product-single/content', 'order-summary'); ?>
-                <?php get_template_part('template-parts/product-single/content', 'attributes'); ?>
+            <div class="col-md-5 ps-md-4 mb-3 mb-md-0 sticky-top order-md-2 bg-white">
+                <?php
+                get_template_part('template-parts/product-single/content', 'order-summary');
+                get_template_part('template-parts/product-single/content', 'attributes');
+
+                // Pre-config (desktop)
+                if (have_rows('configurations')) {
+                    get_template_part('template-parts/product-single/content', 'preconfig', 'd-none d-md-block');
+                }
+                ?>
             </div>
 
             <div class="col-md-7 order-md-1">
-                <?php get_template_part('template-parts/product-single/content', 'custom-inputs'); ?>
+                <?php
+                get_template_part('template-parts/product-single/content', 'custom-inputs');
+                // Pre-config (mobile)
+                if (have_rows('configurations')) {
+                    get_template_part('template-parts/product-single/content', 'preconfig', 'd-block d-md-none');
+                }
+                ?>
             </div>
 
         </div>

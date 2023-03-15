@@ -646,6 +646,13 @@
         }
     });
 
+    // Pre-config
+    $('.expand-preconfig').on('click', function() {
+        let parent = $(this).closest('.primary-components');
+        let config = parent.next();
+        config.toggleClass('d-none');
+    })
+
 
     // $('#customModal').on('show.bs.modal', function (event) {
     $('#customModal').on('show.bs.modal', function (event) {

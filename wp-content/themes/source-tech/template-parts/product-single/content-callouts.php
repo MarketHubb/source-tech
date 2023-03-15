@@ -5,7 +5,7 @@
         if( have_rows('callouts', 'option') ):
             $callouts = '';
             while ( have_rows('callouts', 'option') ) : the_row();
-                $callouts .= '<div class="callout mb-2 mb-md-3 d-flex align-items-center">';
+                $callouts .= '<div class="callout mb-2 d-flex align-items-center">';
                 $callouts .= '<img src="' . get_sub_field('icon') . '" class="callout-icon me-3" />';
                 $callouts .= '<p class="d-inline fw-bold text-blue-700 anti mb-0 pb-1 lh-sm">' . get_sub_field('callout', 'option') . '</p>';
                 $callouts .= '<p class="mb-0 d-none d-md-inline ps-1">- ' . get_sub_field('description', 'option') . '</p>';

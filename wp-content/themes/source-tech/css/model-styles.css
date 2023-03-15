@@ -6,6 +6,10 @@
 .callout-icon {
 	filter: invert(71%) sepia(92%) saturate(1384%) hue-rotate(358deg) brightness(103%) contrast(105%);
 }
+.product-attributes span {
+	margin-right: .5rem;
+	padding-right: .5rem;
+}
 /* Right Panel */
 .order-type .order-tab {
 	opacity: .4;
