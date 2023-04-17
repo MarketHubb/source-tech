@@ -81,7 +81,7 @@
                             </p>
                             <p>
                                 <strong>Tel:</strong> (800) 932-0657 <br>
-                                <strong>Email:</strong> info@sourcetech.net <br>
+                                <strong>Email:</strong><a href="mailto:info@source-tech.net">:info@source-tech.net</a> <br>
                                 <strong>Chat:</strong> <span class="cta-chat" onclick="$zoho.salesiq.floatwindow.visible(&quot;show&quot;);">Click to Start</span>
 
                             </p>
