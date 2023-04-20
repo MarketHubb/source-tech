@@ -12,7 +12,7 @@
                            data-bs-toggle="modal"
                            data-bs-target="#customModal"
                            data-product="<?php echo get_the_title(); ?>">
-                            Need technical support? <i class="fa-light fa-circle-info ps-1"></i>
+                            Need help? <i class="fa-light fa-circle-info ps-1"></i>
                         </a>
                     </span>
             </div>

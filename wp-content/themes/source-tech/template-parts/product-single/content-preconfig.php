@@ -2,36 +2,39 @@
 
 <?php
 if( have_rows('configurations') ):
-    $c  = '<div class="mt-5 mb-4 ' . $args . '">';
-    $c .= '<h5 class="text-blue-800 mb-4 px-4">Explore our pre-configured options:</h5>';
+    $c  = '<div class="mt-5 pt-md-5 mb-4 ' . $args . '">';
+    $c .= '<p class="text-blue-800 mb-1 my-md-4 px-4 text-center fw-bold">Explore our pre-configured options:</p>';
+    $c .= '<div class="accordion accordion-flush" id="pre-config-list">';
+    $i = 1;
     while ( have_rows('configurations') ) : the_row();
-        $c .= '<div class="row mb-4">';
-        $c .= '<div class="col-12">';
-        $c .= '<p class="fw-bold p-lg mb-1 bg-grey-blue px-4 py-1 rounded">';
-        $c .= get_sub_field('configuration_label')[0];
+        // Accordion
+        $c .= '<div class="accordion-item">';
+        $c .= '<h2 class="accordion-header" id="flush-heading' . $i . '">';
+        $c .= '<button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse' . $i . '" aria-expanded="false" aria-controls="flush-collapse' . $i . '">';
+
+        $c .= '<div class="accordion-btn-copy">';
+        $c .= '<span class="fw-bold">' . get_sub_field('configuration_label')[0] . '</span>';
 
         if (get_sub_field('chasis')[0]) {
-            $c .= '<span class="small fw-normal"> (' . get_sub_field('chasis')[0] . ')</span>';
+            $c .= '<span class="small fw-normal d-block mt-1">' . get_sub_field('chasis')[0] . '</span>';
         }
+        $c .= '</div>';
+        $c .= '<div class="accordion-btn-price">';
+        $c .= '<span class="">$' . get_sub_field('price') . '</span>';
+        $c .= '</div>';
 
-        $c .= '<span class="float-end">$' . get_sub_field('price') . '</span>';
+        $c .= '</button>';
+        $c .= '</h2>';
+        $c .= '<div id="flush-collapse' . $i . '" class="accordion-collapse collapse" aria-labelledby="flush-heading' . $i . '" data-bs-parent="#pre-config-list">';
 
-        $c .= '<div class="px-4 py-2 primary-components">';
-        $c .= '<p class="mb-0 fw-600">CPU: <span class="text-dark small fw-normal">' . get_sub_field('processor') . '</span></p>';
-        $c .= '<p class="mb-0 fw-600">Drives: <span class="text-dark small fw-normal">' . get_sub_field('hard_drive') . '</span></p>';
-        $c .= '<p class="mb-0 fw-600">Memory: <span class="text-dark small fw-normal">' . get_sub_field('memory') . '</span></p>';
-
+        // Body Content
+        $c .= '<div class="accordion-body bg-grey-blue-lightest shadow-sm">';
         // Add to cart
         $c .= '<div class="text-end my-1">';
         $c .= return_foxycart_links($post->ID, $foxycart_options, get_sub_field('price'), get_sub_field('configuration_label')[0]);
         $c .= '</div>';
-
-        $c .= '<p class="small mb-0 mt-2 link expand-preconfig">';
-        $c .= 'View all  <span class="text-lowercase">' . get_sub_field('configuration_label')[0] . '</span> configuration specs:</p>';
-        $c .= '</div>';
-
-
-        $c .= '<div class="rounded bg-grey-blue-lightest shadow-sm px-4 py-3 d-none">';
+        // Config Specs
+        $c .= '<div class="my-3">';
         $c .= '<p class="mb-1 fw-600">CPU: <span class="text-dark small fw-normal">' . get_sub_field('processor') . '</span></p>';
 
         $c .= '<p class="mb-1 fw-600">Drives: <span class="text-dark small fw-normal">' . get_sub_field('hard_drive') . '</span></p>';
@@ -44,9 +47,60 @@ if( have_rows('configurations') ):
         $c .= '<p class="mb-1 fw-600">Power Supply: <span class="text-dark small fw-normal">' . get_sub_field('power_supply')[0] . '</span></p>';
         $c .= '</div>';
 
-        $c .= '</div></div>';
+        // End Body Content
+
+
+        $c .= '</div></div></div>';
+        $i++;
+        // End Accordion
+
+//        $c .= '<div class="row mb-4">';
+//        $c .= '<div class="col-12">';
+//        $c .= '<p class="fw-bold p-lg mb-1 bg-grey-blue-lightest border border-1 px-4 py-1 rounded">';
+//        $c .= get_sub_field('configuration_label')[0];
+//
+//        if (get_sub_field('chasis')[0]) {
+//            $c .= '<span class="small fw-normal ms-2">' . get_sub_field('chasis')[0] . '</span>';
+//        }
+//
+//        $c .= '<span class="float-end">$' . get_sub_field('price') . '</span>';
+//
+//        $c .= '<div class=" primary-components">';
+//        $c .= '<ul class="list-group list-group-horizontal m-0 p-0">';
+//        $c .= '<li class="list-group-item flex-fill">' . get_sub_field('processor') . '</li>';
+//        $c .= '<li class="list-group-item flex-fill">' . get_sub_field('hard_drive') . '</li>';
+//        $c .= '<li class="list-group-item flex-fill">' . get_sub_field('memory') . '</li>';
+//        $c .= '</ul>';
+//        $c .= '<p class="mb-0 fw-600 d-none">CPU: <span class="text-dark small fw-normal">' . get_sub_field('processor') . '</span></p>';
+//        $c .= '<p class="mb-0 fw-600 d-none">Drives: <span class="text-dark small fw-normal">' . get_sub_field('hard_drive') . '</span></p>';
+//        $c .= '<p class="mb-0 fw-600 d-none">Memory: <span class="text-dark small fw-normal">' . get_sub_field('memory') . '</span></p>';
+//
+//        // Add to cart
+//        $c .= '<div class="text-end my-1">';
+//        $c .= return_foxycart_links($post->ID, $foxycart_options, get_sub_field('price'), get_sub_field('configuration_label')[0]);
+//        $c .= '</div>';
+//
+//        $c .= '<p class="small mb-0 mt-2 link expand-preconfig">';
+//        $c .= '<span class="">' . get_sub_field('configuration_label')[0] . '</span> configuration specs:</p>';
+//        $c .= '</div>';
+//
+//
+//        $c .= '<div class="card bg-grey-blue-lightest p-4  d-none">';
+//        $c .= '<p class="mb-1 fw-600">CPU: <span class="text-dark small fw-normal">' . get_sub_field('processor') . '</span></p>';
+//
+//        $c .= '<p class="mb-1 fw-600">Drives: <span class="text-dark small fw-normal">' . get_sub_field('hard_drive') . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Memory: <span class="text-dark small fw-normal">' . get_sub_field('memory') . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Chassis: <span class="text-dark small fw-normal">' . get_sub_field('chasis')[0] . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Raid Controller: <span class="text-dark small fw-normal">' . get_sub_field('raid_controller')[0] . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Network Daughter Card: <span class="text-dark small fw-normal">' . get_sub_field('adapter')[0] . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Remote Access: <span class="text-dark small fw-normal">' . get_sub_field('express_remote')[0] . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Rails: <span class="text-dark small fw-normal">' . get_sub_field('rails')[0] . '</span></p>';
+//        $c .= '<p class="mb-1 fw-600">Power Supply: <span class="text-dark small fw-normal">' . get_sub_field('power_supply')[0] . '</span></p>';
+//        $c .= '</div>';
+//
+//        $c .= '</div></div>';
     endwhile;
-    $c .= '</div>';
+    $c .= '</div></div>';
     echo $c;
 endif;
 ?>

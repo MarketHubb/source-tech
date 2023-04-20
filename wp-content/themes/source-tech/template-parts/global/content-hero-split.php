@@ -3,14 +3,14 @@ $hero = get_field('page_banner_details');
 
 if ($hero) : ?>
 
-    <div class="container-fluid hero-banner content-section  <?php echo $args['section_classes']; ?>" id="banner-split">
+    <div class="container hero-banner content-section  <?php echo $args['section_classes']; ?>" id="banner-split">
         <div class="row justify-content-end align-items-center row-eq-height ">
             <!-- Content (left) -->
-            <div class="col-md-5 ">
+            <div class="col-md-5 my-4 p-4 py-md-0">
 
                 <h1 class=""><?php echo $hero['page_banner_heading']; ?><br>
                 <span class="font-weight-lighter"><?php echo $hero['page_banner_subheading']; ?></span></h1>
-                <p class="pr-md-3 pr-lg-5"><?php echo $hero['page_banner_description']; ?></p>
+                <p class="pe-md-3 pe-lg-5 mb-4"><?php echo $hero['page_banner_description']; ?></p>
 
                 <?php
                 if ($hero['page_banner_button_type'] === 'Custom') {
@@ -21,13 +21,13 @@ if ($hero) : ?>
                 ?>
 
                 <?php if ($hero['page_banner_button_type'] !== 'None') { ?>
-                    <a class="btn btn-primary btn-lg mb-3" href="<?php echo $button_url; ?>" role="button"><?php echo $hero['page_banner_button_text']; ?></a>
+                    <a class="btn btn-primary mb-3" href="<?php echo $button_url; ?>" role="button"><?php echo $hero['page_banner_button_text']; ?></a>
                 <?php } ?>
 
             </div>
 
             <!-- Image (right) -->
-            <div class="col-md-5 ">
+            <div class="col-md-5 d-none d-md-flex">
                 <div class=""><img
                             src="<?php echo $hero['page_banner_image']; ?>"
                             alt="">

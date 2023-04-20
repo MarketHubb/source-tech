@@ -1,3 +1,9 @@
+#page {
+	margin-top: .85rem;
+}
+.global-alert i {
+	opacity: .7;
+}
 .product-summary table tr th:not(:first-of-type) {
 	text-align: right;
 }
@@ -381,10 +387,6 @@ ul.flush li:last-of-type {
 	background-image: -webkit-radial-gradient(50% 50%, ellipse cover, rgb(255, 255, 255), rgba(9, 137, 251, 0.1980392) 115%) !important;
 }
 /*endregion*/
-/*region Banner, Hero & Full-width Callouts */
-#banner-split h1, h2.section-title {
-	font-size: 2.5rem;
-}
 #banner-split img {
 	object-fit: fill;
 	max-width: inherit;
@@ -818,7 +820,6 @@ h2.sub-heading, h3.sub-heading {
 .global-alert .alert-cta, .global-alert .alert-cta a {
 	color: #fff !important;
 	font-weight: 600 !important;
-	letter-spacing: .01rem;
 }
 .global-alert .alert-cta:hover, .global-alert .alert-cta a:hover {
 	cursor: pointer;

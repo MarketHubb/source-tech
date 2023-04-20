@@ -72,7 +72,40 @@
 
 
     <div class="bg-blue global-alert fixed shadow-sm mb-3">
-        <p class="text-center text-white"><?php //echo $alert_copy; ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="list-group list-group-horizontal ms-0 ps-0">
+                        <li class="list-group-item flex-fill bg-transparent py-1 no-border text-center">
+                            <span class="d-none d-md-inline alert-cta float-none float-md-end" onclick='$zoho.salesiq.floatwindow.visible("show");'>
+                                <i class="fas fa-comments-alt text-white me-1 me-md-2 fa-sm"></i>Live Chat
+                            </span>
+                            <span class="d-inline d-md-none alert-cta float-none float-md-end" onclick='$zoho.salesiq.floatwindow.visible("show");'>
+                                <i class="fas fa-comments-alt text-white me-1 me-md-2 fa-sm"></i>Chat
+                             </span>
+                        </li>
+                        <li class="list-group-item flex-fill bg-transparent py-1 text-center no-border">
+                            <span class="d-none d-md-inline alert-cta">
+                                <a href="mailto:info@source-tech.net" class="cta-email"><i class="fas fa-envelope me-1 me-md-2 fa-sm"></i>info@source-tech.net</a>
+                            </span>
+                            <span class="d-inline d-md-none alert-cta">
+                                <a href="mailto:info@source-tech.net" class="cta-email"><i class="fas fa-envelope me-1 me-md-2 fa-sm"></i>Email</a>
+                            </span>
+                        </li>
+                        <li class="list-group-item flex-fill bg-transparent py-1 text-center no-border">
+                            <span class="d-none d-md-inline alert-cta float-none float-md-start">
+                                <a href="tel:800-932-0657"><i class="fas fa-phone me-1 me-md-2 fa-sm"></i>800-932-0657</a>
+                            </span>
+                            <span class="d-inline d-md-none alert-cta float-none float-md-start">
+                                <a href="tel:800-932-0657"><i class="fas fa-phone me-1 me-md-2 fa-sm"></i>800-932-0657</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center text-white d-none"><?php //echo $alert_copy; ?>
             <span class="alert-cta px-4 cta-chat" onclick='$zoho.salesiq.floatwindow.visible("show");'><i class="fas fa-comments-alt text-white"></i> Live Chat</span>
             <span class="alert-cta px-4"><a href="mailto:info@source-tech.net" class="cta-email"><i class="fas fa-envelope"></i> info@source-tech.net</a></span>
             <span class="alert-cta px-4"><a href="tel:800-932-0657"><i class="fas fa-phone"></i> 800-932-0657</a></span>
