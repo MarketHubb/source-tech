@@ -1104,7 +1104,9 @@ body .gform_wrapper h2.gsection_title {
 }
 /*** Small Devices, Tablets  ***/
 @media only screen and (max-width : 768px) {
-
+	.sticky-top {
+		z-index: 99999;
+	}
 	#masthead {
 		margin-top: 0;
 	}
