@@ -1062,7 +1062,6 @@ body .gform_wrapper h2.gsection_title {
 *** Media Queries ***
 *****************************************/
 @media all and (max-width: 1600px) {
-	.main-navigation .menu-main-nav-container,
 	.site-header .bottom-row,
 	.container-fluid > .wrapper
 	{
@@ -1104,6 +1103,14 @@ body .gform_wrapper h2.gsection_title {
 }
 /*** Small Devices, Tablets  ***/
 @media only screen and (max-width : 768px) {
+	button.menu-toggle {
+		background-color: #0087c7 !important;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+	}
+	#page {
+		margin-top: 1.75rem;
+	}
 	.sticky-top {
 		z-index: 99999 !important;
 	}

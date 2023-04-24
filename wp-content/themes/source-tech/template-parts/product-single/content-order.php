@@ -1,4 +1,4 @@
-<div class="bg-grey-blue-light py-5 mb-4">
+<div class="bg-grey-blue-light py-0 py-md-5 mb-4">
     <div class="container bg-white rounded p-md-5 pt-1 shadow-lg rounded">
 
         <!-- Title & Image Gallery -->

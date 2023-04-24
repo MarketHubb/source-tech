@@ -112,7 +112,7 @@
         </p>
     </div>
 
-	<div id="page" class="site">
+	<div id="page" class="site" data-type="<?php echo get_post_type(); ?>">
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'source-tech' ); ?></a>
 
 		<header id="masthead" class="site-header" data-buttonvariant="">
