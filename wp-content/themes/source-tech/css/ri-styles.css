@@ -1105,7 +1105,18 @@ body .gform_wrapper h2.gsection_title {
 /*** Small Devices, Tablets  ***/
 @media only screen and (max-width : 768px) {
 	.sticky-top {
-		z-index: 99999;
+		z-index: 99999 !important;
+	}
+	#order-summary-container {
+		box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  	}
+	#order-summary-container .card {
+		box-shadow: none;
+		margin-top: 2rem !important;
+	}
+	#order-summary-container .product-attributes {
+		text-align: center;
+		font-size: .85rem;
 	}
 	#masthead {
 		margin-top: 0;

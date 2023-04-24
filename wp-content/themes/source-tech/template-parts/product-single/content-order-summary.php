@@ -1,6 +1,6 @@
 <?php $custom_config = get_query_var('custom_config'); ?>
 
-<div class="card shadow-sm" id="custom-config">
+<div class="card shadow-sm mt-4 mt-md-0" id="custom-config">
     <div id="summary-total">
         <div class="card-header bg-grey-blue py-3">
             <?php get_template_part('template-parts/product-single/content', 'summary-total'); ?>

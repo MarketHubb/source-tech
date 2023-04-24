@@ -16,7 +16,7 @@
 
         <div class="row justify-content-between align-items-start mb-5 pb-4">
 
-            <div class="col-md-5 ps-md-4 mb-3 mb-md-0 sticky-top order-md-2 bg-white">
+            <div class="col-md-5 ps-md-4 mb-3 mb-md-0 sticky-top order-md-2 bg-white" id="order-summary-container">
                 <?php
                 get_template_part('template-parts/product-single/content', 'order-summary');
                 get_template_part('template-parts/product-single/content', 'attributes');

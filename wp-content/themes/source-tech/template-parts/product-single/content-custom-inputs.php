@@ -9,7 +9,7 @@ if (!$custom_config) {
     $heading = "Custom configure your " . get_the_title();
     $subheading = "Need help with your order?";
     $subheading_mobile = "Need help?";
-    $link = "Our support team is available";
+    $link = "Our support team is online";
 }
 ?>
 <div class="card">
