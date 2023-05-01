@@ -33,8 +33,7 @@ get_template_part('template-parts/global/content', 'image-list', $image_list_arg
 
 <!-- Services -->
     <div class="content">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-4 pr-md-4">
                         <i class="far fa-globe-americas fa-2x blue"></i>
@@ -61,15 +60,13 @@ get_template_part('template-parts/global/content', 'image-list', $image_list_arg
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- Testimonial -->
 <?php get_template_part('template-parts/global/content', 'testimonial'); ?>
 
     <div class="content">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <div class="row align-items-center justify-content-start">
                     <div class="col-md-4">
                         <div class="panel shadow orange-top">
@@ -92,7 +89,6 @@ get_template_part('template-parts/global/content', 'image-list', $image_list_arg
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 
@@ -126,8 +122,7 @@ get_template_part('template-parts/global/content', 'image-list', $image_list_arg
 <!--            </div>-->
 
     <div class="content bg-blue-light" id="maintenance-parts">
-        <div class="container-fluid">
-            <div class="wrapper">
+            <div class="container">
                 <div class="row">
                     <div class="col text-center">
                         <h2 class="mb-5">Equipment & Replacement Parts</h2>
@@ -175,12 +170,10 @@ get_template_part('template-parts/global/content', 'image-list', $image_list_arg
                 </div>
             </div>
         </div>
-    </div>
 
 
     <div class="content">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-5">
                         <i class="fas fa-user-headset fa-2x blue"></i>
@@ -212,6 +205,5 @@ get_template_part('template-parts/global/content', 'image-list', $image_list_arg
                 </div>
             </div>
         </div>
-    </div>
 
 <?php get_footer();

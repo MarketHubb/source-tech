@@ -522,3 +522,21 @@ function return_formatted_component_options_float_labels($post_id) {
     return $form;
 
 }
+
+function return_lowest_price_custom_config($post_id) {
+    $components = get_all_server_component_options($post_id);
+    $component_price_array = [];
+
+    foreach ($components as $key => $val) {
+        if (!$val['optional']) {
+            $options_ordered_by_price = array_sort($val['options'], 'price', SORT_ASC);
+            $i = 1;
+            foreach ($options_ordered_by_price as $option_price) {
+                $component_price_array[$key] = $option_price['price'];
+                break;
+            }
+        }
+    }
+
+    return $component_price_array;
+}
