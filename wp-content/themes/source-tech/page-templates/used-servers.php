@@ -6,8 +6,8 @@ get_header(); ?>
 
 <div class="">
     <div class="container pt-3 pb-3">
-        <div class="row">
-            <div class="col">
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
                 <h1 class="page-title text-center">New & Refurbished Servers for Sale</h1>
                 <div class="divider"></div>
                 <p class="text-center">Save thousands on new and refurbished servers from Dell, HPE, Lenovo, Oracle and more.
