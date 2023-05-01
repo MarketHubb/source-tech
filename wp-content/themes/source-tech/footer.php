@@ -23,8 +23,7 @@
 <!--    </div>-->
 
     <div class="bg-light-blue pt-5 mt-5">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <!-- Logo + Mission -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 text-center">
@@ -34,13 +33,11 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- Footer -->
     <div class="bg-white py-5">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <div class="row">
 
                     <!-- Top Pages -->
@@ -113,14 +110,12 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <div class="bg-grey-dark d-none d-md-block">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <div class="row">
-                    <ul class="list-group pt-3 pb-2 w-100 list-group-horizontal no-border">
+                    <ul class="list-group pt-3 pb-2 list-group-horizontal no-border">
                         <?php
                         if (have_rows('footer_payment', 'option')):
                             $payment = '';
@@ -136,7 +131,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
     </div>
 
 

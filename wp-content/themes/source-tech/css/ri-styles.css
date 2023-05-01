@@ -335,9 +335,6 @@ ul.flush li:last-of-type {
 .bg-blue {
 	color: #fff !important;
 }
-.content-section:not(.hero-banner) {
-	margin: 3rem 1rem;
-}
 .content-section.bg-color:not(.hero-banner) {
 	margin-bottom: 0;
 	padding-bottom: 3rem;
@@ -389,7 +386,6 @@ ul.flush li:last-of-type {
 /*endregion*/
 #banner-split img {
 	object-fit: fill;
-	max-width: inherit;
 }
 .masthead-callout {
 	background-image: url(../img/Home-Banner-6.jpg);

@@ -33,9 +33,9 @@ $server_args = array(
 get_template_part('template-parts/servers/content', 'manufacturers'); ?>
 
 <!-- What We do -->
-<div class="container-fluid content-section bg-color bg-light-blue" id="what-we-do">
-    <div class="wrapper">
-        <div class="row justify-content-center content-heading">
+<div class="bg-light-blue py-4 pb-md-5">
+    <div class="container" id="what-we-do">
+        <div class="row justify-content-center content-heading pb-4">
             <div class="col-md-8 text-center">
                 <h2 class="section-title">What We Do</h2>
                 <p>From small offices to large data centers, SourceTech Systems has the enterprise IT hardware and 24x7 support services to keep you connected.</p>
@@ -81,15 +81,13 @@ get_template_part('template-parts/global/content-callout', null, $server_callout
 ?>
 
 <!-- Testimonial -->
-<div class="container-fluid content-section">
-    <div class="wrapper">
-        <div class="row justify-content-center my-5">
-            <div class="col-md-7 text-center">
+<div class="container content-section">
+        <div class="row justify-content-center my-5 py-5">
+            <div class="col-md-7 text-center ">
                 <p class="testimonial">"Our company has been doing business with SourceTech for about a year, and they have become our primary 3rd party company when it comes to pre-owned servers and storage. They always provide the lowest pricing."</p>
                 <p class="author mb-0">- Timothy Deleon</p>
             </div>
         </div>
-    </div>
 </div>
 
 <?php
@@ -119,9 +117,8 @@ $server_callout_args = array(
 get_template_part('template-parts/global/content-callout', null, $server_callout_args);
 ?>
 
-<div class="container-fluid content-section">
-    <div class="wrapper">
-        <div class="row justify-content-center content-heading">
+<div class="container content-section">
+        <div class="row justify-content-center content-heading pb-4">
             <div class="col-md-8 text-center">
                 <h2 class="section-title">3 Easy Ways to Get a Quote</h2>
                 <p>We make ordering Enterprise IT equipment fast and easy. Forget being forced to by what's on the shelf, or having to use complicated shopping carts.</p>
@@ -162,19 +159,17 @@ get_template_part('template-parts/global/content-callout', null, $server_callout
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 <!-- Testimonial -->
-<div class="container-fluid content-section">
-    <div class="wrapper ">
+<div class="container content-section">
+
         <div class="row justify-content-center py-5 my-5">
             <div class="col-md-7 text-center">
                 <p class="testimonial">"Excellent service! I've been very pleased with the quality of service and hardware I've received.  Shipping the equipment to Canada, all custom paperwork was well managed. I'd highly recommend them!"</p>
                 <p class="author mb-0">- Michel Bouchard</p>
             </div>
         </div>
-    </div>
 </div>
 
 <div class="container-fluid">

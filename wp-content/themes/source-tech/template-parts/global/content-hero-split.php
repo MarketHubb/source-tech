@@ -4,11 +4,11 @@ $hero = get_field('page_banner_details');
 if ($hero) : ?>
 
     <div class="container hero-banner content-section  <?php echo $args['section_classes']; ?>" id="banner-split">
-        <div class="row justify-content-end align-items-center row-eq-height ">
+        <div class="row justify-content-between align-items-center row-eq-height py-4">
             <!-- Content (left) -->
             <div class="col-md-5 my-4 p-4 py-md-0">
 
-                <h1 class=""><?php echo $hero['page_banner_heading']; ?><br>
+                <h1 class="fs-2"><?php echo $hero['page_banner_heading']; ?><br>
                 <span class="font-weight-lighter"><?php echo $hero['page_banner_subheading']; ?></span></h1>
                 <p class="pe-md-3 pe-lg-5 mb-4"><?php echo $hero['page_banner_description']; ?></p>
 
@@ -27,7 +27,7 @@ if ($hero) : ?>
             </div>
 
             <!-- Image (right) -->
-            <div class="col-md-5 d-none d-md-flex">
+            <div class="col-md-6 d-none d-md-flex">
                 <div class=""><img
                             src="<?php echo $hero['page_banner_image']; ?>"
                             alt="">
