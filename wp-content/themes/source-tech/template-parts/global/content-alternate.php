@@ -1,7 +1,6 @@
 <?php $order_class = ($args['row_index'] % 2 == 0) ? 'order-md-last' : ''; ?>
 <div class="content">
-    <div class="container-fluid">
-        <div class="wrapper">
+    <div class="container">
 
             <div class="row align-items-center justify-content-between">
 
@@ -21,5 +20,4 @@
 
             </div>
         </div>
-    </div>
 </div>

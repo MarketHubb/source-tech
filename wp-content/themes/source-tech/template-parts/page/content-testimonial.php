@@ -2,19 +2,18 @@
 
     <div class="jumbotron hero bg-cover text-white mb-0"
          style="background-image: url(<?php echo $image ?>)">
-        <div class="container-fluid">
-            <div class="wrapper">
+        <div class="container">
                 <div class="row justify-content-center">
 
                     <div class="col-md-12 text-center">
-                        <div class="hero-copy">
+                        <div class="hero-copy py-5">
 
                             <?php if (isset($subheading) && !empty($subheading)) { ?>
                                 <p class="lead"><?php echo $subheading; ?></p>
                             <?php } ?>
 
                             <!-- Heading -->
-                            <p class="lead font-weight-bold mb-0 pb-0">"Our company has been doing business with SourceTech for about 1 year and they have become our primary 3rd party company when it comes to pre-owned server and storage. They always provide the lowest pricing, systems are properly setup and turn around is usually 1 week. If there are any issues their response is always quick and extremely helpful."</p>
+                            <p class="lead fs-5  mb-0 pb-0">"Our company has been doing business with SourceTech for about 1 year and they have become our primary 3rd party company when it comes to pre-owned server and storage. They always provide the lowest pricing, systems are properly setup and turn around is usually 1 week. If there are any issues their response is always quick and extremely helpful."</p>
                             <p class="mt-4">- Timothy Deleon</p>
 
                             <?php
@@ -34,5 +33,4 @@
 
                 </div>
             </div>
-        </div>
     </div>
