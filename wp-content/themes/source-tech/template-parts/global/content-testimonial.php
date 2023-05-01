@@ -39,8 +39,7 @@ if (isset($testimonial['background']) && $testimonial['background'] === "blue") 
 ?>
 
 <div class="content testimonial-container <?php echo $container_color_class; ?>">
-    <div class="container-fluid">
-        <div class="wrapper">
+    <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-5 h-100">
                     <h3 class="display-4"><?php echo $testimonial['lead']; ?></h3>
@@ -54,5 +53,4 @@ if (isset($testimonial['background']) && $testimonial['background'] === "blue") 
                 </div>
             </div>
         </div>
-    </div>
 </div>

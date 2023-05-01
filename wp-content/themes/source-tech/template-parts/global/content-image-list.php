@@ -1,6 +1,5 @@
 <div class="content image-list-container <?php echo $args['section_classes']; ?>">
-    <div class="container-fluid">
-        <div class="wrapper">
+    <div class="container">
             <div class="row">
                 <ul class="list-group list-group-horizontal">
                     <?php
@@ -18,5 +17,4 @@
                 </ul>
             </div>
         </div>
-    </div>
 </div>
