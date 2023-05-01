@@ -2,7 +2,7 @@
 (function($) {
 
     // Hide Server dropdowns
-    $('#menu-item-529').find('ul.sub-menu').css('display', 'none');
+    // $('#menu-item-529').find('ul.sub-menu').css('display', 'none');
     // Prevent links from page refresh
     $('body a').each(function(e) {
        if ($(this).attr('href') === '#prevent') {

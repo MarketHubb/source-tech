@@ -1,3 +1,14 @@
+.main-navigation ul ul.sub-menu li a {
+	font-size: .85rem !important;
+	line-height: 1.3;
+	font-weight: 600 !important;
+}
+.main-navigation ul ul.sub-menu li {
+	border-bottom: 1px solid #eee;
+}
+.main-navigation ul ul.sub-menu {
+	background-color: #f9f9f9;
+}
 #page {
 	margin-top: .85rem;
 }
