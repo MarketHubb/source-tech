@@ -242,7 +242,7 @@ function source_tech_scripts()
         wp_enqueue_style( 'ri-blog-list-styles', get_stylesheet_directory_uri() . '/css/ri-blog-list.css' );
     }
 }
-add_action( 'wp_enqueue_scripts', 'source_tech_scripts', 1);
+add_action( 'wp_enqueue_scripts', 'source_tech_scripts');
 
 /**
  * Implement the Custom Header feature.
