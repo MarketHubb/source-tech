@@ -3,7 +3,7 @@
 <?php
 if( have_rows('configurations') ):
     $c  = '<div class="mt-5 pt-md-5 mb-4 ' . $args . '">';
-    $c .= '<p class="text-blue-800 mb-1 my-md-4 px-4 text-center fw-bold">Explore our pre-configured options:</p>';
+    $c .= '<h5 class="text-blue-800 mb-1 my-md-4 px-4 text-center fw-bold fs-6">Shop our pre-configured ' . trim(get_the_title()) . '\'s</h5>';
     $c .= '<div class="accordion accordion-flush" id="pre-config-list">';
     $i = 1;
     while ( have_rows('configurations') ) : the_row();
@@ -14,9 +14,16 @@ if( have_rows('configurations') ):
 
         $c .= '<div class="accordion-btn-copy">';
         $c .= '<span class="fw-bold">' . get_sub_field('configuration_label')[0] . '</span>';
+        $c .= '<span class="small fw-normal text-secondary"> - ' . get_sub_field('chasis')[0] . '</span>';
+
+        $c .= '<ul class="list-group list-group-horizontal ms-0 ps-0 mt-2 d-flex align-items-center">';
+        $c .= '<li class="list-group-item bg-transparent flex-fill p-0 no-border"><span class="text-dark small fw-normal">' . get_sub_field('processor_short') . '</span></li>';
+        $c .= '<li class="list-group-item bg-transparent flex-fill p-0 no-border border-start border-end border-dark px-2 mx-2"><span class="text-dark small fw-normal">' . get_sub_field('memory_short') . '</span></li>';
+        $c .= '<li class="list-group-item bg-transparent flex-fill p-0 no-border"><span class="text-dark small fw-normal">' . get_sub_field('hard_drive_short') . '</span></li>';
+        $c .= '</ul>';
 
         if (get_sub_field('chasis')[0]) {
-            $c .= '<span class="small fw-normal d-block mt-1">' . get_sub_field('chasis')[0] . '</span>';
+//            $c .= '<span class="small fw-normal d-block mt-1">' . get_sub_field('chasis')[0] . '</span>';
         }
         $c .= '</div>';
         $c .= '<div class="accordion-btn-price">';

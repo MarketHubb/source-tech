@@ -12,6 +12,12 @@ if (!$custom_config) {
     $link = "Our support team is online";
 }
 ?>
+
+<?php 
+$test = return_lowest_price_custom_config($post->ID); 
+?>
+
+
 <div class="card">
     <div class="card-header bg-grey-blue border-blue-light text-center py-3">
         <h5 class="my-1 text-center text-blue-800"><?php echo $heading; ?></h5>
