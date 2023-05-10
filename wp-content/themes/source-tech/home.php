@@ -11,6 +11,8 @@
 get_header();
 ?>
 
+<div class="blog">
+    <div class="site-content">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
@@ -33,7 +35,8 @@ get_header();
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
+<?php get_sidebar('blog');  ?>
+</div>
+</div>
 
-<?php
-get_sidebar('blog');
-get_footer();
+<?php get_footer(); ?>
